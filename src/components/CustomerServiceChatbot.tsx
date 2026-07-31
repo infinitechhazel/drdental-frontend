@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react"
+import { MessageCircle, X, Send, Bot, User, ChevronDown } from "lucide-react"
 
 interface Message {
-  id: number;
-  role: "bot" | "user";
-  text: string;
+  id: number
+  role: "bot" | "user"
+  text: string
 }
 
 const QUICK_REPLIES = [
@@ -15,7 +15,7 @@ const QUICK_REPLIES = [
   "Clinic hours",
   "Location",
   "Payment options",
-];
+]
 
 const BOT_RESPONSES: Record<string, string> = {
   default:
@@ -26,9 +26,9 @@ const BOT_RESPONSES: Record<string, string> = {
   services:
     "We offer a wide range of services:\n\n🦷 General Dentistry — check-ups, cleaning, fillings, extractions\n✨ Cosmetic Dentistry — whitening, veneers, smile makeovers\n🔧 Orthodontics — metal braces, ceramic braces, Invisalign\n🏗️ Restorative — implants, crowns, bridges, root canals\n💉 Aesthetics — botox, dermal fillers, facial rejuvenation\n👶 Pediatric Dentistry — gentle care for kids\n\nWould you like details on any specific service?",
   hours:
-    "Our clinic hours are:\n\n📅 Mon–Fri: 9:00 AM – 6:00 PM\n📅 Saturday: 9:00 AM – 5:00 PM\n📅 Sunday: 10:00 AM – 3:00 PM\n\nWe recommend booking in advance to secure your preferred time slot!",
+    "Our clinic hours are:\n\n📅 Mon–Fri: 8:00 AM – 5:00 PM\n\nWe recommend booking in advance to secure your preferred time slot!",
   location:
-    "We're located in Batangas City, Batangas, Philippines. Visit drdentalcare.com or contact us directly for the exact address and directions. 📍",
+    "We're located in Unit I-3 K.H Building cor. Ponciano And Bonifacio Street, Davao City, Philippines. Visit drdentalcare.com or contact us directly for the exact address and directions. 📍",
   payment:
     "We accept multiple payment methods:\n\n💵 Cash\n💳 Credit & Debit Cards\n📱 GCash & Maya\n🏥 PhilHealth (for eligible procedures)\n\nWe also offer flexible installment plans for certain treatments. Ask our front desk for details!",
   whitening:
@@ -43,93 +43,89 @@ const BOT_RESPONSES: Record<string, string> = {
   emergency:
     "For dental emergencies like severe toothache, knocked-out tooth, or swollen jaw — please contact us immediately by phone or visit the clinic. We accommodate emergency cases as quickly as possible. 🚨",
   kids: "Yes, we're very child-friendly! Our pediatric dental services are designed to make kids feel comfortable and at ease. We use gentle techniques and a warm, welcoming environment to help children develop positive dental habits early. 👶",
-  aesthetic:
-    "Our aesthetic services include botox, dermal fillers, facial rejuvenation, chemical peels, and skin care treatments. These are performed by trained medical professionals in a safe clinical setting. Book a consultation to discuss your goals!",
-};
+}
 
 function getBotResponse(input: string): string {
-  const msg = input.toLowerCase();
+  const msg = input.toLowerCase()
   if (msg.match(/^(hi|hello|hey|good\s?(morning|afternoon|evening)|kumusta)/))
-    return BOT_RESPONSES.greet;
-  if (msg.match(/book|appointment|schedule|reserve/)) return BOT_RESPONSES.book;
+    return BOT_RESPONSES.greet
+  if (msg.match(/book|appointment|schedule|reserve/)) return BOT_RESPONSES.book
   if (msg.match(/service|offer|treatment|procedure|what do you/))
-    return BOT_RESPONSES.services;
+    return BOT_RESPONSES.services
   if (msg.match(/hour|open|close|schedule|time|when/))
-    return BOT_RESPONSES.hours;
+    return BOT_RESPONSES.hours
   if (msg.match(/location|address|where|directions|map|find you/))
-    return BOT_RESPONSES.location;
+    return BOT_RESPONSES.location
   if (msg.match(/pay|payment|gcash|maya|credit|cash|philhealth|installment/))
-    return BOT_RESPONSES.payment;
-  if (msg.match(/whiten|bleach|bright/)) return BOT_RESPONSES.whitening;
+    return BOT_RESPONSES.payment
+  if (msg.match(/whiten|bleach|bright/)) return BOT_RESPONSES.whitening
   if (msg.match(/brace|aligner|invisalign|orthodont|crooked|straight/))
-    return BOT_RESPONSES.braces;
+    return BOT_RESPONSES.braces
   if (msg.match(/implant|missing tooth|missing teeth/))
-    return BOT_RESPONSES.implant;
+    return BOT_RESPONSES.implant
   if (msg.match(/pain|hurt|scared|nervous|anxious|fear/))
-    return BOT_RESPONSES.pain;
+    return BOT_RESPONSES.pain
   if (msg.match(/price|cost|how much|fee|rate|afford/))
-    return BOT_RESPONSES.price;
+    return BOT_RESPONSES.price
   if (msg.match(/emergency|urgent|swollen|knocked|broken|severe/))
-    return BOT_RESPONSES.emergency;
+    return BOT_RESPONSES.emergency
   if (msg.match(/kid|child|children|pediatric|baby|toddler/))
-    return BOT_RESPONSES.kids;
-  if (msg.match(/botox|filler|aesthetic|skin|facial|peel/))
-    return BOT_RESPONSES.aesthetic;
-  return BOT_RESPONSES.default;
+    return BOT_RESPONSES.kids
+  return BOT_RESPONSES.default
 }
 
 export default function CustomerServiceChatbot() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 0,
       role: "bot",
       text: "Hi there! 👋 I'm the Dr. Dental Care Center virtual assistant. How can I help you today?",
     },
-  ]);
-  const [input, setInput] = useState("");
-  const [typing, setTyping] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  ])
+  const [input, setInput] = useState("")
+  const [typing, setTyping] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, typing]);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages, typing])
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 100);
-  }, [open]);
+    if (open) setTimeout(() => inputRef.current?.focus(), 100)
+  }, [open])
 
   const sendMessage = (text: string) => {
-    if (!text.trim()) return;
+    if (!text.trim()) return
     const userMsg: Message = {
       id: Date.now(),
       role: "user",
       text: text.trim(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setTyping(true);
+    }
+    setMessages((prev) => [...prev, userMsg])
+    setInput("")
+    setTyping(true)
 
     setTimeout(
       () => {
-        const reply = getBotResponse(text);
+        const reply = getBotResponse(text)
         setMessages((prev) => [
           ...prev,
           { id: Date.now() + 1, role: "bot", text: reply },
-        ]);
-        setTyping(false);
+        ])
+        setTyping(false)
       },
       800 + Math.random() * 400,
-    );
-  };
+    )
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage(input);
+      e.preventDefault()
+      sendMessage(input)
     }
-  };
+  }
 
   return (
     <>
@@ -265,5 +261,5 @@ export default function CustomerServiceChatbot() {
         )}
       </button>
     </>
-  );
+  )
 }
