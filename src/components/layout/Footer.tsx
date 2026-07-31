@@ -1,33 +1,31 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { useState, useEffect } from "react";
+import Link from "next/link"
+import { Phone, Mail, MapPin, Clock } from "lucide-react"
+import { useState, useEffect } from "react"
 
 interface Service {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 export default function Footer() {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Service[]>([])
 
   useEffect(() => {
     async function fetchServices() {
       try {
-        const res = await fetch("/api/services");
-        if (!res.ok) throw new Error("Failed to fetch");
-        const raw = await res.json();
-        const list = Array.isArray(raw)
-          ? raw
-          : (raw.data ?? raw.services ?? []);
-        setServices(list);
+        const res = await fetch("/api/services")
+        if (!res.ok) throw new Error("Failed to fetch")
+        const raw = await res.json()
+        const list = Array.isArray(raw) ? raw : (raw.data ?? raw.services ?? [])
+        setServices(list)
       } catch {
-        setServices([]);
+        setServices([])
       }
     }
-    fetchServices();
-  }, []);
+    fetchServices()
+  }, [])
 
   return (
     <footer className="relative bg-[#020617] border-t border-white/5 overflow-hidden">
@@ -44,8 +42,9 @@ export default function Footer() {
             Dr. Dental Care <span className="text-cyan-400">Center</span>
           </h3>
           <p className="text-slate-500 text-sm leading-relaxed">
-            Advanced dental and aesthetic care, engineered for precision and
-            designed for beauty.
+            Every smile carries a story, a memory, and a reason to be shared.
+            We&apos;re here to provide thoughtful, advanced dental care so you
+            can smile with confidence through every stage of life.
           </p>
         </div>
 
@@ -112,7 +111,7 @@ export default function Footer() {
           <div className="space-y-3 text-sm text-slate-500">
             <div className="flex items-center gap-2">
               <Phone size={14} className="text-cyan-400 shrink-0" />
-              +1 (555) 234-5678
+              +639679646888
             </div>
             <div className="flex items-center gap-2">
               <Mail size={14} className="text-cyan-400 shrink-0" />
@@ -120,11 +119,12 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2">
               <MapPin size={14} className="text-cyan-400 shrink-0" />
-              123 Medical Ave, Suite 200
+              Unit I-3 K.H Building cor. Ponciano And Bonifacio Street, Davao
+              City
             </div>
             <div className="flex items-center gap-2">
               <Clock size={14} className="text-cyan-400 shrink-0" />
-              Mon–Sat: 9AM–7PM
+              Mon-Fri: 8AM-5PM
             </div>
           </div>
         </div>
@@ -134,5 +134,5 @@ export default function Footer() {
         &copy; 2026 Dr. Dental Care Center. All rights reserved.
       </div>
     </footer>
-  );
+  )
 }

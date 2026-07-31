@@ -264,21 +264,17 @@ function BookInner() {
               />
             </div>
             <h2 className="font-serif text-3xl text-white mb-3">
-              Appointment Confirmed
+              Appointment Received
             </h2>
             <p className="text-slate-400 mb-1 font-medium">
-              {activeService?.name ?? "Your appointment"} —{" "}
-              {selectedDate?.toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-              })}{" "}
-              at {selectedTime}
+              We&apos;ve successfully received your appointment request for{" "}
+              {activeService?.name ?? "the selected service"}.
             </p>
+
             <p className="text-slate-500 text-sm mb-8">
-              A confirmation has been sent to{" "}
-              <span className="text-slate-300">{email}</span>. We look forward
-              to seeing you.
+              Our team will review your request and send a confirmation to{" "}
+              <span className="text-slate-300">{email}</span> as soon as
+              possible.
             </p>
             <div className="flex flex-col items-center gap-3">
               <p className="text-slate-600 text-xs">
