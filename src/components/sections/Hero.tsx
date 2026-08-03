@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import equipment from '@/assets/equipment-2.jpg';
+import exterior from '@/assets/exterior-2.jpg';
 import {
   ArrowRight,
   Shield,
@@ -205,8 +207,8 @@ export default function Home() {
             className="hidden lg:block"
           >
             <Image
-              src="https://media.base44.com/images/public/6a13e4d0cd3364a569f6bbfc/a9409cf0e_generated_09de69c2.png"
-              alt="Dr. Dental Care Center interior"
+              src={equipment}
+              alt="Dr. Dental Care Center equipment"
               width={600}
               height={450}
               className="rounded-2xl shadow-2xl shadow-cyan-400/5 border border-white/5"
@@ -512,8 +514,8 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div {...fade}>
             <Image
-              src="https://media.base44.com/images/public/6a13e4d0cd3364a569f6bbfc/e2e277e3f_generated_49286962.png"
-              alt="Dr. Dental Care Center interior"
+              src={exterior}              
+              alt="Dr. Dental Care Center exterior"
               width={600}
               height={450}
               className="rounded-2xl border border-white/5"
