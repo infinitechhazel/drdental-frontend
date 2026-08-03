@@ -3,10 +3,10 @@ import { WifiOff, Home } from "lucide-react"
 
 export default function OfflinePage() {
   return (
-    <div className="min-h-screen bg-[#0b1d26] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#0b2620] flex items-center justify-center px-4">
       <div className="text-center">
         <div className="mb-8">
-          <WifiOff className="w-24 h-24 text-[#d4a24c] mx-auto mb-4" />
+          <WifiOff className="w-24 h-24 text-[#4ade80] mx-auto mb-4" />
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
             You&apos;re Offline
           </h1>
@@ -18,7 +18,7 @@ export default function OfflinePage() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-[#d4a24c] text-black px-6 py-3 rounded-full font-semibold hover:brightness-110 transition"
+            className="inline-flex items-center gap-2 bg-[#4ade80] text-black px-6 py-3 rounded-full font-semibold hover:brightness-110 transition"
           >
             <Home size={20} />
             Go Home

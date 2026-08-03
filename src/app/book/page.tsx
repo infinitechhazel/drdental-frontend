@@ -34,20 +34,14 @@ const fade = {
 }
 
 const timeSlots = [
+  "8:00 AM",
   "9:00 AM",
-  "9:30 AM",
   "10:00 AM",
-  "10:30 AM",
   "11:00 AM",
-  "11:30 AM",
   "1:00 PM",
-  "1:30 PM",
   "2:00 PM",
-  "2:30 PM",
   "3:00 PM",
-  "3:30 PM",
   "4:00 PM",
-  "4:30 PM",
 ]
 
 function generateDays() {
@@ -155,7 +149,7 @@ function BookInner() {
   useEffect(() => {
     if (!submitted) return
     if (countdown <= 0) {
-      router.push("/")
+      router.push("/profile")
       return
     }
     const t = setTimeout(() => setCountdown((c) => c - 1), 1000)
@@ -222,6 +216,7 @@ function BookInner() {
         throw new Error((data.message as string) || "Failed to save booking.")
       }
       setSubmitted(true)
+      router.replace("/profile")
     } catch (err: unknown) {
       setError(
         err instanceof Error
@@ -252,15 +247,15 @@ function BookInner() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-20 h-20 rounded-full bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center"
+                className="w-20 h-20 rounded-full bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center"
               >
-                <CheckCircle className="text-cyan-400" size={36} />
+                <CheckCircle className="text-emerald-400" size={36} />
               </motion.div>
               <motion.div
                 initial={{ scale: 0.8, opacity: 0.6 }}
                 animate={{ scale: 1.4, opacity: 0 }}
                 transition={{ duration: 1.2, repeat: Infinity }}
-                className="absolute inset-0 rounded-full border border-cyan-400/40"
+                className="absolute inset-0 rounded-full border border-emerald-400/40"
               />
             </div>
             <h2 className="font-serif text-3xl text-white mb-3">
@@ -279,7 +274,7 @@ function BookInner() {
             <div className="flex flex-col items-center gap-3">
               <p className="text-slate-600 text-xs">
                 Redirecting to home in{" "}
-                <span className="text-cyan-400 font-semibold">
+                <span className="text-emerald-400 font-semibold">
                   {countdown}s
                 </span>
                 …
@@ -289,12 +284,12 @@ function BookInner() {
                   initial={{ width: "100%" }}
                   animate={{ width: "0%" }}
                   transition={{ duration: 5, ease: "linear" }}
-                  className="h-full bg-cyan-400/60 rounded-full"
+                  className="h-full bg-emerald-400/60 rounded-full"
                 />
               </div>
               <button
                 onClick={() => router.push("/")}
-                className="mt-2 text-xs text-cyan-400/70 hover:text-cyan-400 transition-colors underline underline-offset-2"
+                className="mt-2 text-xs text-emerald-400/70 hover:text-emerald-400 transition-colors underline underline-offset-2"
               >
                 Go home now
               </button>
@@ -316,7 +311,7 @@ function BookInner() {
             className="mb-12 flex items-start justify-between flex-wrap gap-4"
           >
             <div>
-              <p className="text-cyan-400 text-sm uppercase tracking-[0.3em] mb-3">
+              <p className="text-emerald-400 text-sm uppercase tracking-[0.3em] mb-3">
                 Booking
               </p>
               <h1 className="font-serif text-4xl md:text-5xl text-white">
@@ -324,7 +319,7 @@ function BookInner() {
               </h1>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full self-start mt-2">
-              <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-slate-400 text-sm">
                 Signed in as <span className="text-white">{user?.name}</span>
               </span>
@@ -338,16 +333,16 @@ function BookInner() {
               <motion.div {...fade}>
                 <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
                   <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-cyan-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
                       1
                     </span>{" "}
                     Select Service
                   </h3>
 
                   {lockedFromUrl && activeService ? (
-                    <div className="flex items-center justify-between px-4 py-3 bg-cyan-400/10 border border-cyan-400/30 rounded-xl">
+                    <div className="flex items-center justify-between px-4 py-3 bg-emerald-400/10 border border-emerald-400/30 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
                         {servicesLoading ? (
                           <span className="text-slate-400 text-sm animate-pulse">
                             Loading…
@@ -359,7 +354,7 @@ function BookInner() {
                         )}
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-cyan-400/70 text-xs">
+                        <span className="text-emerald-400/70 text-xs">
                           Selected
                         </span>
                         <button
@@ -406,7 +401,7 @@ function BookInner() {
               <motion.div {...fade} transition={{ delay: 0.1 }}>
                 <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
                   <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-cyan-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
                       2
                     </span>{" "}
                     Choose Date
@@ -418,7 +413,7 @@ function BookInner() {
                         onClick={() => setSelectedDate(d)}
                         className={`p-2 rounded-lg text-center text-sm transition-all ${
                           selectedDate?.toDateString() === d.toDateString()
-                            ? "bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                            ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                             : "bg-white/5 text-slate-400 hover:bg-white/10"
                         }`}
                       >
@@ -436,7 +431,7 @@ function BookInner() {
               <motion.div {...fade} transition={{ delay: 0.2 }}>
                 <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
                   <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-cyan-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
                       3
                     </span>{" "}
                     Select Time
@@ -454,7 +449,7 @@ function BookInner() {
                           onClick={() => setSelectedTime(t)}
                           className={`py-2 px-3 rounded-lg text-sm transition-all ${
                             selectedTime === t
-                              ? "bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                              ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                               : "bg-white/5 text-slate-400 hover:bg-white/10"
                           }`}
                         >
@@ -470,7 +465,7 @@ function BookInner() {
               <motion.div {...fade} transition={{ delay: 0.3 }}>
                 <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
                   <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-cyan-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
                       4
                     </span>{" "}
                     Your Information
@@ -574,7 +569,7 @@ function BookInner() {
                         <span className="text-slate-500">Starting at</span>
                         <Badge
                           variant="outline"
-                          className="border-cyan-400/30 text-cyan-400"
+                          className="border-emerald-400/30 text-emerald-400"
                         >
                           {activeService?.price
                             ? `₱${Number(activeService.price).toLocaleString()}`
@@ -618,7 +613,7 @@ function BookInner() {
                         loading ||
                         servicesLoading
                       }
-                      className="w-full mt-6 bg-cyan-400 text-slate-950 hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all disabled:opacity-30"
+                      className="w-full mt-6 bg-emerald-400 text-slate-950 hover:bg-emerald-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all disabled:opacity-30"
                       size="lg"
                     >
                       {loading ? (

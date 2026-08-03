@@ -186,11 +186,11 @@ export default function TestimonialsAdmin() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen w-full bg-gradient-to-br from-slate-50 via-blue-50 to-white">
+      <div className="flex min-h-screen w-full bg-gradient-to-br from-slate-50 via-emerald-50 to-white">
         <ProtectedNav userRole="admin" />
         <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4 bg-white border border-blue-100 shadow-xl px-8 py-8 rounded-2xl">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <div className="flex flex-col items-center gap-4 bg-white border border-emerald-100 shadow-xl px-8 py-8 rounded-2xl">
+            <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
             <p className="text-slate-800 font-semibold">Loading Testimonials</p>
             <p className="text-sm text-slate-500">
               Preparing your dashboard...
@@ -202,7 +202,7 @@ export default function TestimonialsAdmin() {
   }
 
   return (
-    <div className="flex min-h-screen w-full bg-gradient-to-br from-slate-50 via-blue-50 to-white">
+    <div className="flex min-h-screen w-full bg-gradient-to-br from-slate-50 via-emerald-50 to-white">
       <ProtectedNav userRole="admin" />
 
       <div className={`flex-1 min-w-0`}>
@@ -216,16 +216,16 @@ export default function TestimonialsAdmin() {
             </p>
           </div>
 
-          <Card className="gap-0 p-0 border border-blue-100 shadow-lg rounded-2xl overflow-hidden bg-white">
-            <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
+          <Card className="gap-0 p-0 border border-emerald-100 shadow-lg rounded-2xl overflow-hidden bg-white">
+            <CardHeader className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white p-4">
               <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
                 <div className="relative w-full md:max-w-md">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-200" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-200" />
                   <Input
                     placeholder="Search testimonials..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-9 bg-white text-slate-900 placeholder:text-slate-400 border-0 focus:ring-2 focus:ring-blue-300"
+                    className="pl-9 bg-white text-slate-900 placeholder:text-slate-400 border-0 focus:ring-2 focus:ring-emerald-300"
                   />
                 </div>
                 <Button
@@ -240,7 +240,7 @@ export default function TestimonialsAdmin() {
                     })
                     setFormOpen(true)
                   }}
-                  className="bg-white text-blue-700 hover:bg-blue-50 shadow-md"
+                  className="bg-white text-emerald-700 hover:bg-emerald-50 shadow-md"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   New Testimonial
@@ -250,7 +250,7 @@ export default function TestimonialsAdmin() {
 
             <CardContent className="p-0 overflow-x-auto">
               <table className="w-full text-sm min-w-[800px]">
-                <thead className="bg-blue-50 border-b border-blue-100 text-slate-700">
+                <thead className="bg-emerald-50 border-b border-emerald-100 text-slate-700">
                   <tr>
                     <th className="text-left p-4">Name</th>
                     <th className="text-left p-4">Email</th>
@@ -265,20 +265,20 @@ export default function TestimonialsAdmin() {
                   {filtered.map((t) => (
                     <tr
                       key={t.id}
-                      className="border-b border-slate-100 hover:bg-blue-50/40 transition"
+                      className="border-b border-slate-100 hover:bg-emerald-50/40 transition"
                     >
                       <td className="p-4 font-medium text-slate-900">
                         {t.client_name}
                       </td>
                       <td className="p-4 text-slate-600">{t.client_email}</td>
-                      <td className="p-4 text-blue-600 font-semibold">
+                      <td className="p-4 text-emerald-600 font-semibold">
                         {"★".repeat(t.rating)}
                       </td>
                       <td className="p-4 text-slate-600 truncate max-w-[220px]">
                         {t.message}
                       </td>
                       <td className="p-4">
-                        <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700 capitalize">
+                        <span className="px-2 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 capitalize">
                           {t.status}
                         </span>
                       </td>
@@ -291,14 +291,14 @@ export default function TestimonialsAdmin() {
                           className="bg-transparent"
                           onClick={() => openViewModal(t)}
                         >
-                          <Eye className="w-4 h-4 text-blue-600" />
+                          <Eye className="w-4 h-4 text-emerald-600" />
                         </Button>
                         <Button
                           size="sm"
                           className="bg-transparent"
                           onClick={() => openEditModal(t)}
                         >
-                          <Edit className="w-4 h-4 text-blue-600" />
+                          <Edit className="w-4 h-4 text-emerald-600" />
                         </Button>
                         <Button
                           size="sm"
@@ -322,7 +322,7 @@ export default function TestimonialsAdmin() {
         {/* View Modal */}
         <Dialog open={viewOpen} onOpenChange={setViewOpen}>
           <DialogContent className="w-[95vw] sm:max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl border-0 shadow-2xl p-0 text-gray-950">
-            <div className="sticky top-0 z-10 bg-[#162A3A] px-6 py-5 rounded-t-2xl">
+            <div className="sticky top-0 z-10 bg-emerald-900 px-6 py-5 rounded-t-2xl">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-white">
                   Testimonial Details
@@ -332,10 +332,9 @@ export default function TestimonialsAdmin() {
                 </p>
               </DialogHeader>
             </div>
-            <div className="p-5 space-y-4 bg-[#f5f0e8]">
+            <div className="p-5 space-y-4 bg-[#f0f4ea]">
               {viewTestimonial && (
                 <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-                  <div className="px-5 py-3 bg-gradient-to-r from-[#162A3A] to-[#1e3a50]" />
                   <div className="p-5 bg-white space-y-3 text-sm">
                     <div>
                       <p className="font-semibold text-gray-900">Client Name</p>
@@ -351,7 +350,7 @@ export default function TestimonialsAdmin() {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Rating</p>
-                      <p className="text-yellow-500">
+                      <p className="text-emerald-500">
                         {"★".repeat(viewTestimonial.rating)}
                       </p>
                     </div>
@@ -392,7 +391,7 @@ export default function TestimonialsAdmin() {
         {/* Add/Edit Modal */}
         <Dialog open={formOpen} onOpenChange={setFormOpen}>
           <DialogContent className="w-[95vw] sm:max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl border-0 shadow-2xl p-0 text-gray-950">
-            <div className="sticky top-0 z-10 bg-[#162A3A] px-6 py-5 rounded-t-2xl">
+            <div className="sticky top-0 z-10 bg-emerald-900 px-6 py-5 rounded-t-2xl">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-white">
                   {editingTestimonial
@@ -406,9 +405,8 @@ export default function TestimonialsAdmin() {
                 </p>
               </DialogHeader>
             </div>
-            <div className="p-5 space-y-4 bg-[#f5f0e8]">
+            <div className="p-5 space-y-4 bg-[#f0f4ea]">
               <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-                <div className="px-5 py-3 bg-gradient-to-r from-[#162A3A] to-[#1e3a50]" />
                 <div className="p-5 bg-white space-y-4">
                   <div className="space-y-2">
                     <Label
@@ -426,7 +424,7 @@ export default function TestimonialsAdmin() {
                           client_name: e.target.value,
                         })
                       }
-                      className="border-gray-300 focus:border-[#162A3A]"
+                      className="border-gray-300 focus:border-emerald-900"
                     />
                   </div>
                   <div className="space-y-2">
@@ -446,7 +444,7 @@ export default function TestimonialsAdmin() {
                           client_email: e.target.value,
                         })
                       }
-                      className="border-gray-300 focus:border-[#162A3A]"
+                      className="border-gray-300 focus:border-emerald-900"
                     />
                   </div>
                   <div className="space-y-2">
@@ -464,8 +462,8 @@ export default function TestimonialsAdmin() {
                           }
                           className={
                             formData.rating >= star
-                              ? "bg-yellow-400 hover:bg-amber-500"
-                              : "bg-gray-200 hover:bg-yellow-400"
+                              ? "bg-emerald-400 hover:bg-emerald-500"
+                              : "bg-gray-200 hover:bg-emerald-400"
                           }
                         >
                           ★
@@ -487,7 +485,7 @@ export default function TestimonialsAdmin() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      className="border-gray-300 focus:border-[#162A3A]"
+                      className="border-gray-300 focus:border-emerald-900"
                     />
                   </div>
                   <div className="space-y-2">
@@ -503,7 +501,7 @@ export default function TestimonialsAdmin() {
                         setFormData({ ...formData, status: val })
                       }
                     >
-                      <SelectTrigger className="border-gray-300 focus:border-[#162A3A]">
+                      <SelectTrigger className="border-gray-300 focus:border-emerald-900">
                         <SelectValue placeholder="Select status" />
                       </SelectTrigger>
                       <SelectContent>
@@ -524,7 +522,7 @@ export default function TestimonialsAdmin() {
                   Cancel
                 </Button>
                 <Button
-                  className="flex-1 h-10 bg-[#162A3A] hover:bg-[#1e3a50] text-white rounded-xl font-semibold shadow-md"
+                  className="flex-1 h-10 bg-emerald-900 hover:bg-emerald-800 text-white rounded-xl font-semibold shadow-md"
                   onClick={handleSave}
                   disabled={isSubmitting}
                 >
@@ -538,7 +536,7 @@ export default function TestimonialsAdmin() {
         {/* Delete Confirmation Modal */}
         <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
           <DialogContent>
-            <DialogHeader>
+            <div>
               <DialogTitle className="text-black">
                 Delete Testimonial
               </DialogTitle>
@@ -546,7 +544,7 @@ export default function TestimonialsAdmin() {
                 Are you sure you want to delete this testimonial? This action
                 cannot be undone.
               </DialogDescription>
-            </DialogHeader>
+            </div>
             <DialogFooter className="flex justify-end gap-2">
               <Button
                 variant="outline"

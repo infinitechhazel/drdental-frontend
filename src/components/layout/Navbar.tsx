@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 import {
   Menu,
   X,
@@ -12,46 +12,45 @@ import {
   Calendar,
   User,
   ChevronDown,
-} from "lucide-react";
-import { useAuthStore } from "@/store/authStore";
-import { usePWAInstall } from "@/hooks/use-pwa-install";
+} from "lucide-react"
+import { useAuthStore } from "@/store/authStore"
+import { usePWAInstall } from "@/hooks/use-pwa-install"
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
-  { href: "/facilities", label: "Facilities" },
-  { href: "/contact", label: "Contact" },
-];
+  { href: "/branches", label: "Branches" },
+]
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const { isLoggedIn, user, logout, initializeAuth } = useAuthStore();
-  const { canInstall, handleInstall } = usePWAInstall();
+  const { isLoggedIn, user, logout, initializeAuth } = useAuthStore()
+  const { canInstall, handleInstall } = usePWAInstall()
 
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    initializeAuth();
-    setMounted(true);
+    initializeAuth()
+    setMounted(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    setMobileOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -59,17 +58,17 @@ export default function Navbar() {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        setDropdownOpen(false);
+        setDropdownOpen(false)
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
 
   const handleLogout = () => {
-    logout();
-    router.push("/");
-  };
+    logout()
+    router.push("/")
+  }
 
   const initials = user?.name
     ? user.name
@@ -78,7 +77,7 @@ export default function Navbar() {
         .join("")
         .toUpperCase()
         .slice(0, 2)
-    : "?";
+    : "?"
 
   return (
     <nav
@@ -94,7 +93,7 @@ export default function Navbar() {
           href="/"
           className="font-serif text-xl text-white tracking-wide shrink-0"
         >
-          Dr. Dental Care <span className="text-cyan-400">Center</span>
+          Dr. Dental Care <span className="text-emerald-400">Center</span>
         </Link>
 
         {/* Desktop nav links */}
@@ -105,7 +104,7 @@ export default function Navbar() {
               href={l.href}
               className={`text-sm tracking-wide transition-colors ${
                 pathname === l.href
-                  ? "text-cyan-400"
+                  ? "text-emerald-400"
                   : "text-slate-300 hover:text-white"
               }`}
             >
@@ -120,7 +119,7 @@ export default function Navbar() {
             <Button
               onClick={handleInstall}
               variant="outline"
-              className="border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 text-sm px-4 flex items-center gap-2"
+              className="border-emerald-400 text-emerald-400 hover:bg-emerald-400/10 text-sm px-4 flex items-center gap-2"
             >
               <Download size={16} />
               Download App
@@ -131,9 +130,9 @@ export default function Navbar() {
             (isLoggedIn && user ? (
               <div className="flex items-center gap-3">
                 <Link href="/book">
-                  <Button className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 font-medium text-sm px-5 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all flex items-center gap-2">
+                  <Button className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium text-sm px-5 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all flex items-center gap-2">
                     <Calendar size={14} />
-                    Book
+                    Book Now
                   </Button>
                 </Link>
 
@@ -145,7 +144,7 @@ export default function Navbar() {
                     onClick={() => setDropdownOpen((v) => !v)}
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                   >
-                    <div className="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 text-xs font-bold select-none">
+                    <div className="w-8 h-8 rounded-full bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-xs font-bold select-none">
                       {initials}
                     </div>
                     <span className="text-white text-sm font-medium max-w-[120px] truncate">
@@ -170,12 +169,12 @@ export default function Navbar() {
                       <div className="py-1">
                         <button
                           onClick={() => {
-                            setDropdownOpen(false);
-                            router.push("/profile");
+                            setDropdownOpen(false)
+                            router.push("/profile")
                           }}
-                          className="w-full flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-white/5 hover:text-white text-sm transition-colors"
+                          className="w-full flex items-center gap-3 px-4 py-2.5 text-emerald-400 hover:bg-white/5 hover:text-white text-sm transition-colors"
                         >
-                          <User size={14} className="text-cyan-400" />
+                          <User size={14} className="text-emerald-400" />
                           Profile & Bookings
                         </button>
                         <button
@@ -192,7 +191,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link href="/login">
-                <Button className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 font-medium text-sm px-6 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all">
+                <Button className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium text-sm px-6 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all">
                   Login
                 </Button>
               </Link>
@@ -217,7 +216,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className={`block py-3 text-sm border-b border-white/[0.04] ${
-                pathname === l.href ? "text-cyan-400" : "text-slate-300"
+                pathname === l.href ? "text-emerald-400" : "text-slate-300"
               }`}
             >
               {l.label}
@@ -227,10 +226,10 @@ export default function Navbar() {
           {canInstall && mounted && (
             <Button
               onClick={() => {
-                handleInstall();
-                setMobileOpen(false);
+                handleInstall()
+                setMobileOpen(false)
               }}
-              className="w-full mt-4 bg-cyan-400/20 text-cyan-400 hover:bg-cyan-400/30 border border-cyan-400 flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-emerald-400/20 text-emerald-400 hover:bg-emerald-400/30 border border-emerald-400 flex items-center justify-center gap-2"
             >
               <Download size={16} />
               Download App
@@ -241,7 +240,7 @@ export default function Navbar() {
             (isLoggedIn && user ? (
               <div className="mt-4 space-y-3">
                 <div className="flex items-center gap-3 px-1 py-2 bg-white/5 rounded-lg">
-                  <div className="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-xs font-bold">
                     {initials}
                   </div>
                   <span className="text-white text-sm font-medium truncate">
@@ -249,17 +248,17 @@ export default function Navbar() {
                   </span>
                 </div>
                 <Link href="/book" className="block">
-                  <Button className="w-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 flex items-center justify-center gap-2">
+                  <Button className="w-full bg-emerald-400 text-slate-950 hover:bg-emerald-300 flex items-center justify-center gap-2">
                     <Calendar size={15} />
-                    Book Appointment
+                    Book Now
                   </Button>
                 </Link>
                 <Link href="/profile" className="block">
                   <Button
                     variant="outline"
-                    className="w-full border-white/10 text-slate-300 hover:bg-white/5 hover:text-white flex items-center justify-center gap-2"
+                    className="w-full border-white/10 text-emerald-400 hover:bg-white/5 hover:text-white flex items-center justify-center gap-2"
                   >
-                    <User size={15} className="text-cyan-400" />
+                    <User size={15} className="text-emerald-400" />
                     Profile & Bookings
                   </Button>
                 </Link>
@@ -274,7 +273,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link href="/login">
-                <Button className="w-full mt-4 bg-cyan-400 text-slate-950 hover:bg-cyan-300">
+                <Button className="w-full mt-4 bg-emerald-400 text-slate-950 hover:bg-emerald-300">
                   Login
                 </Button>
               </Link>
@@ -282,5 +281,5 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-  );
+  )
 }

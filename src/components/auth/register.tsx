@@ -148,9 +148,9 @@ export default function RegisterPage() {
         />
 
         {/* GLOWS */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-emerald-500/10 blur-[120px] rounded-full" />
 
-        <div className="absolute bottom-[-80px] left-[-60px] w-72 h-72 bg-blue-600/10 blur-[100px] rounded-full" />
+        <div className="absolute bottom-[-80px] left-[-60px] w-72 h-72 bg-emerald-600/10 blur-[100px] rounded-full" />
 
         <div className="absolute top-1/3 right-[-80px] w-64 h-64 bg-sky-400/10 blur-[100px] rounded-full" />
 
@@ -160,7 +160,7 @@ export default function RegisterPage() {
           animate={{ opacity: 1, y: 0 }}
           className="relative w-full max-w-2xl z-10"
         >
-          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-cyan-400/30 via-blue-500/10 to-transparent" />
+          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-emerald-400/30 via-emerald-500/10 to-transparent" />
 
           <div
             className="relative bg-[#0a1628]/90 border border-white/[0.08]
@@ -169,7 +169,7 @@ export default function RegisterPage() {
             {/* BACK */}
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-slate-500 hover:text-cyan-400 mb-6"
+              className="flex items-center gap-2 text-slate-500 hover:text-emerald-400 mb-6"
             >
               <ArrowLeftCircle className="w-5 h-5" />
 
@@ -178,16 +178,16 @@ export default function RegisterPage() {
 
             {/* HEADER */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cyan-400/10 border border-cyan-400/20 mb-4">
-                <User className="text-cyan-400" />
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-400/10 border border-emerald-400/20 mb-4">
+                <User className="text-emerald-400" />
               </div>
 
               <h1 className="text-2xl font-semibold text-white">
                 Create Account
               </h1>
 
-              <p className="text-cyan-400/80 text-xs uppercase tracking-[0.2em] mt-1">
-                MSD Dental & Aesthetic Clinic
+              <p className="text-emerald-400/80 text-xs uppercase tracking-[0.2em] mt-1">
+                Dr. Dental Care Center
               </p>
             </div>
 
@@ -224,7 +224,7 @@ export default function RegisterPage() {
                 {/* PASSWORD */}
                 <div className="space-y-1.5">
                   <label className="text-[11px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    <Lock className="w-3.5 h-3.5 text-emerald-400" />
                     Password
                   </label>
 
@@ -238,8 +238,8 @@ export default function RegisterPage() {
                       placeholder="Min. 8 characters"
                       className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08]
                                  px-4 pr-10 text-white placeholder:text-slate-400
-                                 focus:outline-none focus:ring-2 focus:ring-cyan-400/10
-                                 focus:border-cyan-400/50 transition"
+                                 focus:outline-none focus:ring-2 focus:ring-emerald-400/10
+                                 focus:border-emerald-400/50 transition"
                     />
 
                     <button
@@ -255,7 +255,7 @@ export default function RegisterPage() {
                 {/* CONFIRM PASSWORD */}
                 <div className="space-y-1.5">
                   <label className="text-[11px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    <Lock className="w-3.5 h-3.5 text-emerald-400" />
                     Confirm Password
                   </label>
 
@@ -272,8 +272,8 @@ export default function RegisterPage() {
                       placeholder="Repeat your password"
                       className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08]
                                  px-4 pr-10 text-white placeholder:text-slate-400
-                                 focus:outline-none focus:ring-2 focus:ring-cyan-400/10
-                                 focus:border-cyan-400/50 transition"
+                                 focus:outline-none focus:ring-2 focus:ring-emerald-400/10
+                                 focus:border-emerald-400/50 transition"
                     />
 
                     <button
@@ -297,8 +297,8 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500
-                           hover:from-cyan-400 hover:to-blue-400 text-white font-semibold
+                className="w-full h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-500
+                           hover:from-emerald-400 hover:to-emerald-400 text-white font-semibold
                            transition disabled:opacity-60"
               >
                 {isSubmitting ? "Creating Account..." : "Create Account"}
@@ -309,7 +309,7 @@ export default function RegisterPage() {
                 Already have an account?{" "}
                 <Link
                   href="/login"
-                  className="text-cyan-400 hover:text-cyan-300"
+                  className="text-emerald-400 hover:text-emerald-300"
                 >
                   Sign in
                 </Link>
@@ -344,7 +344,7 @@ function Field({
   return (
     <div className="space-y-1.5">
       <label className="text-[11px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
-        <Icon className="w-3.5 h-3.5 text-cyan-400" />
+        <Icon className="w-3.5 h-3.5 text-emerald-400" />
         {label}
       </label>
 
@@ -355,8 +355,8 @@ function Field({
         placeholder={placeholder}
         className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08]
                    px-4 text-white placeholder:text-slate-400  {/* FIXED: was placeholder:text-slate-600 */}
-                   focus:outline-none focus:ring-2 focus:ring-cyan-400/10
-                   focus:border-cyan-400/50 transition"
+                   focus:outline-none focus:ring-2 focus:ring-emerald-400/10
+                   focus:border-emerald-400/50 transition"
       />
     </div>
   );
@@ -389,7 +389,7 @@ function PhoneField({
   return (
     <div className="space-y-1.5">
       <label className="text-[11px] uppercase tracking-widest text-slate-400 flex items-center gap-2">
-        <Phone className="w-3.5 h-3.5 text-cyan-400" />
+        <Phone className="w-3.5 h-3.5 text-emerald-400" />
         Phone Number
       </label>
 
@@ -401,13 +401,13 @@ function PhoneField({
         maxLength={11}
         className={`w-full h-12 rounded-xl bg-[#060e1e] border
                    px-4 text-white placeholder:text-slate-400
-                   focus:outline-none focus:ring-2 focus:ring-cyan-400/10
-                   focus:border-cyan-400/50 transition
+                   focus:outline-none focus:ring-2 focus:ring-emerald-400/10
+                   focus:border-emerald-400/50 transition
                    ${
                      validation === null
                        ? "border-white/[0.08]"
                        : validation.ok
-                         ? "border-cyan-400/50"
+                         ? "border-emerald-400/50"
                          : "border-red-500/60"
                    }`}
       />
@@ -415,7 +415,7 @@ function PhoneField({
       {validation !== null && (
         <p
           className={`text-[11px] ${
-            validation.ok ? "text-cyan-400" : "text-red-400"
+            validation.ok ? "text-emerald-400" : "text-red-400"
           }`}
         >
           {validation.ok ? "✓ " : ""}

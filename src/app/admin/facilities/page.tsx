@@ -31,7 +31,7 @@ type Facility = {
   name: string
   description: string
   bullets: string[]
-  accent: "cyan" | "blue"
+  accent: "cyan" | "emerald"
   image_url: string | null
   sort_order: number
 }
@@ -42,7 +42,7 @@ type FacilityForm = {
   name: string
   description: string
   bullets: string[]
-  accent: "cyan" | "blue"
+  accent: "cyan" | "emerald"
   sort_order: number
   image: File | null
 }
@@ -287,7 +287,7 @@ export default function AdminFacilitiesPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <Loader2 className="animate-spin text-blue-500" size={28} />
+        <Loader2 className="animate-spin text-emerald-500" size={28} />
       </div>
     )
   }
@@ -318,7 +318,7 @@ export default function AdminFacilitiesPage() {
           </div>
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
           >
             <Plus size={15} /> Add Facility
           </button>
@@ -394,7 +394,7 @@ export default function AdminFacilitiesPage() {
                               className={
                                 f.accent === "cyan"
                                   ? "text-cyan-500"
-                                  : "text-blue-500"
+                                  : "text-emerald-500"
                               }
                             />
                             {f.name}
@@ -413,10 +413,10 @@ export default function AdminFacilitiesPage() {
                         {/* Accent */}
                         <td className="px-4 py-3 hidden sm:table-cell">
                           <span
-                            className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${
+                            className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${
                               f.accent === "cyan"
                                 ? "bg-cyan-50 text-cyan-700 border border-cyan-200"
-                                : "bg-blue-50 text-blue-700 border border-blue-200"
+                                : "bg-emerald-50 text-emerald-700 border border-emerald-200"
                             }`}
                           >
                             {f.accent}
@@ -493,7 +493,7 @@ export default function AdminFacilitiesPage() {
                       setForm({ ...form, image: file })
                       if (file) setImagePreview(URL.createObjectURL(file))
                     }}
-                    className="w-full text-sm text-slate-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                    className="w-full text-sm text-slate-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
                   />
                   <p className="text-xs text-slate-400 mt-1">
                     Recommended: 4:3 ratio. Saved to public/images/facilities/
@@ -526,13 +526,13 @@ export default function AdminFacilitiesPage() {
                     onChange={(e) =>
                       setForm({
                         ...form,
-                        accent: e.target.value as "cyan" | "blue",
+                        accent: e.target.value as "cyan" | "emerald",
                       })
                     }
                     className={inputCls}
                   >
                     <option value="cyan">Cyan</option>
-                    <option value="blue">Blue</option>
+                    <option value="emerald">emerald</option>
                   </select>
                 </Field>
                 <Field label="Label (short, e.g. Air Quality)">
@@ -612,7 +612,7 @@ export default function AdminFacilitiesPage() {
               </div>
               <button
                 onClick={addBullet}
-                className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                className="text-sm font-medium text-emerald-600 hover:text-emerald-700"
               >
                 + Add Bullet
               </button>
@@ -629,7 +629,7 @@ export default function AdminFacilitiesPage() {
               <button
                 onClick={modal === "create" ? handleCreate : handleUpdate}
                 disabled={saving}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
               >
                 {saving ? (
                   <>
@@ -691,9 +691,9 @@ export default function AdminFacilitiesPage() {
 ───────────────────────────────────────── */
 
 const inputCls =
-  "w-full px-3 py-1.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 text-sm text-slate-900"
+  "w-full px-3 py-1.5 rounded-lg border border-slate-300 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 text-sm text-slate-900"
 const textareaCls =
-  "w-full px-3 py-1.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 text-sm font-sans resize-none text-slate-900"
+  "w-full px-3 py-1.5 rounded-lg border border-slate-300 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 text-sm font-sans resize-none text-slate-900"
 
 type FieldProps = {
   label: string
@@ -739,7 +739,7 @@ function ActionBtn({ icon, label, onClick, danger }: ActionBtnProps) {
       className={`p-1.5 rounded-lg transition-colors ${
         danger
           ? "hover:bg-red-50 text-red-600"
-          : "hover:bg-blue-50 text-blue-600"
+          : "hover:bg-emerald-50 text-emerald-600"
       }`}
     >
       {icon}

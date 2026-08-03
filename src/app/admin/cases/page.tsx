@@ -172,7 +172,7 @@ export default function CasesPage() {
 
   /* ───────────────── UI ───────────────── */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-white text-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50 to-white text-slate-800">
       <main className="min-h-screen bg-[#f4f8ff] pt-[12px] pb-12 px-4">
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pt-2">
@@ -191,7 +191,7 @@ export default function CasesPage() {
               setForm(EMPTY_FORM)
               setModal("create")
             }}
-            className="h-11 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition-all duration-200 shadow-lg shadow-blue-500/20 text-white font-medium flex items-center gap-2"
+            className="h-11 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 transition-all duration-200 shadow-lg shadow-emerald-500/20 text-white font-medium flex items-center gap-2"
           >
             <Plus size={18} />
             Add Case
@@ -199,7 +199,7 @@ export default function CasesPage() {
         </div>
 
         {/* FILTERS */}
-        <div className="bg-white/80 backdrop-blur-xl border border-blue-100 rounded-3xl p-5 shadow-sm mb-6">
+        <div className="bg-white/80 backdrop-blur-xl border border-emerald-100 rounded-3xl p-5 shadow-sm mb-6">
           <div className="relative mb-4">
             <Search
               size={18}
@@ -207,7 +207,7 @@ export default function CasesPage() {
             />
 
             <input
-              className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50/70 pl-11 pr-4 text-sm outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition"
+              className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50/70 pl-11 pr-4 text-sm outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition"
               placeholder="Search treatment or patient..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -221,8 +221,8 @@ export default function CasesPage() {
                 onClick={() => setCategory(c)}
                 className={`px-4 h-10 rounded-xl text-sm font-medium transition-all duration-200 ${
                   category === c
-                    ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md shadow-blue-500/20"
-                    : "bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-700"
+                    ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                    : "bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
                 }`}
               >
                 {c}
@@ -232,7 +232,7 @@ export default function CasesPage() {
         </div>
 
         {/* LIST */}
-        <div className="bg-white/90 backdrop-blur-xl border border-blue-100 rounded-3xl shadow-sm overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-xl border border-emerald-100 rounded-3xl shadow-sm overflow-hidden">
           {/* TOP */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
             <div>
@@ -251,8 +251,8 @@ export default function CasesPage() {
             </div>
           ) : cases.length === 0 ? (
             <div className="p-16 text-center">
-              <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center">
-                <Search className="text-blue-500" />
+              <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center">
+                <Search className="text-emerald-500" />
               </div>
 
               <h3 className="font-semibold text-slate-800 mb-1">
@@ -268,13 +268,13 @@ export default function CasesPage() {
               {cases.map((c) => (
                 <div
                   key={c.id}
-                  className="group px-6 py-5 hover:bg-blue-50/50 transition-all duration-200"
+                  className="group px-6 py-5 hover:bg-emerald-50/50 transition-all duration-200"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                     {/* LEFT */}
                     <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
-                        <Eye className="text-blue-600" size={20} />
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                        <Eye className="text-emerald-600" size={20} />
                       </div>
 
                       <div>
@@ -286,8 +286,8 @@ export default function CasesPage() {
                           <span
                             className={`px-2.5 py-1 rounded-full text-xs font-medium ${
                               c.category === "Dental"
-                                ? "bg-blue-100 text-blue-700"
-                                : "bg-cyan-100 text-cyan-700"
+                                ? "bg-emerald-100 text-emerald-700"
+                                : "bg-emerald-100 text-emerald-700"
                             }`}
                           >
                             {c.category}
@@ -311,7 +311,7 @@ export default function CasesPage() {
                           setSelected(c)
                           setModal("view")
                         }}
-                        className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-blue-100 hover:text-blue-700 transition flex items-center justify-center"
+                        className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-100 hover:text-emerald-700 transition flex items-center justify-center"
                       >
                         <Eye size={18} />
                       </button>
@@ -332,7 +332,7 @@ export default function CasesPage() {
                           })
                           setModal("edit")
                         }}
-                        className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-blue-100 hover:text-blue-700 transition flex items-center justify-center"
+                        className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-emerald-100 hover:text-emerald-700 transition flex items-center justify-center"
                       >
                         <Pencil size={18} />
                       </button>
@@ -358,7 +358,7 @@ export default function CasesPage() {
         <div className="flex items-center justify-between mt-6">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
-            className="h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-blue-50 hover:border-blue-200 transition flex items-center gap-2 text-sm font-medium"
+            className="h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-200 transition flex items-center gap-2 text-sm font-medium"
           >
             <ChevronLeft size={16} />
             Prev
@@ -370,7 +370,7 @@ export default function CasesPage() {
 
           <button
             onClick={() => setPage((p) => p + 1)}
-            className="h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-blue-50 hover:border-blue-200 transition flex items-center gap-2 text-sm font-medium"
+            className="h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-200 transition flex items-center gap-2 text-sm font-medium"
           >
             Next
             <ChevronRight size={16} />
@@ -381,7 +381,7 @@ export default function CasesPage() {
       {/* MODALS */}
       {modal && (
         <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-xl bg-white rounded-3xl border border-blue-100 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-full max-w-xl bg-white rounded-3xl border border-emerald-100 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* HEADER */}
             <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
               <div>
@@ -464,7 +464,7 @@ export default function CasesPage() {
 
                     <input
                       placeholder="Enter treatment name"
-                      className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition"
+                      className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition"
                       value={form.treatment}
                       onChange={(e) =>
                         setForm({ ...form, treatment: e.target.value })
@@ -480,7 +480,7 @@ export default function CasesPage() {
 
                     <input
                       placeholder="Enter patient name"
-                      className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition"
+                      className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition"
                       value={form.patient}
                       onChange={(e) =>
                         setForm({ ...form, patient: e.target.value })
@@ -496,7 +496,7 @@ export default function CasesPage() {
 
                     <textarea
                       placeholder="Describe the treatment result..."
-                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition min-h-[120px]"
+                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition min-h-[120px]"
                       value={form.result}
                       onChange={(e) =>
                         setForm({ ...form, result: e.target.value })
@@ -512,7 +512,7 @@ export default function CasesPage() {
                         Before Image
                       </label>
 
-                      <label className="block border-2 border-dashed border-slate-200 rounded-2xl p-5 bg-slate-50 hover:border-blue-300 hover:bg-blue-50/40 transition cursor-pointer">
+                      <label className="block border-2 border-dashed border-slate-200 rounded-2xl p-5 bg-slate-50 hover:border-emerald-300 hover:bg-emerald-50/40 transition cursor-pointer">
                         <div className="mb-3">
                           <p className="text-sm font-medium text-slate-700">
                             Upload Before Photo
@@ -542,7 +542,7 @@ export default function CasesPage() {
                         After Image
                       </label>
 
-                      <label className="block border-2 border-dashed border-slate-200 rounded-2xl p-5 bg-slate-50 hover:border-blue-300 hover:bg-blue-50/40 transition cursor-pointer">
+                      <label className="block border-2 border-dashed border-slate-200 rounded-2xl p-5 bg-slate-50 hover:border-emerald-300 hover:bg-emerald-50/40 transition cursor-pointer">
                         <div className="mb-3">
                           <p className="text-sm font-medium text-slate-700">
                             Upload After Photo
@@ -599,7 +599,7 @@ export default function CasesPage() {
               {modal === "create" && (
                 <button
                   onClick={handleCreate}
-                  className="h-11 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg shadow-blue-500/20 text-white font-medium transition"
+                  className="h-11 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 shadow-lg shadow-emerald-500/20 text-white font-medium transition"
                 >
                   Create Case
                 </button>
@@ -608,7 +608,7 @@ export default function CasesPage() {
               {modal === "edit" && (
                 <button
                   onClick={handleUpdate}
-                  className="h-11 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg shadow-blue-500/20 text-white font-medium transition"
+                  className="h-11 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 shadow-lg shadow-emerald-500/20 text-white font-medium transition"
                 >
                   Update Case
                 </button>

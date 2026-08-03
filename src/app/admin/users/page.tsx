@@ -70,7 +70,7 @@ function getInitials(name: string) {
 }
 
 const avatarColors = [
-  "bg-blue-100 text-blue-700",
+  "bg-emerald-100 text-emerald-700",
   "bg-indigo-100 text-indigo-700",
   "bg-sky-100 text-sky-700",
   "bg-cyan-100 text-cyan-700",
@@ -163,7 +163,7 @@ export default function UsersAdminPage() {
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 h-auto font-semibold text-slate-500 hover:text-blue-700 text-xs uppercase tracking-wide"
+          className="p-0 h-auto font-semibold text-slate-500 hover:text-emerald-700 text-xs uppercase tracking-wide"
         >
           ID <ArrowUpDown className="ml-1 h-3 w-3" />
         </Button>
@@ -180,7 +180,7 @@ export default function UsersAdminPage() {
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 h-auto font-semibold text-slate-500 hover:text-blue-700 text-xs uppercase tracking-wide"
+          className="p-0 h-auto font-semibold text-slate-500 hover:text-emerald-700 text-xs uppercase tracking-wide"
         >
           Customer <ArrowUpDown className="ml-1 h-3 w-3" />
         </Button>
@@ -235,7 +235,7 @@ export default function UsersAdminPage() {
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 h-auto font-semibold text-slate-500 hover:text-blue-700 text-xs uppercase tracking-wide hidden lg:flex"
+          className="p-0 h-auto font-semibold text-slate-500 hover:text-emerald-700 text-xs uppercase tracking-wide hidden lg:flex"
         >
           Joined <ArrowUpDown className="ml-1 h-3 w-3" />
         </Button>
@@ -264,16 +264,16 @@ export default function UsersAdminPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedUser(user)}
-                  className="h-8 w-8 p-0 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
+                  className="h-8 w-8 p-0 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg"
                 >
                   <Eye className="h-4 w-4" />
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="w-[95vw] sm:max-w-md max-h-[92vh] overflow-y-auto rounded-2xl border border-blue-100 shadow-2xl p-0 bg-white">
+              <DialogContent className="w-[95vw] sm:max-w-md max-h-[92vh] overflow-y-auto rounded-2xl border border-emerald-100 shadow-2xl p-0 bg-white">
                 {selectedUser && (
                   <>
-                    <div className="bg-gradient-to-br from-blue-600 to-blue-800 px-6 py-6 rounded-t-2xl relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 px-6 py-6 rounded-t-2xl relative overflow-hidden">
                       <div
                         className="absolute inset-0 opacity-10"
                         style={{
@@ -290,7 +290,7 @@ export default function UsersAdminPage() {
                             <DialogTitle className="text-xl font-bold text-white leading-tight">
                               {selectedUser.name}
                             </DialogTitle>
-                            <p className="text-blue-200 text-sm capitalize">
+                            <p className="text-emerald-200 text-sm capitalize">
                               {selectedUser.role}
                             </p>
                           </div>
@@ -301,8 +301,8 @@ export default function UsersAdminPage() {
                     <div className="p-6 space-y-4 bg-slate-50">
                       <div className="bg-white rounded-xl border border-slate-100 shadow-sm divide-y divide-slate-50">
                         <div className="p-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                            <Mail className="w-4 h-4 text-blue-600" />
+                          <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                            <Mail className="w-4 h-4 text-emerald-600" />
                           </div>
                           <div>
                             <p className="text-xs text-slate-400 font-medium">
@@ -316,8 +316,8 @@ export default function UsersAdminPage() {
 
                         {selectedUser.phone && (
                           <div className="p-4 flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                              <Phone className="w-4 h-4 text-blue-600" />
+                            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                              <Phone className="w-4 h-4 text-emerald-600" />
                             </div>
                             <div>
                               <p className="text-xs text-slate-400 font-medium">
@@ -332,8 +332,8 @@ export default function UsersAdminPage() {
 
                         {selectedUser.address && (
                           <div className="p-4 flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                              <MapPin className="w-4 h-4 text-blue-600" />
+                            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                              <MapPin className="w-4 h-4 text-emerald-600" />
                             </div>
                             <div>
                               <p className="text-xs text-slate-400 font-medium">
@@ -352,8 +352,8 @@ export default function UsersAdminPage() {
                         )}
 
                         <div className="p-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                            <Calendar className="w-4 h-4 text-blue-600" />
+                          <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                            <Calendar className="w-4 h-4 text-emerald-600" />
                           </div>
                           <div>
                             <p className="text-xs text-slate-400 font-medium">
@@ -407,9 +407,9 @@ export default function UsersAdminPage() {
       <div className={`flex min-h-screen w-full bg-slate-50 ${dmSans.className}`}>
         <ProtectedNav userRole="admin" />
         <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4 bg-white rounded-2xl border border-blue-100 shadow-xl px-10 py-10">
-            <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center">
-              <Loader2 className="h-7 w-7 animate-spin text-blue-600" />
+          <div className="flex flex-col items-center gap-4 bg-white rounded-2xl border border-emerald-100 shadow-xl px-10 py-10">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center">
+              <Loader2 className="h-7 w-7 animate-spin text-emerald-600" />
             </div>
             <div className="text-center">
               <p className="text-base font-semibold text-slate-800">
@@ -420,9 +420,9 @@ export default function UsersAdminPage() {
               </p>
             </div>
             <div className="flex gap-1.5 mt-1">
-              <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-              <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+              <span className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce" />
             </div>
           </div>
         </div>
@@ -438,8 +438,8 @@ export default function UsersAdminPage() {
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="w-1 h-6 rounded-full bg-blue-600" />
-                  <span className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+                  <div className="w-1 h-6 rounded-full bg-emerald-600" />
+                  <span className="text-xs font-semibold uppercase tracking-widest text-emerald-600">
                     Admin Panel
                   </span>
                 </div>
@@ -451,15 +451,15 @@ export default function UsersAdminPage() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 bg-white rounded-xl border border-blue-100 shadow-sm px-5 py-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+              <div className="flex items-center gap-2 bg-white rounded-xl border border-emerald-100 shadow-sm px-5 py-3">
+                <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center">
                   <UsersIcon className="w-4 h-4 text-white" />
                 </div>
                 <div>
                   <p className="text-xs text-slate-400 font-medium leading-none mb-0.5">
                     Total Customers
                   </p>
-                  <p className="text-xl font-bold text-blue-700 leading-none">
+                  <p className="text-xl font-bold text-emerald-700 leading-none">
                     {users.length}
                   </p>
                 </div>
@@ -474,7 +474,7 @@ export default function UsersAdminPage() {
                     placeholder="Search customers..."
                     value={globalFilter || ""}
                     onChange={(e) => setGlobalFilter(e.target.value)}
-                    className="pl-9 h-9 text-sm bg-slate-50 border-slate-200 rounded-lg focus:bg-white focus:border-blue-400 text-slate-700 placeholder:text-slate-400"
+                    className="pl-9 h-9 text-sm bg-slate-50 border-slate-200 rounded-lg focus:bg-white focus:border-emerald-400 text-slate-700 placeholder:text-slate-400"
                   />
                 </div>
                 <span className="text-xs text-slate-400 shrink-0">
@@ -503,7 +503,7 @@ export default function UsersAdminPage() {
                     {table.getRowModel().rows.map((row, i) => (
                       <tr
                         key={row.id}
-                        className={`border-b border-slate-50 hover:bg-blue-50/40 transition-colors duration-150 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/30"}`}
+                        className={`border-b border-slate-50 hover:bg-emerald-50/40 transition-colors duration-150 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/30"}`}
                       >
                         {row.getVisibleCells().map((cell) => (
                           <td key={cell.id} className="px-5 py-3.5">
@@ -520,8 +520,8 @@ export default function UsersAdminPage() {
 
               {table.getRowModel().rows.length === 0 && (
                 <div className="flex flex-col items-center py-16 text-center px-4">
-                  <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-                    <User2 className="w-7 h-7 text-blue-300" />
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
+                    <User2 className="w-7 h-7 text-emerald-300" />
                   </div>
                   <p className="font-semibold text-slate-600">No customers found</p>
                   {globalFilter && (

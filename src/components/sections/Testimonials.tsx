@@ -27,7 +27,7 @@ export default function TestimonialsSection() {
     async function fetchTestimonials() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/testimonials?status=approved`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/testimonials?status=approved`,
         )
 
         const data = await res.json()
@@ -46,7 +46,9 @@ export default function TestimonialsSection() {
   if (loading) {
     return (
       <section className="bg-[#F8FAFC] py-24">
-        <div className="text-center text-slate-500">Loading testimonials...</div>
+        <div className="text-center text-slate-500">
+          Loading testimonials...
+        </div>
       </section>
     )
   }
@@ -56,7 +58,7 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER (UNCHANGED DESIGN) */}
         <motion.div {...fade} className="text-center mb-16">
-          <p className="text-blue-600 text-sm uppercase tracking-[0.3em] mb-3">
+          <p className="text-emerald-600 text-sm uppercase tracking-[0.3em] mb-3">
             Testimonials
           </p>
           <h2 className="font-serif text-4xl text-slate-900">
@@ -69,14 +71,13 @@ export default function TestimonialsSection() {
           {testimonials.map((t, i) => (
             <motion.div key={t.id} {...fade} transition={{ delay: i * 0.1 }}>
               <Card className="p-6 bg-white border-slate-200 h-full">
-                
                 {/* STARS */}
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: t.rating }).map((_, j) => (
                     <Star
                       key={j}
                       size={16}
-                      className="fill-amber-400 text-amber-400"
+                      className="fill-emerald-500 text-emerald-500"
                     />
                   ))}
                 </div>

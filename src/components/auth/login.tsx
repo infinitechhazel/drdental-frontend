@@ -52,7 +52,7 @@ export default function LoginPage() {
           login({ ...user, token });
 
           toast.success("Login Successful!", {
-            description: "Welcome back to MSD Dental & Aesthetic Clinic!",
+            description: "Welcome back to Dr. Dental Care Center!",
           });
 
           // Respect ?redirect= param (e.g. coming from /book), then fall back to role-based route
@@ -101,8 +101,8 @@ export default function LoginPage() {
         />
 
         {/* Radial glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-[-80px] left-[-60px] w-72 h-72 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-[-80px] left-[-60px] w-72 h-72 bg-emerald-600/10 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute top-1/3 right-[-80px] w-64 h-64 bg-sky-400/10 blur-[100px] rounded-full pointer-events-none" />
 
         {/* Animated light particles */}
@@ -123,7 +123,7 @@ export default function LoginPage() {
                 delay: i * 1.4,
                 ease: "easeInOut",
               }}
-              className="absolute bottom-0 rounded-full bg-cyan-400/30 blur-3xl"
+              className="absolute bottom-0 rounded-full bg-emerald-400/30 blur-3xl"
               style={{
                 width: `${80 + i * 20}px`,
                 height: `${80 + i * 20}px`,
@@ -182,12 +182,12 @@ export default function LoginPage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative w-full max-w-md z-10"
         >
-          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-cyan-400/30 via-blue-500/10 to-transparent pointer-events-none" />
+          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-emerald-400/30 via-emerald-500/10 to-transparent pointer-events-none" />
 
           <div className="relative bg-[#0a1628]/90 border border-white/[0.08] rounded-2xl p-8 shadow-[0_32px_80px_rgba(0,0,0,0.6),0_0_0_1px_rgba(56,189,248,0.08)] backdrop-blur-xl">
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors mb-6"
+              className="flex items-center gap-2 text-slate-500 hover:text-emerald-400 transition-colors mb-6"
             >
               <ArrowLeftCircle className="w-5 h-5" />
               <span className="text-xs tracking-widest uppercase font-medium">
@@ -196,7 +196,7 @@ export default function LoginPage() {
             </button>
 
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-blue-600/20 border border-cyan-400/20 mb-4">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 border border-emerald-400/20 mb-4">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                   <path
                     d="M14 3C10.5 3 7 5.5 7 9c0 2 0.8 3.5 1.5 5 0.7 1.5 1 3 1.2 5.5 0.1 1.2 0.8 2.5 1.8 2.5 0.8 0 1.2-0.8 1.5-2 0.3-1.2 0.5-2 1-2s0.7 0.8 1 2c0.3 1.2 0.7 2 1.5 2 1 0 1.7-1.3 1.8-2.5 0.2-2.5 0.5-4 1.2-5.5C20.2 12.5 21 11 21 9c0-3.5-3.5-6-7-6Z"
@@ -214,17 +214,17 @@ export default function LoginPage() {
               >
                 Welcome Back
               </h1>
-              <p className="text-cyan-400/80 text-xs tracking-[0.2em] uppercase mt-1 font-medium">
-                MSD Dental & Aesthetic Clinic
+              <p className="text-emerald-400/80 text-xs tracking-[0.2em] uppercase mt-1 font-medium">
+                Dr. Dental Care Center
               </p>
-              <div className="w-12 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mx-auto mt-3" />
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent mx-auto mt-3" />
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email */}
               <div className="space-y-1.5">
                 <label className="text-xs text-slate-400 uppercase tracking-widest font-medium flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-cyan-400/70" /> Email
+                  <Mail className="w-3.5 h-3.5 text-emerald-400/70" /> Email
                   Address
                 </label>
                 <input
@@ -234,7 +234,7 @@ export default function LoginPage() {
                   required
                   disabled={isSubmitting}
                   placeholder="you@email.com"
-                  className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08] hover:border-white/[0.14] focus:border-cyan-400/50 px-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-400/10 transition-all"
+                  className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08] hover:border-white/[0.14] focus:border-emerald-400/50 px-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/10 transition-all"
                 />
               </div>
 
@@ -242,9 +242,9 @@ export default function LoginPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs text-slate-400 uppercase tracking-widest font-medium flex items-center gap-2">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400/70" /> Password
+                    <Lock className="w-3.5 h-3.5 text-emerald-400/70" /> Password
                   </label>
-                  {/* <Link href="/forgot-password" className="text-[11px] text-cyan-400/70 hover:text-cyan-400 transition-colors tracking-wide">
+                  {/* <Link href="/forgot-password" className="text-[11px] text-emerald-400/70 hover:text-emerald-400 transition-colors tracking-wide">
                     Forgot password?
                   </Link> */}
                 </div>
@@ -258,12 +258,12 @@ export default function LoginPage() {
                     required
                     disabled={isSubmitting}
                     placeholder="Enter your password"
-                    className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08] hover:border-white/[0.14] focus:border-cyan-400/50 px-4 pr-11 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-400/10 transition-all"
+                    className="w-full h-12 rounded-xl bg-[#060e1e] border border-white/[0.08] hover:border-white/[0.14] focus:border-emerald-400/50 px-4 pr-11 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-400/10 transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-cyan-400 transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-emerald-400 transition-colors"
                   >
                     {showPassword ? (
                       <EyeOff className="w-4 h-4" />
@@ -281,7 +281,7 @@ export default function LoginPage() {
                   disabled={isSubmitting}
                   className="relative w-full h-12 rounded-xl font-semibold text-sm tracking-wide overflow-hidden group disabled:opacity-60 transition-all"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:from-cyan-400 group-hover:to-blue-400 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-500 group-hover:from-emerald-400 group-hover:to-emerald-400 transition-all duration-300" />
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -332,7 +332,7 @@ export default function LoginPage() {
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
-                  className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                  className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
                 >
                   Create account
                 </Link>

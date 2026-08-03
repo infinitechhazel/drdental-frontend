@@ -1,7 +1,7 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+"use client"
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
   Wind,
@@ -12,16 +12,16 @@ import {
   Zap,
   X,
   ZoomIn,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+} from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useCallback } from "react"
 
 const fade = {
   initial: { opacity: 0, y: 16 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
   transition: { duration: 0.45 },
-};
+}
 
 const iconMap: { [key: string]: React.ElementType } = {
   Wind,
@@ -30,60 +30,60 @@ const iconMap: { [key: string]: React.ElementType } = {
   Droplets,
   HeartPulse,
   ScanLine,
-};
-
-type Facility = {
-  id: string;
-  icon: React.ElementType;
-  label: string;
-  image_url: string;
-  name: string;
-  description: string;
-  bullets: string[];
-  accent: "cyan" | "blue";
-};
-
-type FacilityData = {
-  id: string;
-  icon_name: string;
-  label: string;
-  image_url: string;
-  name: string;
-  description: string;
-  bullets: string[];
-  accent: "cyan" | "blue";
-};
-
-function getImageUrl(imagePath: string | null): string | null {
-  if (!imagePath) return null;
-  const baseUrl = process.env.NEXT_PUBLIC_IMAGE_URL || "";
-  return imagePath.startsWith("http") ? imagePath : `${baseUrl}${imagePath}`;
 }
 
-type ModalState = { src: string; alt: string } | null;
+type Facility = {
+  id: string
+  icon: React.ElementType
+  label: string
+  image_url: string
+  name: string
+  description: string
+  bullets: string[]
+  accent: "cyan" | "blue"
+}
+
+type FacilityData = {
+  id: string
+  icon_name: string
+  label: string
+  image_url: string
+  name: string
+  description: string
+  bullets: string[]
+  accent: "cyan" | "blue"
+}
+
+function getImageUrl(imagePath: string | null): string | null {
+  if (!imagePath) return null
+  const baseUrl = process.env.NEXT_PUBLIC_IMAGE_URL || ""
+  return imagePath.startsWith("http") ? imagePath : `${baseUrl}${imagePath}`
+}
+
+type ModalState = { src: string; alt: string } | null
 
 function ImageModal({
   modal,
   onClose,
 }: {
-  modal: ModalState;
-  onClose: () => void;
+  modal: ModalState
+  onClose: () => void
 }) {
   useEffect(() => {
-    if (!modal) return;
+    if (!modal) return
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [modal, onClose]);
+      if (e.key === "Escape") onClose()
+    }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [modal, onClose])
 
   useEffect(() => {
-    document.body.style.overflow = modal ? "hidden" : "";
+    document.body.style.overflow = modal ? "hidden" : ""
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [modal]);
+      document.body.style.overflow = ""
+    }
+  }, [modal])
 
   return (
     <AnimatePresence>
@@ -123,45 +123,45 @@ function ImageModal({
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }
 
 export default function Facilities() {
-  const [modal, setModal] = useState<ModalState>(null);
-  const [facilities, setFacilities] = useState<Facility[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [modal, setModal] = useState<ModalState>(null)
+  const [facilities, setFacilities] = useState<Facility[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchFacilities = async () => {
       try {
-        const response = await fetch("/api/facilities");
-        if (!response.ok) throw new Error("Failed to fetch facilities");
-        const data: FacilityData[] = await response.json();
+        const response = await fetch("/api/facilities")
+        if (!response.ok) throw new Error("Failed to fetch facilities")
+        const data: FacilityData[] = await response.json()
         setFacilities(
           data.map((f) => ({ ...f, icon: iconMap[f.icon_name] || Wind })),
-        );
+        )
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Unknown error");
+        setError(err instanceof Error ? err.message : "Unknown error")
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-    fetchFacilities();
-  }, []);
+    }
+    fetchFacilities()
+  }, [])
 
   const openModal = useCallback(
     (src: string, alt: string) => setModal({ src, alt }),
     [],
-  );
-  const closeModal = useCallback(() => setModal(null), []);
+  )
+  const closeModal = useCallback(() => setModal(null), [])
 
   if (loading) {
     return (
       <div className="bg-[#020617] min-h-screen flex items-center justify-center">
         <div className="text-slate-400 text-sm">Loading facilities…</div>
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -169,7 +169,7 @@ export default function Facilities() {
       <div className="bg-[#020617] min-h-screen flex items-center justify-center">
         <div className="text-red-400 text-sm">Error: {error}</div>
       </div>
-    );
+    )
   }
 
   return (
@@ -177,9 +177,12 @@ export default function Facilities() {
       <ImageModal modal={modal} onClose={closeModal} />
 
       {/* ── Header ── */}
-      <header className="border-b border-white/5 px-6 py-8">
+      <header className="border-b border-white/5 px-6 py-8 pt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fade}>
+            <p className="text-emerald-400 text-[10px] font-bold uppercase tracking-[0.25em] mb-2">
+              Facilities Overview
+            </p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
               Our Facilities
             </h1>
@@ -195,18 +198,21 @@ export default function Facilities() {
       <div className="border-b border-white/5 sticky top-0 z-30 bg-[#020617]/95 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex overflow-x-auto">
-            {facilities.map((f) => {
-              const Icon = f.icon;
+            {facilities.map((f, i) => {
+              const Icon = f.icon
               return (
                 <Link
                   key={f.id}
                   href={`#${f.id}`}
-                  className="flex items-center gap-1.5 px-4 py-3 whitespace-nowrap text-xs font-medium text-slate-500 hover:text-slate-200 border-b-2 border-transparent hover:border-white/20 transition-all"
+                  className="flex items-center gap-1.5 px-4 py-3 whitespace-nowrap text-xs font-medium text-slate-500 hover:text-emerald-300 border-b-2 border-transparent hover:border-emerald-400/60 transition-all"
                 >
+                  <span className="text-[9px] font-mono text-slate-600">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <Icon className="w-3 h-3" />
                   {f.label}
                 </Link>
-              );
+              )
             })}
           </div>
         </div>
@@ -215,18 +221,23 @@ export default function Facilities() {
       {/* ── Facility Rows ── */}
       <div className="max-w-6xl mx-auto px-6 py-8 space-y-4">
         {facilities.map((f, i) => {
-          const Icon = f.icon;
-          const isEven = i % 2 === 0;
-          const isCyan = f.accent === "cyan";
-          const imgSrc = getImageUrl(f.image_url);
+          const Icon = f.icon
+          const isEven = i % 2 === 0
+          const isCyan = f.accent === "cyan"
+          const imgSrc = getImageUrl(f.image_url)
 
           return (
             <motion.section
               key={f.id}
               id={f.id}
               {...fade}
-              className="flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02]"
+              className="relative flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02] hover:border-white/15 transition-colors scroll-mt-20"
             >
+              {/* Index number watermark — scan anchor */}
+              <span className="hidden lg:block absolute top-4 right-5 text-4xl font-bold text-white/[0.04] select-none pointer-events-none leading-none">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
               {/* Image — fixed height, fixed width on desktop */}
               <div
                 className={`relative shrink-0 w-full lg:w-72 xl:w-80 h-48 lg:h-auto ${
@@ -245,8 +256,8 @@ export default function Facilities() {
                     <div
                       className={`absolute inset-0 ${
                         isCyan
-                          ? "bg-gradient-to-br from-cyan-900/40 to-transparent"
-                          : "bg-gradient-to-br from-blue-900/40 to-transparent"
+                          ? "bg-gradient-to-br from-emerald-900/40 to-transparent"
+                          : "bg-gradient-to-br from-green-900/40 to-transparent"
                       }`}
                     />
                     <button
@@ -265,7 +276,7 @@ export default function Facilities() {
 
               {/* Content */}
               <div
-                className={`flex flex-col justify-center px-6 py-6 gap-3 flex-1 ${
+                className={`flex flex-col justify-center px-6 py-6 gap-3.5 flex-1 min-w-0 ${
                   isEven ? "lg:order-2" : "lg:order-1"
                 }`}
               >
@@ -273,18 +284,18 @@ export default function Facilities() {
                 <div className="flex items-center gap-2">
                   <div
                     className={`p-1.5 rounded-md ${
-                      isCyan ? "bg-cyan-500/15" : "bg-blue-500/15"
+                      isCyan ? "bg-emerald-500/15" : "bg-green-500/15"
                     }`}
                   >
                     <Icon
                       className={`w-3.5 h-3.5 ${
-                        isCyan ? "text-cyan-400" : "text-blue-400"
+                        isCyan ? "text-emerald-400" : "text-green-400"
                       }`}
                     />
                   </div>
                   <span
                     className={`text-[10px] font-bold uppercase tracking-widest ${
-                      isCyan ? "text-cyan-400" : "text-blue-400"
+                      isCyan ? "text-emerald-400" : "text-green-400"
                     }`}
                   >
                     {f.label}
@@ -293,23 +304,23 @@ export default function Facilities() {
 
                 {/* Title + description */}
                 <div>
-                  <h2 className="text-lg font-bold leading-tight mb-1">
+                  <h2 className="text-lg font-bold leading-tight mb-1.5">
                     {f.name}
                   </h2>
-                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     {f.description}
                   </p>
                 </div>
 
-                {/* Bullets — always 2 columns */}
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                {/* Bullets — always 2 columns, clearer scan targets */}
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 pt-1 border-t border-white/5 mt-1">
                   {f.bullets.map((bullet, j) => (
-                    <li key={j} className="flex gap-2 items-start">
+                    <li key={j} className="flex gap-2 items-start pt-2">
                       <span
                         className={`shrink-0 mt-0.5 w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-bold ${
                           isCyan
-                            ? "bg-cyan-500/20 text-cyan-400"
-                            : "bg-blue-500/20 text-blue-400"
+                            ? "bg-emerald-500/20 text-emerald-400"
+                            : "bg-green-500/20 text-green-400"
                         }`}
                       >
                         ✓
@@ -322,7 +333,7 @@ export default function Facilities() {
                 </ul>
               </div>
             </motion.section>
-          );
+          )
         })}
       </div>
 
@@ -335,7 +346,10 @@ export default function Facilities() {
             every aspect of our clinic
           </p>
           <Link href="/book">
-            <Button size="lg" className="group">
+            <Button
+              size="lg"
+              className="group bg-emerald-500 hover:bg-emerald-400 text-slate-950"
+            >
               Schedule Your Visit
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -343,5 +357,5 @@ export default function Facilities() {
         </div>
       </motion.section>
     </div>
-  );
+  )
 }

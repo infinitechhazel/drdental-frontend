@@ -210,7 +210,7 @@ function ActionModal({
   const isApprove = modal.type === "approve"
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white border border-blue-100 rounded-2xl max-w-md w-full p-6 shadow-xl">
+      <div className="bg-white border border-emerald-100 rounded-2xl max-w-md w-full p-6 shadow-xl">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-3">
             <div
@@ -234,7 +234,7 @@ function ActionModal({
           </button>
         </div>
 
-        <div className="bg-[#f4f8ff] border border-blue-100 rounded-xl p-4 mb-4 grid grid-cols-2 gap-3">
+        <div className="bg-[#f4f8ff] border border-emerald-100 rounded-xl p-4 mb-4 grid grid-cols-2 gap-3">
           {[
             ["Name", modal.booking.name],
             ["Email", modal.booking.email],
@@ -273,7 +273,7 @@ function ActionModal({
                 ? "We are pleased to confirm your appointment. We look forward to seeing you."
                 : "Unfortunately we cannot accommodate this time. Please rebook at a different slot."
             }
-            className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400 resize-none text-sm"
+            className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-emerald-400 resize-none text-sm"
           />
         </div>
 
@@ -415,17 +415,17 @@ function NewBookingModal({
         value={form[key]}
         onChange={(e) => setForm((p) => ({ ...p, [key]: e.target.value }))}
         placeholder={ph}
-        className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400 text-sm"
+        className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-emerald-400 text-sm"
       />
     </div>
   )
 
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white border border-blue-100 rounded-2xl max-w-lg w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white border border-emerald-100 rounded-2xl max-w-lg w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <Calendar size={18} className="text-blue-600" />
+            <Calendar size={18} className="text-emerald-600" />
             <h3 className="font-semibold text-slate-800">New Booking</h3>
           </div>
           <button
@@ -453,7 +453,7 @@ function NewBookingModal({
                   setForm((p) => ({ ...p, service_id: e.target.value }))
                 }
                 disabled={servicesLoading}
-                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 focus:outline-none focus:border-blue-400 text-sm disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm disabled:opacity-60"
               >
                 <option value="">
                   {servicesLoading
@@ -482,7 +482,7 @@ function NewBookingModal({
                 onChange={(e) =>
                   setForm((p) => ({ ...p, date: e.target.value, time: "" }))
                 }
-                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 focus:outline-none focus:border-blue-400 text-sm"
+                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm"
               />
             </div>
             <div>
@@ -494,7 +494,7 @@ function NewBookingModal({
                 onChange={(e) =>
                   setForm((p) => ({ ...p, time: e.target.value }))
                 }
-                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 focus:outline-none focus:border-blue-400 text-sm"
+                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm"
               >
                 <option value="">Select time</option>
                 {TIME_SLOTS.map((t) => (
@@ -516,7 +516,7 @@ function NewBookingModal({
                 setForm((p) => ({ ...p, notes: e.target.value }))
               }
               placeholder="Any additional notes…"
-              className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400 text-sm resize-none"
+              className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-emerald-400 text-sm resize-none"
             />
           </div>
 
@@ -536,7 +536,7 @@ function NewBookingModal({
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm disabled:opacity-50"
             >
               {loading ? "Creating…" : "Create Booking"}
             </button>
@@ -591,10 +591,10 @@ function ViewModal({
 
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white border border-blue-100 rounded-2xl max-w-md w-full p-6 shadow-xl">
+      <div className="bg-white border border-emerald-100 rounded-2xl max-w-md w-full p-6 shadow-xl">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <Eye size={18} className="text-blue-600" />
+            <Eye size={18} className="text-emerald-600" />
             <h3 className="font-semibold text-slate-800">Booking Details</h3>
           </div>
           <button
@@ -921,14 +921,14 @@ export default function AdminBookingsTable() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           {/* Title Section */}
           <div className="flex items-center gap-2 flex-wrap">
-            <Calendar size={20} className="text-blue-600 shrink-0" />
+            <Calendar size={20} className="text-emerald-600 shrink-0" />
 
             <h1 className="text-lg font-semibold text-slate-800">
               All Bookings
             </h1>
 
             {meta && (
-              <span className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100 font-semibold">
+              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-semibold">
                 {meta.total} total
               </span>
             )}
@@ -945,7 +945,7 @@ export default function AdminBookingsTable() {
 
             <button
               onClick={() => setShowNewModal(true)}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-colors"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl transition-colors"
             >
               <Plus size={15} />
               New Booking
@@ -955,7 +955,7 @@ export default function AdminBookingsTable() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white border border-blue-100 rounded-2xl p-4 flex items-center gap-3">
+          <div className="bg-white border border-emerald-100 rounded-2xl p-4 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
               <Clock size={16} className="text-amber-600" />
             </div>
@@ -970,7 +970,7 @@ export default function AdminBookingsTable() {
             </div>
           </div>
 
-          <div className="bg-white border border-blue-100 rounded-2xl p-4 flex items-center gap-3">
+          <div className="bg-white border border-emerald-100 rounded-2xl p-4 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
               <CheckCircle size={16} className="text-emerald-600" />
             </div>
@@ -985,7 +985,7 @@ export default function AdminBookingsTable() {
             </div>
           </div>
 
-          <div className="bg-white border border-blue-100 rounded-2xl p-4 flex items-center gap-3">
+          <div className="bg-white border border-emerald-100 rounded-2xl p-4 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shrink-0">
               <XCircle size={16} className="text-red-600" />
             </div>
@@ -1002,7 +1002,7 @@ export default function AdminBookingsTable() {
         </div>
 
         {/* Search + filter */}
-        <div className="bg-white border border-blue-100 rounded-2xl p-3 mb-4 flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="bg-white border border-emerald-100 rounded-2xl p-3 mb-4 flex flex-col sm:flex-row sm:items-center gap-3">
           {/* Search Input */}
           <div className="flex-1 relative w-full">
             <Search
@@ -1017,7 +1017,7 @@ export default function AdminBookingsTable() {
                 if (e.key === "Enter") setSearch(searchInput)
               }}
               placeholder="Search by name or email…"
-              className="w-full pl-9 pr-3 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400"
+              className="w-full pl-9 pr-3 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-emerald-400"
             />
           </div>
 
@@ -1034,7 +1034,7 @@ export default function AdminBookingsTable() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="appearance-none w-full sm:w-auto pl-9 pr-8 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-blue-400"
+              className="appearance-none w-full sm:w-auto pl-9 pr-8 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-emerald-400"
             >
               <option value="">All statuses</option>
               <option value="pending">Pending</option>
@@ -1059,7 +1059,7 @@ export default function AdminBookingsTable() {
               value={serviceFilter}
               onChange={(e) => setServiceFilter(e.target.value)}
               disabled={servicesLoading}
-              className="appearance-none w-full sm:w-auto pl-9 pr-8 py-2.5 bg-[#f4f8ff] border border-blue-100 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-blue-400 disabled:opacity-60"
+              className="appearance-none w-full sm:w-auto pl-9 pr-8 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-emerald-400 disabled:opacity-60"
             >
               <option value="">
                 {servicesLoading ? "Loading services…" : "All services"}
@@ -1092,7 +1092,7 @@ export default function AdminBookingsTable() {
         )}
 
         {/* Table */}
-        <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden">
+        <div className="bg-white border border-emerald-100 rounded-2xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px] text-sm">
               <thead>
@@ -1143,12 +1143,12 @@ export default function AdminBookingsTable() {
                       <td className="px-3 sm:px-5 py-3.5">
                         <div className="flex flex-col gap-0.5 text-xs text-slate-500">
                           <span className="flex items-center gap-1.5">
-                            <Mail size={11} className="text-blue-400" />
+                            <Mail size={11} className="text-emerald-400" />
                             {b.email ?? "—"}
                           </span>
                           {b.phone && (
                             <span className="flex items-center gap-1.5">
-                              <Phone size={11} className="text-blue-400" />
+                              <Phone size={11} className="text-emerald-400" />
                               {b.phone}
                             </span>
                           )}
@@ -1160,11 +1160,11 @@ export default function AdminBookingsTable() {
                       <td className="px-3 sm:px-5 py-3.5">
                         <div className="flex flex-col gap-0.5 text-xs text-slate-500">
                           <span className="flex items-center gap-1.5">
-                            <Calendar size={11} className="text-blue-400" />
+                            <Calendar size={11} className="text-emerald-400" />
                             {b.booking_date ? formatDate(b.booking_date) : "—"}
                           </span>
                           <span className="flex items-center gap-1.5">
-                            <Clock size={11} className="text-blue-400" />
+                            <Clock size={11} className="text-emerald-400" />
                             {b.booking_date ? formatTime(b.booking_date) : "—"}
                           </span>
                         </div>
@@ -1177,7 +1177,7 @@ export default function AdminBookingsTable() {
                           <button
                             onClick={() => setViewBooking(b)}
                             title="View"
-                            className="w-8 h-8 rounded-lg hover:bg-blue-50 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-colors"
+                            className="w-8 h-8 rounded-lg hover:bg-emerald-50 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors"
                           >
                             <Eye size={14} />
                           </button>

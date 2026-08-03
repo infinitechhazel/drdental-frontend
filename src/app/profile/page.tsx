@@ -30,7 +30,7 @@ type Booking = {
 
 const statusColors: Record<string, string> = {
   pending: "border-yellow-400/30 text-yellow-400",
-  confirmed: "border-cyan-400/30 text-cyan-400",
+  confirmed: "border-emerald-400/30 text-emerald-400",
   cancelled: "border-red-400/30 text-red-400",
 }
 
@@ -110,7 +110,7 @@ export default function ProfilePage() {
 
       <main className="flex-1 max-w-5xl mx-auto w-full px-6 pt-28 pb-20">
         <motion.div {...fade} className="mb-10">
-          <p className="text-cyan-400 text-sm uppercase tracking-[0.3em] mb-3">
+          <p className="text-emerald-400 text-sm uppercase tracking-[0.3em] mb-3">
             Account
           </p>
           <h1 className="font-serif text-4xl md:text-5xl text-white">
@@ -137,20 +137,20 @@ export default function ProfilePage() {
               <p className="text-slate-500 text-sm mb-6">Patient Account</p>
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-3 text-slate-400">
-                  <User size={14} className="text-cyan-400 shrink-0" />
+                  <User size={14} className="text-emerald-400 shrink-0" />
                   <span className="truncate">
                     {typeof user?.name === "string" ? user.name : ""}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-400">
-                  <Mail size={14} className="text-cyan-400 shrink-0" />
+                  <Mail size={14} className="text-emerald-400 shrink-0" />
                   <span className="truncate">
                     {typeof user?.email === "string" ? user.email : ""}
                   </span>
                 </div>
                 {typeof user?.phone === "string" && user.phone && (
                   <div className="flex items-center gap-3 text-slate-400">
-                    <Phone size={14} className="text-cyan-400 shrink-0" />
+                    <Phone size={14} className="text-emerald-400 shrink-0" />
                     <span>{user.phone}</span>
                   </div>
                 )}
@@ -165,7 +165,7 @@ export default function ProfilePage() {
             className="lg:col-span-2 space-y-4"
           >
             <h3 className="text-white font-medium text-lg mb-4 flex items-center gap-2">
-              <Stethoscope size={16} className="text-cyan-400" />
+              <Stethoscope size={16} className="text-emerald-400" />
               My Appointments
             </h3>
 
@@ -192,7 +192,7 @@ export default function ProfilePage() {
                 <p className="text-slate-500 text-sm">No appointments yet.</p>
                 <button
                   onClick={() => router.push("/book")}
-                  className="mt-4 px-5 py-2 bg-cyan-400 text-slate-950 text-sm font-medium rounded-full hover:bg-cyan-300 transition-colors"
+                  className="mt-4 px-5 py-2 bg-emerald-400 text-slate-950 text-sm font-medium rounded-full hover:bg-emerald-300 transition-colors"
                 >
                   Book Now
                 </button>
@@ -215,11 +215,11 @@ export default function ProfilePage() {
                         </p>
                         <div className="flex flex-wrap items-center gap-3 text-slate-400 text-xs">
                           <span className="flex items-center gap-1">
-                            <Calendar size={11} className="text-cyan-400" />
+                            <Calendar size={11} className="text-emerald-400" />
                             {parseDate(b)}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Clock size={11} className="text-cyan-400" />
+                            <Clock size={11} className="text-emerald-400" />
                             {parseTime(b)}
                           </span>
                         </div>

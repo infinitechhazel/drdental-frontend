@@ -1,45 +1,45 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/store/authStore";
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/store/authStore"
 
-import HeroSection from "@/components/sections/Hero";
-import Testimonials from "@/components/Testimonials";
+import HeroSection from "@/components/sections/Hero"
+import Testimonials from "@/components/Testimonials"
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
-  const { isLoggedIn, user, initializeAuth } = useAuthStore();
-  const router = useRouter();
+  const { isLoggedIn, user, initializeAuth } = useAuthStore()
+  const router = useRouter()
 
   useEffect(() => {
-    initializeAuth();
-    const timer = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(timer);
-  }, [initializeAuth]);
+    initializeAuth()
+    const timer = setTimeout(() => setLoading(false), 800)
+    return () => clearTimeout(timer)
+  }, [initializeAuth])
 
   useEffect(() => {
     if (!loading && isLoggedIn && user?.role?.toLowerCase() === "admin") {
-      router.replace("/admin/dashboard");
+      router.replace("/admin/dashboard")
     }
-  }, [loading, isLoggedIn, user, router]);
+  }, [loading, isLoggedIn, user, router])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#020617]">
+      <div className="min-h-screen flex items-center justify-center bg-green-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin" />
-          <span className="text-slate-500 text-sm font-medium tracking-wide">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-400 border-t-transparent" />
+          <span className="text-sm font-medium tracking-wide text-green-200">
             Loading...
           </span>
         </div>
       </div>
-    );
+    )
   }
 
   if (isLoggedIn && user?.role?.toLowerCase() === "admin") {
-    return null;
+    return null
   }
 
   return (
@@ -47,5 +47,5 @@ export default function Home() {
       <HeroSection />
       <Testimonials />
     </div>
-  );
+  )
 }

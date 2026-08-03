@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import equipment from '@/assets/equipment-2.jpg';
-import exterior from '@/assets/exterior-2.jpg';
+import Link from "next/link"
+import Image from "next/image"
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import equipment from "@/assets/equipment-2.jpg"
+import exterior from "@/assets/exterior-2.jpg"
 import {
   ArrowRight,
   Shield,
@@ -22,29 +22,29 @@ import {
   Stethoscope,
   MapPin,
   Calendar,
-} from "lucide-react";
-import { motion } from "framer-motion";
+} from "lucide-react"
+import { motion } from "framer-motion"
 
 const fade = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
   transition: { duration: 0.6 },
-};
+}
 
 const slideLeft = {
   initial: { opacity: 0, x: -30 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true },
   transition: { duration: 0.6 },
-};
+}
 
 const slideRight = {
   initial: { opacity: 0, x: 30 },
   whileInView: { opacity: 1, x: 0 },
   viewport: { once: true },
   transition: { duration: 0.6 },
-};
+}
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Sparkles,
@@ -55,7 +55,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Star,
   Award,
   Users,
-};
+}
 
 const FALLBACK_ICONS: React.ElementType[] = [
   Sparkles,
@@ -66,141 +66,152 @@ const FALLBACK_ICONS: React.ElementType[] = [
   Star,
   Award,
   Users,
-];
+]
 
 const CREDENTIAL_ICON_MAP: Record<string, React.ElementType> = {
   GraduationCap,
   Stethoscope,
   Star,
   Award,
-};
+}
 
 function CredentialIcon({
   name,
   ...props
 }: {
-  name: string;
-  size?: number;
-  className?: string;
+  name: string
+  size?: number
+  className?: string
 }) {
-  const Icon = CREDENTIAL_ICON_MAP[name] ?? Award;
-  return <Icon {...props} />;
+  const Icon = CREDENTIAL_ICON_MAP[name] ?? Award
+  return <Icon {...props} />
 }
 
 interface Service {
-  id: number;
-  name: string;
-  description: string;
-  icon?: string;
-  price?: number;
-  duration?: number;
-  category?: string;
+  id: number
+  name: string
+  description: string
+  icon?: string
+  price?: number
+  duration?: number
+  category?: string
 }
 
 type Credential = {
-  icon: string;
-  label: string;
-  value: string;
-  sub: string;
-};
+  icon: string
+  label: string
+  value: string
+  sub: string
+}
 
-type Stat = { value: string; label: string };
+type Stat = { value: string; label: string }
 
 type DoctorProfile = {
-  name: string;
-  title: string;
-  role: string;
-  bio: string;
-  quote: string;
-  location: string;
-  since_year: string;
-  image_url: string | null;
-  credentials: Credential[];
-};
+  name: string
+  title: string
+  role: string
+  bio: string
+  quote: string
+  location: string
+  since_year: string
+  image_url: string | null
+  credentials: Credential[]
+}
 
 type AboutData = {
-  stats: Stat[];
-  doctor: DoctorProfile | null;
-};
+  stats: Stat[]
+  doctor: DoctorProfile | null
+}
 
 function normalizeServices(raw: unknown): Service[] {
-  if (Array.isArray(raw)) return raw as Service[];
+  if (Array.isArray(raw)) return raw as Service[]
   if (raw && typeof raw === "object") {
-    const obj = raw as Record<string, unknown>;
-    if (Array.isArray(obj.data)) return obj.data as Service[];
-    if (Array.isArray(obj.services)) return obj.services as Service[];
+    const obj = raw as Record<string, unknown>
+    if (Array.isArray(obj.data)) return obj.data as Service[]
+    if (Array.isArray(obj.services)) return obj.services as Service[]
   }
-  return [];
+  return []
 }
 
 export default function Home() {
-  const [services, setServices] = useState<Service[]>([]);
-  const [servicesLoading, setServicesLoading] = useState(true);
-  const [about, setAbout] = useState<AboutData | null>(null);
+  const [services, setServices] = useState<Service[]>([])
+  const [servicesLoading, setServicesLoading] = useState(true)
+  const [about, setAbout] = useState<AboutData | null>(null)
 
   useEffect(() => {
     fetch("/api/services")
       .then((r) => r.json())
       .then((raw) => setServices(normalizeServices(raw)))
       .catch(console.error)
-      .finally(() => setServicesLoading(false));
+      .finally(() => setServicesLoading(false))
 
     fetch("/api/about", { cache: "no-store" })
       .then((r) => r.json())
       .then((d: AboutData) => setAbout(d))
-      .catch(console.error);
-  }, []);
+      .catch(console.error)
+  }, [])
 
   const stats: Stat[] = about?.stats?.length
     ? about.stats
     : [
-        { value: "15K+", label: "Patients Treated" },
+        { value: "5K+", label: "Patients Treated" },
         { value: "98%", label: "Satisfaction Rate" },
-        { value: "12+", label: "Years Experience" },
-        { value: "25+", label: "Specialists" },
-      ];
+        { value: "6+", label: "Years Experience" },
+        { value: "10+", label: "Specialists" },
+      ]
 
-  const doctor = about?.doctor ?? null;
+  const doctor = about?.doctor ?? null
 
   return (
     <div>
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#0B1220] to-[#020617]" />
-        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-cyan-400/10 rounded-full blur-[120px] -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-emerald-400/10 rounded-full blur-[120px] -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-green-600/10 rounded-full blur-[100px]" />
         <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div {...fade}>
-            <p className="text-cyan-400 text-sm uppercase tracking-[0.3em] mb-6">
+            <p className="text-emerald-400 text-sm uppercase tracking-[0.3em] mb-6">
               Dr. Dental Care Center
             </p>
+
             <h1 className="font-serif text-5xl md:text-7xl text-white leading-[1.1] mb-6">
-              Advanced Dental & Aesthetic Care
+              Quality Dental Care You Can Trust
             </h1>
-            <p className="text-slate-400 text-lg leading-relaxed max-w-lg mb-10">
-              Where clinical precision meets aesthetic excellence. Experience
-              healthcare engineered for results and designed for beauty.
+
+            <p className="text-slate-400 text-lg leading-relaxed max-w-lg mb-6">
+              Providing reliable and compassionate dental care for over 6 years.
+              Our team is dedicated to helping every patient achieve a healthier
+              smile through personalized treatments and modern dental solutions.
             </p>
+
+            <p className="text-slate-400 text-lg leading-relaxed max-w-lg mb-10">
+              Your journey to better oral health starts with a dental team that
+              cares, listens, and puts your comfort first.
+            </p>
+
             <div className="flex flex-wrap gap-4">
               <Link href="/book">
                 <Button
                   size="lg"
-                  className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 font-medium px-8 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all"
+                  className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium px-8 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all"
                 >
                   Book Appointment <ArrowRight className="ml-2" size={18} />
                 </Button>
               </Link>
+
               <Link href="/services">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 font-medium px-8 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all"
+                  className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium px-8 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all"
                 >
                   Explore Services
                 </Button>
               </Link>
             </div>
           </motion.div>
+
           <motion.div
             {...fade}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -211,7 +222,7 @@ export default function Home() {
               alt="Dr. Dental Care Center equipment"
               width={600}
               height={450}
-              className="rounded-2xl shadow-2xl shadow-cyan-400/5 border border-white/5"
+              className="rounded-2xl shadow-2xl shadow-emerald-400/5 border border-white/5"
             />
           </motion.div>
         </div>
@@ -227,7 +238,7 @@ export default function Home() {
               transition={{ delay: i * 0.1 }}
               className="text-center"
             >
-              <p className="text-3xl font-bold text-cyan-400 font-serif">
+              <p className="text-3xl font-bold text-emerald-400 font-serif">
                 {s.value}
               </p>
               <p className="text-slate-500 text-sm mt-1">{s.label}</p>
@@ -239,13 +250,13 @@ export default function Home() {
       {/* ── Meet the Founder ── */}
       {doctor && (
         <section className="relative bg-[#020617] py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
-          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-cyan-400/3 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-emerald-400/3 to-transparent pointer-events-none" />
 
           <div className="relative max-w-7xl mx-auto px-6">
             <motion.div {...fade} className="flex items-center gap-3 mb-14">
-              <div className="h-px w-8 bg-cyan-400" />
-              <p className="text-cyan-400 text-xs uppercase tracking-[0.3em]">
+              <div className="h-px w-8 bg-emerald-400" />
+              <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
                 Meet the Founder
               </p>
             </motion.div>
@@ -253,8 +264,8 @@ export default function Home() {
             <div className="grid lg:grid-cols-12 gap-0 items-stretch">
               {/* Photo */}
               <motion.div {...slideLeft} className="lg:col-span-5 relative">
-                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-cyan-400/40 rounded-tl-xl pointer-events-none z-10" />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-cyan-400/20 rounded-br-xl pointer-events-none z-10" />
+                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-emerald-400/40 rounded-tl-xl pointer-events-none z-10" />
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-emerald-400/20 rounded-br-xl pointer-events-none z-10" />
 
                 <div className="relative rounded-2xl overflow-hidden border border-white/10 h-full min-h-[520px]">
                   <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900">
@@ -273,12 +284,12 @@ export default function Home() {
                     )}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-transparent" />
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400" />
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-green-400" />
 
                   {/* Badges */}
-                  <div className="absolute top-5 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-cyan-400/30 rounded-xl px-3 py-2">
-                    <Calendar size={12} className="text-cyan-400" />
-                    <span className="text-cyan-400 text-xs font-mono">
+                  <div className="absolute top-5 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-emerald-400/30 rounded-xl px-3 py-2">
+                    <Calendar size={12} className="text-emerald-400" />
+                    <span className="text-emerald-400 text-xs font-mono">
                       Since {doctor.since_year} ·{" "}
                       {new Date().getFullYear() -
                         parseInt(doctor.since_year ?? "0")}
@@ -297,7 +308,7 @@ export default function Home() {
                     <p className="text-white font-serif text-2xl leading-tight mb-1">
                       {doctor.name}
                     </p>
-                    <p className="text-cyan-400 text-xs uppercase tracking-[0.2em] mt-2">
+                    <p className="text-emerald-400 text-xs uppercase tracking-[0.2em] mt-2">
                       {doctor.title}
                     </p>
                     <p className="text-slate-500 text-xs mt-1">{doctor.role}</p>
@@ -313,9 +324,9 @@ export default function Home() {
               >
                 {/* Quote */}
                 {doctor.quote && (
-                  <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden group hover:border-cyan-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-52 h-52 bg-cyan-400/5 rounded-full blur-3xl group-hover:bg-cyan-400/10 transition-colors" />
-                    <span className="absolute top-2 left-6 text-7xl font-serif text-cyan-400/20 leading-none select-none">
+                  <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden group hover:border-emerald-400/30 transition-colors">
+                    <div className="absolute top-0 right-0 w-52 h-52 bg-emerald-400/5 rounded-full blur-3xl group-hover:bg-emerald-400/10 transition-colors" />
+                    <span className="absolute top-2 left-6 text-7xl font-serif text-emerald-400/20 leading-none select-none">
                       &ldquo;
                     </span>
                     <div className="relative pt-6">
@@ -323,7 +334,7 @@ export default function Home() {
                         {doctor.quote}
                       </p>
                       <div className="flex items-center gap-3">
-                        <div className="h-px w-8 bg-cyan-400/50" />
+                        <div className="h-px w-8 bg-emerald-400/50" />
                         <p className="text-slate-500 text-sm">
                           — {doctor.name.split(" ").slice(0, 2).join(" ")} ·
                           Founder, Dr. Dental Care Center
@@ -351,11 +362,11 @@ export default function Home() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }}
                       >
-                        <div className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl hover:border-cyan-400/30 hover:bg-white/[0.06] transition-all group cursor-default">
-                          <div className="w-9 h-9 rounded-lg bg-cyan-400/10 flex items-center justify-center shrink-0 group-hover:bg-cyan-400/20 transition-colors">
+                        <div className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl hover:border-emerald-400/30 hover:bg-white/[0.06] transition-all group cursor-default">
+                          <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center shrink-0 group-hover:bg-emerald-400/20 transition-colors">
                             <CredentialIcon
                               name={c.icon}
-                              className="text-cyan-400"
+                              className="text-emerald-400"
                               size={17}
                             />
                           </div>
@@ -385,7 +396,7 @@ export default function Home() {
                           <Star
                             key={i}
                             size={13}
-                            className="text-cyan-400 fill-cyan-400"
+                            className="text-emerald-400 fill-emerald-400"
                           />
                         ))}
                       </div>
@@ -413,7 +424,7 @@ export default function Home() {
                 <Link href="/about">
                   <Button
                     variant="outline"
-                    className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 w-fit transition-all"
+                    className="border-emerald-400/30 text-emerald-400 hover:bg-emerald-400/10 w-fit transition-all"
                   >
                     Learn More About Us{" "}
                     <ArrowRight size={15} className="ml-2" />
@@ -429,7 +440,7 @@ export default function Home() {
       <section className="bg-[#F8FAFC] py-24">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fade} className="text-center mb-16">
-            <p className="text-blue-600 text-sm uppercase tracking-[0.3em] mb-3">
+            <p className="text-green-600 text-sm uppercase tracking-[0.3em] mb-3">
               Our Expertise
             </p>
             <h2 className="font-serif text-4xl text-slate-900">
@@ -439,7 +450,7 @@ export default function Home() {
 
           {servicesLoading && (
             <div className="flex items-center justify-center py-20">
-              <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+              <Loader2 className="h-8 w-8 animate-spin text-green-600" />
             </div>
           )}
 
@@ -454,16 +465,16 @@ export default function Home() {
               {services.map((s, i) => {
                 const IconComponent =
                   (s.icon && ICON_MAP[s.icon]) ||
-                  FALLBACK_ICONS[i % FALLBACK_ICONS.length];
+                  FALLBACK_ICONS[i % FALLBACK_ICONS.length]
                 return (
                   <motion.div
                     key={s.id}
                     {...fade}
                     transition={{ delay: i * 0.08 }}
                   >
-                    <Card className="p-6 bg-white border-slate-200 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-600/5 transition-all group cursor-pointer h-full flex flex-col">
+                    <Card className="p-6 bg-white border-slate-200 hover:border-green-200 hover:shadow-lg hover:shadow-green-600/5 transition-all group cursor-pointer h-full flex flex-col">
                       <IconComponent
-                        className="text-blue-600 mb-4 shrink-0"
+                        className="text-green-600 mb-4 shrink-0"
                         size={28}
                       />
                       <h3 className="font-serif text-lg text-slate-900 mb-2">
@@ -475,7 +486,7 @@ export default function Home() {
                       {(s.price !== undefined || s.duration !== undefined) && (
                         <div className="flex gap-3 mt-3 flex-wrap">
                           {s.price !== undefined && (
-                            <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium">
+                            <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full font-medium">
                               ₱{Number(s.price).toLocaleString("en-PH")}
                             </span>
                           )}
@@ -488,7 +499,7 @@ export default function Home() {
                       )}
                     </Card>
                   </motion.div>
-                );
+                )
               })}
             </div>
           )}
@@ -498,7 +509,7 @@ export default function Home() {
               <Link href="/services">
                 <Button
                   variant="outline"
-                  className="border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-600 transition-all"
+                  className="border-green-200 text-green-600 hover:bg-green-50 hover:text-green-600 transition-all"
                 >
                   View All Services <ArrowRight size={16} className="ml-2" />
                 </Button>
@@ -510,11 +521,11 @@ export default function Home() {
 
       {/* ── Why Choose ── */}
       <section className="bg-[#020617] py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-400/5 rounded-full blur-[100px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-400/5 rounded-full blur-[100px]" />
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div {...fade}>
             <Image
-              src={exterior}              
+              src={exterior}
               alt="Dr. Dental Care Center exterior"
               width={600}
               height={450}
@@ -522,7 +533,7 @@ export default function Home() {
             />
           </motion.div>
           <motion.div {...fade} transition={{ delay: 0.2 }}>
-            <p className="text-cyan-400 text-sm uppercase tracking-[0.3em] mb-3">
+            <p className="text-emerald-400 text-sm uppercase tracking-[0.3em] mb-3">
               Why Dr. Dental Care Center
             </p>
             <h2 className="font-serif text-4xl text-white mb-8">
@@ -546,8 +557,8 @@ export default function Home() {
               },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-cyan-400/10 flex items-center justify-center shrink-0">
-                  <item.icon size={20} className="text-cyan-400" />
+                <div className="w-10 h-10 rounded-lg bg-emerald-400/10 flex items-center justify-center shrink-0">
+                  <item.icon size={20} className="text-emerald-400" />
                 </div>
                 <div>
                   <h3 className="text-white font-medium mb-1">{item.title}</h3>
@@ -561,7 +572,7 @@ export default function Home() {
 
       {/* ── Final CTA ── */}
       <section className="bg-[#020617] py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-transparent to-blue-600/5" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/5 via-transparent to-green-600/5" />
         <motion.div
           {...fade}
           className="relative max-w-3xl mx-auto px-6 text-center"
@@ -576,7 +587,7 @@ export default function Home() {
           <Link href="/book">
             <Button
               size="lg"
-              className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 font-medium px-10 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all"
+              className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium px-10 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all"
             >
               Book Your Appointment <ArrowRight className="ml-2" size={18} />
             </Button>
@@ -584,5 +595,5 @@ export default function Home() {
         </motion.div>
       </section>
     </div>
-  );
+  )
 }

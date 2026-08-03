@@ -1,5 +1,3 @@
-// app/about/page.tsx
-
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -166,7 +164,7 @@ export default function About() {
   if (loading) {
     return (
       <div className="bg-[#020617] min-h-screen flex items-center justify-center">
-        <Loader2 className="text-cyan-400 animate-spin" size={32} />
+        <Loader2 className="text-emerald-400 animate-spin" size={32} />
       </div>
     );
   }
@@ -186,18 +184,18 @@ export default function About() {
       {/* ── Hero ── */}
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-400/5 rounded-full blur-[120px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-400/5 rounded-full blur-[120px]" />
         </div>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
           <span className="text-[160px] md:text-[220px] font-black text-white/[0.02] leading-none tracking-tighter">
-            Dr. Dental Care Center
+            Dr. Dental
           </span>
         </div>
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div {...fade} className="max-w-4xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-cyan-400" />
-              <p className="text-cyan-400 text-xs uppercase tracking-[0.3em]">
+              <div className="h-px w-12 bg-emerald-400" />
+              <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
                 About Dr. Dental Care Center
               </p>
             </div>
@@ -219,7 +217,7 @@ export default function About() {
             >
               {stats.map((s, i) => (
                 <div key={i} className="bg-[#020617] px-6 py-6 text-center">
-                  <div className="text-3xl font-bold text-cyan-400 mb-1">
+                  <div className="text-3xl font-bold text-emerald-400 mb-1">
                     {s.value}
                   </div>
                   <div className="text-slate-500 text-xs uppercase tracking-widest">
@@ -235,13 +233,13 @@ export default function About() {
       {/* ── Founder ── */}
       {doctor && (
         <section className="relative py-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
-          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-cyan-400/3 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-emerald-400/3 to-transparent pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-6 py-20">
             <motion.div {...fade} className="flex items-center gap-3 mb-14">
-              <div className="h-px w-8 bg-cyan-400" />
-              <p className="text-cyan-400 text-xs uppercase tracking-[0.3em]">
+              <div className="h-px w-8 bg-emerald-400" />
+              <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
                 Meet the Founder
               </p>
             </motion.div>
@@ -249,8 +247,8 @@ export default function About() {
             <div className="grid lg:grid-cols-12 gap-0 items-stretch">
               {/* Photo */}
               <motion.div {...slideLeft} className="lg:col-span-5 relative">
-                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-cyan-400/40 rounded-tl-xl pointer-events-none z-10" />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-cyan-400/20 rounded-br-xl pointer-events-none z-10" />
+                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-emerald-400/40 rounded-tl-xl pointer-events-none z-10" />
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-emerald-400/20 rounded-br-xl pointer-events-none z-10" />
 
                 <div className="relative rounded-2xl overflow-hidden border border-white/10 h-full min-h-[520px]">
                   <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900">
@@ -265,12 +263,12 @@ export default function About() {
                     )}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-transparent" />
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400" />
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-400" />
 
                   {/* Badges */}
-                  <div className="absolute top-5 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-cyan-400/30 rounded-xl px-3 py-2">
-                    <Calendar size={12} className="text-cyan-400" />
-                    <span className="text-cyan-400 text-xs font-mono">
+                  <div className="absolute top-5 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-emerald-400/30 rounded-xl px-3 py-2">
+                    <Calendar size={12} className="text-emerald-400" />
+                    <span className="text-emerald-400 text-xs font-mono">
                       Since {doctor.since_year} ·{" "}
                       {new Date().getFullYear() -
                         parseInt(doctor.since_year ?? "0")}
@@ -289,7 +287,7 @@ export default function About() {
                     <p className="text-white font-serif text-2xl leading-tight mb-1">
                       {doctor.name}
                     </p>
-                    <p className="text-cyan-400 text-xs uppercase tracking-[0.2em] mt-2">
+                    <p className="text-emerald-400 text-xs uppercase tracking-[0.2em] mt-2">
                       {doctor.title}
                     </p>
                     <p className="text-slate-500 text-xs mt-1">{doctor.role}</p>
@@ -305,9 +303,9 @@ export default function About() {
               >
                 {/* Quote */}
                 {doctor.quote && (
-                  <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden group hover:border-cyan-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-52 h-52 bg-cyan-400/5 rounded-full blur-3xl group-hover:bg-cyan-400/10 transition-colors" />
-                    <span className="absolute top-2 left-6 text-7xl font-serif text-cyan-400/20 leading-none select-none">
+                  <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden group hover:border-emerald-400/30 transition-colors">
+                    <div className="absolute top-0 right-0 w-52 h-52 bg-emerald-400/5 rounded-full blur-3xl group-hover:bg-emerald-400/10 transition-colors" />
+                    <span className="absolute top-2 left-6 text-7xl font-serif text-emerald-400/20 leading-none select-none">
                       &ldquo;
                     </span>
                     <div className="relative pt-6">
@@ -315,7 +313,7 @@ export default function About() {
                         {doctor.quote}
                       </p>
                       <div className="flex items-center gap-3">
-                        <div className="h-px w-8 bg-cyan-400/50" />
+                        <div className="h-px w-8 bg-emerald-400/50" />
                         <p className="text-slate-500 text-sm">
                           — {doctor.name.split(" ").slice(0, 2).join(" ")} ·
                           Founder, Dr. Dental Care Center
@@ -343,11 +341,11 @@ export default function About() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }}
                       >
-                        <div className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl hover:border-cyan-400/30 hover:bg-white/[0.06] transition-all group cursor-default">
-                          <div className="w-9 h-9 rounded-lg bg-cyan-400/10 flex items-center justify-center shrink-0 group-hover:bg-cyan-400/20 transition-colors">
+                        <div className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl hover:border-emerald-400/30 hover:bg-white/[0.06] transition-all group cursor-default">
+                          <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center shrink-0 group-hover:bg-emerald-400/20 transition-colors">
                             <CredentialIcon
                               name={c.icon}
-                              className="text-cyan-400"
+                              className="text-emerald-400"
                               size={17}
                             />
                           </div>
@@ -377,7 +375,7 @@ export default function About() {
                           <Star
                             key={i}
                             size={13}
-                            className="text-cyan-400 fill-cyan-400"
+                            className="text-emerald-400 fill-emerald-400"
                           />
                         ))}
                       </div>
@@ -414,11 +412,11 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-6">
               {data.mission && (
                 <motion.div {...fade}>
-                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-cyan-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-400/5 rounded-full blur-2xl group-hover:bg-cyan-400/10 transition-colors" />
+                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-emerald-400/30 transition-colors">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-400/5 rounded-full blur-2xl group-hover:bg-emerald-400/10 transition-colors" />
                     <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center mb-5">
-                        <Target className="text-cyan-400" size={18} />
+                      <div className="w-10 h-10 rounded-xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-5">
+                        <Target className="text-emerald-400" size={18} />
                       </div>
                       <h3 className="font-serif text-2xl text-white mb-3">
                         Our Mission
@@ -432,11 +430,11 @@ export default function About() {
               )}
               {data.vision && (
                 <motion.div {...fade} transition={{ delay: 0.1 }}>
-                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-cyan-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-blue-400/5 rounded-full blur-2xl group-hover:bg-blue-400/10 transition-colors" />
+                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-emerald-400/30 transition-colors">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-400/5 rounded-full blur-2xl group-hover:bg-emerald-400/10 transition-colors" />
                     <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-blue-400/10 border border-blue-400/20 flex items-center justify-center mb-5">
-                        <Eye className="text-blue-400" size={18} />
+                      <div className="w-10 h-10 rounded-xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-5">
+                        <Eye className="text-emerald-400" size={18} />
                       </div>
                       <h3 className="font-serif text-2xl text-white mb-3">
                         Our Vision
@@ -459,8 +457,8 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-6">
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-2">
-                <div className="h-px w-8 bg-cyan-400" />
-                <p className="text-cyan-400 text-xs uppercase tracking-[0.3em]">
+                <div className="h-px w-8 bg-emerald-400" />
+                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
                   Technology
                 </p>
               </div>
@@ -477,10 +475,10 @@ export default function About() {
                   transition={{ delay: i * 0.08 }}
                 >
                   <div className="p-6 bg-white/5 border border-white/10 rounded-2xl h-full hover:bg-white/[0.07] hover:border-white/20 transition-all group">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-400/10 flex items-center justify-center mb-4 group-hover:bg-cyan-400/20 transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center mb-4 group-hover:bg-emerald-400/20 transition-colors">
                       <DynamicIcon
                         name={t.icon_name}
-                        className="text-cyan-400"
+                        className="text-emerald-400"
                         size={18}
                       />
                     </div>
@@ -504,8 +502,8 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-6">
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-2">
-                <div className="h-px w-8 bg-cyan-400" />
-                <p className="text-cyan-400 text-xs uppercase tracking-[0.3em]">
+                <div className="h-px w-8 bg-emerald-400" />
+                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
                   Our Journey
                 </p>
               </div>
@@ -525,12 +523,12 @@ export default function About() {
                     className="relative flex items-start gap-6 group"
                   >
                     <div className="w-[72px] shrink-0 pt-5 text-right">
-                      <span className="text-cyan-400 font-mono text-xs font-semibold">
+                      <span className="text-emerald-400 font-mono text-xs font-semibold">
                         {t.year}
                       </span>
                     </div>
                     <div className="relative shrink-0 mt-5">
-                      <div className="w-3 h-3 rounded-full border-2 border-cyan-400/50 bg-[#020617] group-hover:border-cyan-400 group-hover:bg-cyan-400/20 transition-all" />
+                      <div className="w-3 h-3 rounded-full border-2 border-emerald-400/50 bg-[#020617] group-hover:border-emerald-400 group-hover:bg-emerald-400/20 transition-all" />
                     </div>
                     <div className="flex-1 py-4 border-b border-white/5 group-hover:border-white/10 transition-colors">
                       <h3 className="text-white font-medium text-sm mb-0.5">
@@ -556,10 +554,10 @@ export default function About() {
               {...fade}
               className="relative rounded-2xl border border-white/10 bg-white/5 p-12 text-center overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-600/5" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-cyan-400/10 rounded-full blur-[80px]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-transparent to-emerald-600/5" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-emerald-400/10 rounded-full blur-[80px]" />
               <div className="relative">
-                <p className="text-cyan-400 text-xs uppercase tracking-[0.3em] mb-3">
+                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em] mb-3">
                   Get Started
                 </p>
                 <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
@@ -571,7 +569,7 @@ export default function About() {
                 <Link href="/book">
                   <Button
                     size="lg"
-                    className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 px-8 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all font-medium"
+                    className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 px-8 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all font-medium"
                   >
                     Book Consultation <ArrowRight className="ml-2" size={16} />
                   </Button>

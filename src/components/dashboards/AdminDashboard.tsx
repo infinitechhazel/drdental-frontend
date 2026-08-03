@@ -162,7 +162,7 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
     if (s === "confirmed" || s === "approved")
       return "bg-emerald-50 text-emerald-600 border border-emerald-100";
     if (s === "in progress" || s === "ongoing")
-      return "bg-blue-50 text-blue-600 border border-blue-100";
+      return "bg-emerald-50 text-emerald-600 border border-emerald-100";
     if (s === "cancelled" || s === "rejected")
       return "bg-red-50 text-red-600 border border-red-100";
     return "bg-amber-50 text-amber-600 border border-amber-100";
@@ -262,11 +262,11 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
                 key={index}
                 className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-all"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 blur-3xl rounded-full" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 blur-3xl rounded-full" />
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center">
-                      <Icon size={22} className="text-blue-600" />
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                      <Icon size={22} className="text-emerald-600" />
                     </div>
                     {loading && (
                       <Loader2 size={16} className="animate-spin text-slate-300" />
@@ -297,7 +297,7 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
                     : `Latest ${recentBookings.length} booking${recentBookings.length !== 1 ? "s" : ""}`}
                 </p>
               </div>
-              <button className="text-sm text-blue-600 font-medium flex items-center gap-1 hover:gap-2 transition-all">
+              <button className="text-sm text-emerald-600 font-medium flex items-center gap-1 hover:gap-2 transition-all">
                 View all
                 <ArrowRight size={15} />
               </button>
@@ -323,7 +323,7 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
                       className="rounded-2xl border border-slate-200 p-4 bg-slate-50"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-sm font-semibold text-white shrink-0">
+                        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center text-sm font-semibold text-white shrink-0">
                           {getAvatar(b.name)}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -360,7 +360,7 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
                       key={index}
                       className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-all"
                     >
-                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-sm font-semibold text-white shrink-0">
+                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center text-sm font-semibold text-white shrink-0">
                         {getAvatar(b.name)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -395,16 +395,16 @@ export default function AdminDashboard({ user }: AdminDashboardProps) {
 
           {/* REVENUE CARD */}
           <div className="space-y-6">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 p-6 shadow-xl shadow-blue-100">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-500 to-emerald-400 p-6 shadow-xl shadow-emerald-100">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.3),transparent_35%)]" />
               <div className="relative z-10">
-                <p className="text-blue-100 text-xs uppercase tracking-[0.2em] font-semibold mb-2">
+                <p className="text-emerald-100 text-xs uppercase tracking-[0.2em] font-semibold mb-2">
                   Revenue — {MONTHS[selectedMonth - 1]} {selectedYear}
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
                   {loading || !data ? "—" : formatRevenue(revenueNumber)}
                 </h2>
-                <p className="text-blue-100 text-sm mt-2">
+                <p className="text-emerald-100 text-sm mt-2">
                   From confirmed bookings this period
                 </p>
               </div>

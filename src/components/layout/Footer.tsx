@@ -28,7 +28,7 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="relative bg-[#020617] border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-[#03130c] border-t border-white/5 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
         <span className="font-serif text-[20vw] text-white whitespace-nowrap">
           Dr. Dental
@@ -39,7 +39,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <h3 className="font-serif text-lg text-white mb-4">
-            Dr. Dental Care <span className="text-cyan-400">Center</span>
+            Dr. Dental Care <span className="text-emerald-400">Center</span>
           </h3>
           <p className="text-slate-500 text-sm leading-relaxed">
             Every smile carries a story, a memory, and a reason to be shared.
@@ -58,7 +58,7 @@ export default function Footer() {
               <Link
                 key={p}
                 href={p}
-                className="block text-sm text-slate-500 hover:text-cyan-400 transition-colors"
+                className="block text-sm text-slate-500 hover:text-emerald-400 transition-colors"
               >
                 {["Home", "About", "Services", "Book", "Contact"][i]}
               </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
                   <Link
                     key={s.id}
                     href="/services"
-                    className="block hover:text-cyan-400 transition-colors"
+                    className="block hover:text-emerald-400 transition-colors"
                   >
                     {s.name}
                   </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
                 {services.length > 5 && (
                   <Link
                     href="/services"
-                    className="block text-cyan-400 hover:text-cyan-300 transition-colors mt-1"
+                    className="block text-emerald-400 hover:text-emerald-300 transition-colors mt-1"
                   >
                     + {services.length - 5} more →
                   </Link>
@@ -110,20 +110,20 @@ export default function Footer() {
           </h4>
           <div className="space-y-3 text-sm text-slate-500">
             <div className="flex items-center gap-2">
-              <Phone size={14} className="text-cyan-400 shrink-0" />
+              <Phone size={14} className="text-emerald-400 shrink-0" />
               +639679646888
             </div>
             <div className="flex items-center gap-2">
-              <Mail size={14} className="text-cyan-400 shrink-0" />
+              <Mail size={14} className="text-emerald-400 shrink-0" />
               info@drdentalcare.com
             </div>
             <div className="flex items-center gap-2">
-              <MapPin size={14} className="text-cyan-400 shrink-0" />
+              <MapPin size={14} className="text-emerald-400 shrink-0" />
               Unit I-3 K.H Building cor. Ponciano And Bonifacio Street, Davao
               City
             </div>
             <div className="flex items-center gap-2">
-              <Clock size={14} className="text-cyan-400 shrink-0" />
+              <Clock size={14} className="text-emerald-400 shrink-0" />
               Mon-Fri: 8AM-5PM
             </div>
           </div>

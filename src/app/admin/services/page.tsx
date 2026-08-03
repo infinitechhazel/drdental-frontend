@@ -231,7 +231,7 @@ export default function ServicesPage() {
           <button
             onClick={openCreate}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl
-                       bg-blue-600 hover:bg-blue-700 active:bg-blue-800
+                       bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800
                        text-white text-sm font-semibold shadow-sm
                        transition-colors w-full sm:w-auto justify-center"
           >
@@ -253,7 +253,7 @@ export default function ServicesPage() {
               placeholder="Search services…"
               className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50
                          pl-9 pr-4 text-sm text-slate-800 placeholder:text-slate-400
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                         focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
                          transition"
             />
           </div>
@@ -269,7 +269,7 @@ export default function ServicesPage() {
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors
                   ${
                     selectedCategory === c
-                      ? "bg-blue-600 text-white shadow-sm"
+                      ? "bg-emerald-600 text-white shadow-sm"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
               >
@@ -429,7 +429,7 @@ export default function ServicesPage() {
                       </span>
                     </div>
                     <div className="flex items-center justify-between mt-3">
-                      <span className="text-blue-600 font-semibold text-sm">
+                      <span className="text-emerald-600 font-semibold text-sm">
                         ₱{Number(s.price).toLocaleString()}
                       </span>
                       <div className="flex gap-1">
@@ -622,7 +622,7 @@ function PrimaryBtn({
   return (
     <button
       onClick={onClick}
-      className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white
+      className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white
                  text-sm font-semibold transition-colors"
     >
       {children}
@@ -685,7 +685,7 @@ function ActionBtn({
         ${
           danger
             ? "text-slate-400 hover:text-red-600 hover:bg-red-50"
-            : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"
+            : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
         }`}
     >
       {icon}
@@ -714,7 +714,7 @@ function ServiceForm({
 
   const inputCls =
     "w-full h-10 rounded-lg border border-slate-200 px-3 text-sm text-slate-800 bg-white " +
-    "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+    "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
 
   return (
     <div className="flex flex-col gap-4">
@@ -787,7 +787,7 @@ function ServiceForm({
           }
           className="w-full text-sm text-slate-600 file:mr-3 file:py-1.5 file:px-4
                      file:rounded-lg file:border-0 file:text-sm file:font-medium
-                     file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100
+                     file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100
                      cursor-pointer"
         />,
       )}
@@ -832,7 +832,7 @@ function ViewService({ service }: { service: Service }) {
       )}
       {row(
         "Price",
-        <span className="font-semibold text-blue-600">
+        <span className="font-semibold text-emerald-600">
           ₱{Number(service.price).toLocaleString()}
         </span>,
       )}

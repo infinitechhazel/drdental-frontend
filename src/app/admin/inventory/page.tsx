@@ -97,7 +97,7 @@ function isExpired(val: string | null) {
 
 function categoryColor(cat: string | null) {
   switch (cat) {
-    case "Dental Supplies": return "bg-blue-50 text-blue-700 border-blue-200"
+    case "Dental Supplies": return "bg-emerald-50 text-emerald-700 border-emerald-200"
     case "Aesthetic Supplies": return "bg-purple-50 text-purple-700 border-purple-200"
     case "Medications": return "bg-teal-50 text-teal-700 border-teal-200"
     case "Equipment": return "bg-slate-100 text-slate-700 border-slate-200"
@@ -362,7 +362,7 @@ export default function InventoryPage() {
           <button
             onClick={openCreate}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl
-                       bg-blue-600 hover:bg-blue-700 active:bg-blue-800
+                       bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800
                        text-white text-sm font-semibold shadow-sm
                        transition-colors w-full sm:w-auto justify-center"
           >
@@ -373,7 +373,7 @@ export default function InventoryPage() {
 
         {/* ── Stats ── */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <StatCard label="Total Items" value={totalItems} icon={<Package size={18} />} color="blue" />
+          <StatCard label="Total Items" value={totalItems} icon={<Package size={18} />} color="emerald" />
           <StatCard label="Low Stock" value={lowStock} icon={<Layers size={18} />} color="amber" />
           <StatCard label="Out of Stock" value={outOfStock} icon={<AlertTriangle size={18} />} color="red" />
           <StatCard label="Expiring Soon" value={expiringSoon} icon={<CalendarDays size={18} />} color="orange" />
@@ -389,7 +389,7 @@ export default function InventoryPage() {
               placeholder="Search inventory…"
               className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50
                          pl-9 pr-4 text-sm text-slate-800 placeholder:text-slate-400
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                         focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
             />
           </div>
           <div className="flex gap-2 mt-3 flex-wrap">
@@ -399,7 +399,7 @@ export default function InventoryPage() {
                 onClick={() => setSelectedCategory(c)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors
                   ${selectedCategory === c
-                    ? "bg-blue-600 text-white shadow-sm"
+                    ? "bg-emerald-600 text-white shadow-sm"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
               >
@@ -413,7 +413,7 @@ export default function InventoryPage() {
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center py-16 text-slate-400 text-sm gap-2">
-              <div className="w-4 h-4 rounded-full border-2 border-blue-400 border-t-transparent animate-spin" />
+              <div className="w-4 h-4 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin" />
               Loading inventory…
             </div>
           ) : paginated.length === 0 ? (
@@ -441,11 +441,11 @@ export default function InventoryPage() {
                       const expired = isExpired(item.expiry_date)
                       const expiring = isExpiringSoon(item.expiry_date)
                       return (
-                        <tr key={item.id} className="hover:bg-blue-50/30 transition-colors">
+                        <tr key={item.id} className="hover:bg-emerald-50/30 transition-colors">
                           <td className="px-4 py-3.5">
                             <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                                <FlaskConical size={14} className="text-blue-500" />
+                              <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                                <FlaskConical size={14} className="text-emerald-500" />
                               </div>
                               <span className="font-medium text-slate-900 truncate max-w-[160px]">{item.item_name}</span>
                             </div>
@@ -467,7 +467,7 @@ export default function InventoryPage() {
                             ) : <span className="text-slate-400">—</span>}
                           </td>
                           <td className="px-4 py-3.5 text-slate-700 font-medium">{formatPrice(item.cost_price)}</td>
-                          <td className="px-4 py-3.5 text-blue-700 font-semibold">{formatPrice(item.selling_price)}</td>
+                          <td className="px-4 py-3.5 text-emerald-700 font-semibold">{formatPrice(item.selling_price)}</td>
                           <td className="px-4 py-3.5">
                             <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${stock.cls}`}>
                               {stock.label}
@@ -497,8 +497,8 @@ export default function InventoryPage() {
                     <div key={item.id} className="p-4">
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                            <FlaskConical size={15} className="text-blue-500" />
+                          <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                            <FlaskConical size={15} className="text-emerald-500" />
                           </div>
                           <div className="min-w-0">
                             <p className="font-semibold text-slate-900 truncate">{item.item_name}</p>
@@ -531,7 +531,7 @@ export default function InventoryPage() {
                         </div>
                         <div>
                           <p className="text-xs text-slate-400 font-medium">Selling Price</p>
-                          <p className="font-semibold text-blue-700">{formatPrice(item.selling_price)}</p>
+                          <p className="font-semibold text-emerald-700">{formatPrice(item.selling_price)}</p>
                         </div>
                       </div>
 
@@ -643,10 +643,10 @@ function StatCard({
   label: string
   value: number
   icon: React.ReactNode
-  color: "blue" | "amber" | "red" | "orange"
+  color: "emerald" | "amber" | "red" | "orange"
 }) {
   const colors = {
-    blue: "bg-blue-50 text-blue-600 border-blue-100",
+    emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",
     amber: "bg-amber-50 text-amber-600 border-amber-100",
     red: "bg-red-50 text-red-600 border-red-100",
     orange: "bg-orange-50 text-orange-600 border-orange-100",
@@ -691,8 +691,8 @@ function Modal({
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-              <Package size={15} className="text-blue-600" />
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+              <Package size={15} className="text-emerald-600" />
             </div>
             <h2 className="font-semibold text-slate-900 text-base">{title}</h2>
           </div>
@@ -734,7 +734,7 @@ function PrimaryBtn({
     <button
       onClick={onClick}
       disabled={loading}
-      className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white
+      className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white
                  text-sm font-semibold transition-colors disabled:opacity-60 inline-flex items-center gap-2"
     >
       {loading && <div className="w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" />}
@@ -795,7 +795,7 @@ function ActionBtn({
       className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors
         ${danger
           ? "text-slate-400 hover:text-red-600 hover:bg-red-50"
-          : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"
+          : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
         }`}
     >
       {icon}
@@ -815,7 +815,7 @@ function InventoryForm({
 }) {
   const inputCls =
     "w-full h-10 rounded-lg border border-slate-200 px-3 text-sm text-slate-800 bg-white " +
-    "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+    "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
 
   const field = (
     label: string,
@@ -825,7 +825,7 @@ function InventoryForm({
   ) => (
     <div>
       <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">
-        <span className="text-blue-400">{icon}</span>
+        <span className="text-emerald-400">{icon}</span>
         {label}
       </label>
       {node}
@@ -945,7 +945,7 @@ function ViewItem({ item }: { item: InventoryItem }) {
   ) => (
     <div className="flex items-center justify-between py-3 border-b border-slate-50 last:border-0 gap-4">
       <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wide shrink-0">
-        <span className="text-blue-400">{icon}</span>
+        <span className="text-emerald-400">{icon}</span>
         {label}
       </div>
       <span className="text-sm text-slate-800 text-right">{value}</span>
@@ -955,9 +955,9 @@ function ViewItem({ item }: { item: InventoryItem }) {
   return (
     <div>
       {/* Item header card */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 mb-5 border border-blue-100 flex items-center gap-4">
-        <div className="w-14 h-14 rounded-xl bg-white border border-blue-100 flex items-center justify-center shadow-sm shrink-0">
-          <FlaskConical size={24} className="text-blue-500" />
+      <div className="bg-gradient-to-br from-emerald-50 to-indigo-50 rounded-xl p-4 mb-5 border border-emerald-100 flex items-center gap-4">
+        <div className="w-14 h-14 rounded-xl bg-white border border-emerald-100 flex items-center justify-center shadow-sm shrink-0">
+          <FlaskConical size={24} className="text-emerald-500" />
         </div>
         <div>
           <p className="font-bold text-slate-900 text-lg leading-tight">{item.item_name}</p>
@@ -989,7 +989,7 @@ function ViewItem({ item }: { item: InventoryItem }) {
           <span className="font-semibold text-slate-800">{formatPrice(item.cost_price)}</span>
         )}
         {row("Selling Price", <ShoppingCart size={13} />,
-          <span className="font-bold text-blue-700 text-base">{formatPrice(item.selling_price)}</span>
+          <span className="font-bold text-emerald-700 text-base">{formatPrice(item.selling_price)}</span>
         )}
         {item.cost_price && item.selling_price && row("Margin", <Tag size={13} />,
           (() => {

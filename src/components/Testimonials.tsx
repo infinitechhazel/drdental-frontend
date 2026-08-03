@@ -1,23 +1,23 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import {
   Star,
   ChevronLeft,
   ChevronRight,
   Send,
   CheckCircle,
-} from "lucide-react";
+} from "lucide-react"
 
 interface Testimonial {
-  id: number;
-  client_name: string;
-  client_email: string;
-  rating: number;
-  message: string;
-  status: string;
-  created_at: string;
+  id: number
+  client_name: string
+  client_email: string
+  rating: number
+  message: string
+  status: string
+  created_at: string
 }
 
 const fade = {
@@ -25,67 +25,67 @@ const fade = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
   transition: { duration: 0.6 },
-};
+}
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [rating, setRating] = useState(5);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [charCount, setCharCount] = useState(0);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [rating, setRating] = useState(5)
+  const [hoverRating, setHoverRating] = useState(0)
+  const [charCount, setCharCount] = useState(0)
   const [formData, setFormData] = useState({
     client_name: "",
     client_email: "",
     message: "",
-  });
+  })
 
   useEffect(() => {
     const fetchTestimonials = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
         const res = await fetch("/api/testimonials?status=approved", {
           cache: "no-store",
-        });
-        const data = await res.json();
+        })
+        const data = await res.json()
         // Laravel controller returns a plain array
-        setTestimonials(Array.isArray(data) ? data : []);
+        setTestimonials(Array.isArray(data) ? data : [])
       } catch {
-        console.error("Failed to fetch testimonials");
+        console.error("Failed to fetch testimonials")
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-    fetchTestimonials();
-  }, []);
+    }
+    fetchTestimonials()
+  }, [])
 
   const next = () =>
-    setCurrentIndex((prev) => (prev + 1) % (testimonials.length || 1));
+    setCurrentIndex((prev) => (prev + 1) % (testimonials.length || 1))
   const prev = () =>
     setCurrentIndex(
       (prev) =>
         (prev - 1 + (testimonials.length || 1)) % (testimonials.length || 1),
-    );
+    )
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
-    if (name === "message") setCharCount(value.length);
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    if (name === "message") setCharCount(value.length)
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const isValid =
     formData.client_name.trim() &&
     formData.client_email.trim() &&
-    formData.message.trim();
+    formData.message.trim()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isValid) return;
-    setSubmitting(true);
+    e.preventDefault()
+    if (!isValid) return
+    setSubmitting(true)
     try {
       const res = await fetch("/api/testimonials", {
         method: "POST",
@@ -97,21 +97,21 @@ export default function Testimonials() {
           message: formData.message,
           rating,
         }),
-      });
-      if (!res.ok) throw new Error("Failed to submit");
-      setSubmitted(true);
-      setFormData({ client_name: "", client_email: "", message: "" });
-      setRating(5);
-      setCharCount(0);
-      setTimeout(() => setSubmitted(false), 5000);
+      })
+      if (!res.ok) throw new Error("Failed to submit")
+      setSubmitted(true)
+      setFormData({ client_name: "", client_email: "", message: "" })
+      setRating(5)
+      setCharCount(0)
+      setTimeout(() => setSubmitted(false), 5000)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     } finally {
-      setSubmitting(false);
+      setSubmitting(false)
     }
-  };
+  }
 
-  const current = testimonials[currentIndex];
+  const current = testimonials[currentIndex]
 
   return (
     <section className="bg-gradient-to-br from-slate-950 to-slate-900 py-24 px-4">
@@ -121,9 +121,9 @@ export default function Testimonials() {
           <span
             className="inline-block text-xs uppercase tracking-[0.35em] mb-4 px-4 py-1.5 rounded-full border"
             style={{
-              color: "#93C5FD",
-              borderColor: "rgba(147,197,253,0.25)",
-              background: "rgba(59,130,246,0.08)",
+              color: "#6EE7B7",
+              borderColor: "rgba(110,231,183,0.25)",
+              background: "rgba(16,185,129,0.08)",
             }}
           >
             Testimonials
@@ -143,7 +143,7 @@ export default function Testimonials() {
           <motion.div {...fade}>
             {loading && (
               <div className="flex items-center justify-center py-20">
-                <div className="w-8 h-8 rounded-full border-2 border-blue-400 border-t-transparent animate-spin" />
+                <div className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin" />
               </div>
             )}
 
@@ -160,7 +160,7 @@ export default function Testimonials() {
                   initial={{ opacity: 0, scale: 0.97 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
-                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-10 border border-blue-500/20"
+                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-10 border border-emerald-500/20"
                 >
                   {/* Stars */}
                   <div className="flex gap-1 mb-6">
@@ -170,14 +170,14 @@ export default function Testimonials() {
                         size={20}
                         className={
                           i < current.rating
-                            ? "fill-yellow-400 text-yellow-400"
+                            ? "fill-emerald-400 text-emerald-400"
                             : "text-slate-600"
                         }
                       />
                     ))}
                   </div>
 
-                  <p className="text-6xl text-blue-400/30 font-serif leading-none mb-2">
+                  <p className="text-6xl text-emerald-400/30 font-serif leading-none mb-2">
                     &ldquo;
                   </p>
 
@@ -204,12 +204,12 @@ export default function Testimonials() {
                       </p>
                     </div>
                     {/* Rating badge */}
-                    <div className="flex items-center gap-1.5 bg-yellow-400/10 px-3 py-1.5 rounded-full">
+                    <div className="flex items-center gap-1.5 bg-emerald-400/10 px-3 py-1.5 rounded-full">
                       <Star
                         size={14}
-                        className="fill-yellow-400 text-yellow-400"
+                        className="fill-emerald-400 text-emerald-400"
                       />
-                      <span className="text-yellow-400 text-sm font-semibold">
+                      <span className="text-emerald-400 text-sm font-semibold">
                         {current.rating}/5
                       </span>
                     </div>
@@ -221,7 +221,7 @@ export default function Testimonials() {
                   <div className="flex items-center justify-center gap-6 mt-6">
                     <button
                       onClick={prev}
-                      className="p-3 rounded-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 transition-all"
+                      className="p-3 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition-all"
                       aria-label="Previous"
                     >
                       <ChevronLeft size={20} />
@@ -233,7 +233,7 @@ export default function Testimonials() {
                           onClick={() => setCurrentIndex(i)}
                           className={`h-2 rounded-full transition-all ${
                             i === currentIndex
-                              ? "bg-blue-400 w-8"
+                              ? "bg-emerald-400 w-8"
                               : "bg-slate-600 hover:bg-slate-500 w-2"
                           }`}
                           aria-label={`Go to ${i + 1}`}
@@ -242,7 +242,7 @@ export default function Testimonials() {
                     </div>
                     <button
                       onClick={next}
-                      className="p-3 rounded-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 transition-all"
+                      className="p-3 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition-all"
                       aria-label="Next"
                     >
                       <ChevronRight size={20} />
@@ -263,11 +263,11 @@ export default function Testimonials() {
             <div className="grid grid-cols-3 gap-4 mt-10 pt-10 border-t border-slate-700">
               {[
                 { value: "98%", label: "Patient Satisfaction" },
-                { value: "15K+", label: "Patients Treated" },
-                { value: "10+", label: "Years of Excellence" },
+                { value: "5K+", label: "Patients Treated" },
+                { value: "6+", label: "Years of Excellence" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-3xl font-serif text-blue-400 mb-1">
+                  <p className="text-3xl font-serif text-emerald-400 mb-1">
                     {stat.value}
                   </p>
                   <p className="text-slate-400 text-sm">{stat.label}</p>
@@ -315,7 +315,7 @@ export default function Testimonials() {
                         onChange={handleChange}
                         required
                         placeholder="e.g. Maria Santos"
-                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition text-sm"
+                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition text-sm"
                       />
                     </div>
 
@@ -331,7 +331,7 @@ export default function Testimonials() {
                         onChange={handleChange}
                         required
                         placeholder="your@email.com"
-                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition text-sm"
+                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition text-sm"
                       />
                     </div>
 
@@ -354,7 +354,7 @@ export default function Testimonials() {
                               size={28}
                               className={
                                 star <= (hoverRating || rating)
-                                  ? "fill-yellow-400 text-yellow-400"
+                                  ? "fill-emerald-400 text-emerald-400"
                                   : "text-slate-600"
                               }
                             />
@@ -381,7 +381,7 @@ export default function Testimonials() {
                         rows={5}
                         maxLength={500}
                         placeholder="Tell us about your dental treatment — what procedure you had, how the team made you feel, and the results you experienced..."
-                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition resize-none text-sm"
+                        className="w-full px-4 py-3 bg-slate-900/60 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 transition resize-none text-sm"
                       />
                     </div>
 
@@ -389,7 +389,7 @@ export default function Testimonials() {
                     <button
                       type="submit"
                       disabled={submitting || !isValid}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-blue-500/20 disabled:cursor-not-allowed text-sm"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:text-slate-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-500/20 disabled:cursor-not-allowed text-sm"
                     >
                       <Send size={16} />
                       {submitting ? "Submitting..." : "Submit Testimonial"}
@@ -406,5 +406,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  );
+  )
 }

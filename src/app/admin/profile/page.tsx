@@ -43,15 +43,15 @@ export default function ProfilePage() {
       <div className="max-w-[720px] mx-auto">
         {/* Header */}
         <div className="flex items-center gap-2 mb-6">
-          <User size={20} className="text-blue-600" />
+          <User size={20} className="text-emerald-600" />
           <h1 className="text-lg font-semibold text-slate-800">
             My Profile
           </h1>
         </div>
 
         {/* Hero Card */}
-        <div className="bg-white border border-blue-100 shadow-sm rounded-2xl p-6 mb-4 flex flex-wrap items-center gap-5">
-          <div className="w-[72px] h-[72px] rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-semibold">
+        <div className="bg-white border border-emerald-100 shadow-sm rounded-2xl p-6 mb-4 flex flex-wrap items-center gap-5">
+          <div className="w-[72px] h-[72px] rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl font-semibold">
             {initials}
           </div>
 
@@ -138,7 +138,7 @@ interface CardProps {
 
 function Card({ title, children }: CardProps) {
   return (
-    <div className="bg-white border border-blue-100 rounded-2xl p-5 mb-4 shadow-sm">
+    <div className="bg-white border border-emerald-100 rounded-2xl p-5 mb-4 shadow-sm">
       <p className="text-xs uppercase tracking-wider text-slate-500 mb-4 font-medium">
         {title}
       </p>
@@ -174,7 +174,7 @@ interface BadgeProps {
 
 function Badge({ children }: BadgeProps) {
   return (
-    <span className="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100 flex items-center gap-1">
+    <span className="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center gap-1">
       {children}
     </span>
   )

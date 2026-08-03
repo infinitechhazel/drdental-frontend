@@ -398,7 +398,7 @@ export default function AdminAboutPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <Loader2 className="animate-spin text-blue-500" size={28} />
+        <Loader2 className="animate-spin text-emerald-500" size={28} />
       </div>
     )
   }
@@ -427,7 +427,7 @@ export default function AdminAboutPage() {
               <button
                 onClick={handleSaveSettings}
                 disabled={saving}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <Loader2 size={15} className="animate-spin" />
@@ -440,7 +440,7 @@ export default function AdminAboutPage() {
             {activeTab === "timeline" && (
               <button
                 onClick={openTimelineCreate}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
               >
                 <Plus size={15} /> Add Timeline Item
               </button>
@@ -448,7 +448,7 @@ export default function AdminAboutPage() {
             {activeTab === "tech" && (
               <button
                 onClick={openTechCreate}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition-colors w-full sm:w-auto justify-center"
               >
                 <Plus size={15} /> Add Technology
               </button>
@@ -461,7 +461,7 @@ export default function AdminAboutPage() {
               <button
                 key={t.key}
                 onClick={() => setActiveTab(t.key)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === t.key ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === t.key ? "bg-emerald-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"}`}
               >
                 {t.label}
               </button>
@@ -563,7 +563,7 @@ export default function AdminAboutPage() {
                         if (file)
                           setDoctorImagePreview(URL.createObjectURL(file))
                       }}
-                      className="w-full text-sm text-slate-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                      className="w-full text-sm text-slate-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
                     />
                     <p className="text-xs text-slate-400 mt-1">
                       Recommended: portrait ratio (3:4), min 600px wide
@@ -712,7 +712,7 @@ export default function AdminAboutPage() {
                 </div>
                 <button
                   onClick={addCredential}
-                  className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className="inline-flex items-center gap-1.5 text-sm text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   <Plus size={14} /> Add Credential
                 </button>
@@ -752,7 +752,7 @@ export default function AdminAboutPage() {
                         className="hover:bg-slate-50/80 transition-colors"
                       >
                         <td className="px-5 py-4">
-                          <span className="font-mono text-cyan-600 text-sm font-semibold">
+                          <span className="font-mono text-emerald-600 text-sm font-semibold">
                             {t.year}
                           </span>
                         </td>
@@ -825,7 +825,7 @@ export default function AdminAboutPage() {
                           {t.description}
                         </td>
                         <td className="px-4 py-4">
-                          <span className="inline-flex px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100">
+                          <span className="inline-flex px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-100">
                             {t.icon_name}
                           </span>
                         </td>
@@ -921,11 +921,11 @@ export default function AdminAboutPage() {
 ───────────────────────────────────────── */
 const inputCls =
   "w-full h-10 rounded-lg border border-slate-200 px-3 text-sm text-slate-800 bg-white " +
-  "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+  "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
 
 const textareaCls =
   "w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 bg-white " +
-  "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
+  "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition resize-none"
 
 function Field({
   label,
@@ -1117,7 +1117,7 @@ function PrimaryBtn({
   return (
     <button
       onClick={onClick}
-      className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+      className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors"
     >
       {children}
     </button>
@@ -1173,7 +1173,7 @@ function ActionBtn({
     <button
       onClick={onClick}
       title={label}
-      className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${danger ? "text-slate-400 hover:text-red-600 hover:bg-red-50" : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"}`}
+      className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${danger ? "text-slate-400 hover:text-red-600 hover:bg-red-50" : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"}`}
     >
       {icon}
     </button>

@@ -128,7 +128,7 @@ export default function ContactsAdmin() {
       <div className={`flex-1 min-w-0`}>
         <main className="min-h-screen bg-[#f4f8ff] pt-[12px] pb-12 px-4">
           {/* HEADER */}
-          <div className="space-y-1">
+          <div className="space-y-1 pb-6">
             <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
               Inquiries Management
             </h1>

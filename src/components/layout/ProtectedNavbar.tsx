@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { useState } from "react"
 
 import {
   Home,
@@ -20,33 +20,33 @@ import {
   Menu,
   X,
   LogOut,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/authStore";
+import { cn } from "@/lib/utils"
+import { useAuthStore } from "@/store/authStore"
 
 interface ProtectedNavProps {
-  userRole?: "admin" | "user";
+  userRole?: "admin" | "user"
 }
 
 export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
-  const pathname = usePathname();
-  const router = useRouter();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname()
+  const router = useRouter()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useAuthStore((state) => state.logout)
 
   const handleLogout = () => {
-    logout();
-    router.push("/login");
-  };
+    logout()
+    router.push("/login")
+  }
 
   const USER_NAV_ITEMS = [
     { path: "/", icon: Home, label: "Home" },
     { path: "/book", icon: CalendarPlus, label: "Book" },
     { path: "/appointments", icon: ClipboardList, label: "Appointments" },
     { path: "/profile", icon: User, label: "Profile" },
-  ];
+  ]
 
   const ADMIN_NAV_GROUPS = [
     {
@@ -82,16 +82,16 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
       title: "Account",
       items: [{ path: "/admin/profile", icon: User, label: "Profile" }],
     },
-  ];
+  ]
 
   const mobileAdminItems = [
     { path: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { path: "/admin/appointments", icon: CalendarPlus, label: "Appointments" },
     { path: "/admin/inquiry", icon: Bell, label: "Inquiry" },
     { path: "/admin/profile", icon: User, label: "Profile" },
-  ];
+  ]
 
-  const MOBILE_ITEMS = userRole === "admin" ? mobileAdminItems : USER_NAV_ITEMS;
+  const MOBILE_ITEMS = userRole === "admin" ? mobileAdminItems : USER_NAV_ITEMS
 
   /* Shared logout button */
   const LogoutButton = ({ mobile = false }: { mobile?: boolean }) => (
@@ -105,14 +105,14 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
       <LogOut className="h-5 w-5 shrink-0" />
       <span className="text-sm font-medium">Logout</span>
     </button>
-  );
+  )
 
   return (
     <>
       {/* MOBILE TOPBAR */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-xl border-b border-blue-100 z-50 px-4 flex items-center justify-between">
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-xl border-b border-emerald-100 z-50 px-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-100">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-100">
             <Image
               src="/logo.png"
               alt="Dr. Dental Care Center"
@@ -122,7 +122,9 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
             />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-slate-900">Dr. Dental Care Center</h2>
+            <h2 className="text-sm font-semibold text-slate-900">
+              Dr. Dental Care Center
+            </h2>
             <p className="text-[11px] text-slate-500">Premium Portal</p>
           </div>
         </div>
@@ -150,13 +152,13 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
       {/* MOBILE SIDEBAR */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 h-screen w-[85%] max-w-[320px] bg-white border-r border-blue-100 z-50 transition-transform duration-300 flex flex-col",
+          "lg:hidden fixed top-0 left-0 h-screen w-[85%] max-w-[320px] bg-white border-r border-emerald-100 z-50 transition-transform duration-300 flex flex-col",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="px-6 py-6 border-b border-slate-200 mt-2">
           <div className="flex items-center gap-4">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-100">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-100">
               <Image
                 src="/logo.png"
                 alt="Dr. Dental Care Center Logo"
@@ -184,7 +186,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                   </p>
                   <div className="space-y-1">
                     {group.items.map(({ path, icon: Icon, label }) => {
-                      const active = pathname === path;
+                      const active = pathname === path
                       return (
                         <Link
                           key={path}
@@ -193,14 +195,14 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                           className={cn(
                             "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all",
                             active
-                              ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-100"
-                              : "text-slate-600 hover:bg-blue-50 hover:text-blue-700",
+                              ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-100"
+                              : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700",
                           )}
                         >
                           <Icon className="h-5 w-5" />
                           <span className="text-sm font-medium">{label}</span>
                         </Link>
-                      );
+                      )
                     })}
                   </div>
                 </div>
@@ -209,7 +211,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
           ) : (
             <div className="space-y-2">
               {USER_NAV_ITEMS.map(({ path, icon: Icon, label }) => {
-                const active = pathname === path;
+                const active = pathname === path
                 return (
                   <Link
                     key={path}
@@ -218,14 +220,14 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all",
                       active
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-100"
-                        : "text-slate-600 hover:bg-blue-50 hover:text-blue-700",
+                        ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-100"
+                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700",
                     )}
                   >
                     <Icon className="h-5 w-5" />
                     <span className="text-sm font-medium">{label}</span>
                   </Link>
-                );
+                )
               })}
             </div>
           )}
@@ -238,11 +240,11 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
       </aside>
 
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-72 bg-white border-r border-blue-100 z-40 flex-col">
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-72 bg-white border-r border-emerald-100 z-40 flex-col">
         {/* Logo */}
         <div className="px-6 py-6 border-b border-slate-200">
           <div className="flex items-center gap-4">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-100">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-100">
               <Image
                 src="/logo.png"
                 alt="Dr. Dental Care Center Logo"
@@ -268,7 +270,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
         {userRole !== "admin" && (
           <nav className="flex-1 px-5 py-6 space-y-2">
             {USER_NAV_ITEMS.map(({ path, icon: Icon, label }) => {
-              const active = pathname === path;
+              const active = pathname === path
               return (
                 <Link
                   key={path}
@@ -276,8 +278,8 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200",
                     active
-                      ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-100"
-                      : "text-slate-600 hover:bg-blue-50 hover:text-blue-700",
+                      ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-100"
+                      : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700",
                   )}
                 >
                   <Icon className="h-5 w-5" />
@@ -286,7 +288,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                     <div className="ml-auto w-2 h-2 rounded-full bg-white" />
                   )}
                 </Link>
-              );
+              )
             })}
           </nav>
         )}
@@ -302,7 +304,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                   </p>
                   <div className="space-y-1">
                     {group.items.map(({ path, icon: Icon, label }) => {
-                      const active = pathname === path;
+                      const active = pathname === path
                       return (
                         <Link
                           key={path}
@@ -310,8 +312,8 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                           className={cn(
                             "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200",
                             active
-                              ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-100"
-                              : "text-slate-600 hover:bg-blue-50 hover:text-blue-700",
+                              ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-100"
+                              : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700",
                           )}
                         >
                           <Icon className="h-5 w-5" />
@@ -320,7 +322,7 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                             <div className="ml-auto w-2 h-2 rounded-full bg-white" />
                           )}
                         </Link>
-                      );
+                      )
                     })}
                   </div>
                 </div>
@@ -336,10 +338,10 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
       </aside>
 
       {/* MOBILE BOTTOM NAV */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-blue-100 z-40 safe-area-bottom lg:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-emerald-100 z-40 safe-area-bottom lg:hidden">
         <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-2">
           {MOBILE_ITEMS.map(({ path, icon: Icon, label }) => {
-            const active = pathname === path;
+            const active = pathname === path
             return (
               <Link
                 key={path}
@@ -347,8 +349,8 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                 className={cn(
                   "flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-2xl transition-all duration-200 min-w-[64px]",
                   active
-                    ? "text-blue-600"
-                    : "text-slate-500 hover:text-blue-600",
+                    ? "text-emerald-600"
+                    : "text-slate-500 hover:text-emerald-600",
                 )}
               >
                 <Icon className={cn("h-5 w-5", active && "stroke-[2.5px]")} />
@@ -360,12 +362,12 @@ export default function ProtectedNav({ userRole = "user" }: ProtectedNavProps) {
                 >
                   {label}
                 </span>
-                {active && <div className="w-1 h-1 rounded-full bg-blue-600" />}
+                {active && <div className="w-1 h-1 rounded-full bg-emerald-600" />}
               </Link>
-            );
+            )
           })}
         </div>
       </nav>
     </>
-  );
+  )
 }
