@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, Suspense } from "react"
+import { useState, useEffect, useMemo, Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -7,7 +7,10 @@ import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -20,11 +23,13 @@ import {
   Phone,
   CheckCircle,
   ArrowRight,
+  MapPin,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/store/authStore"
 import Header from "@/components/layout/Navbar"
+import { BRANCHES } from "@/lib/branches-data"
 
 const fade = {
   initial: { opacity: 0, y: 30 },
@@ -100,6 +105,8 @@ function BookInner() {
   )
   const [lockedFromUrl, setLockedFromUrl] = useState(false)
 
+  const [selectedBranchId, setSelectedBranchId] = useState<string | null>(null)
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedTime, setSelectedTime] = useState("")
 
@@ -117,6 +124,7 @@ function BookInner() {
   useEffect(() => {
     if (user?.name) setName(user.name)
     if (user?.email) setEmail(user.email)
+    if (user?.phone) setPhone(user.phone)
   }, [user])
 
   useEffect(() => {
@@ -159,6 +167,18 @@ function BookInner() {
   const days = generateDays()
   const activeService =
     allServices.find((s) => s.id === selectedServiceId) ?? null
+  const activeBranch = BRANCHES.find((b) => b.id === selectedBranchId) ?? null
+
+  // Group services by category for the dropdown
+  const groupedServices = useMemo(() => {
+    const groups: Record<string, ApiService[]> = {}
+    allServices.forEach((s) => {
+      const cat = s.category || "Other"
+      if (!groups[cat]) groups[cat] = []
+      groups[cat].push(s)
+    })
+    return Object.entries(groups).sort(([a], [b]) => a.localeCompare(b))
+  }, [allServices])
 
   function validatePhone(value: string) {
     if (value.length > 0 && (!/^09/.test(value) || value.length < 11)) {
@@ -169,7 +189,14 @@ function BookInner() {
   }
 
   async function handleSubmit() {
-    if (!selectedDate || !selectedTime || !name || !email || !phone) {
+    if (
+      !selectedDate ||
+      !selectedTime ||
+      !name ||
+      !email ||
+      !phone ||
+      !selectedBranchId
+    ) {
       setError("Please complete all required fields.")
       return
     }
@@ -200,6 +227,8 @@ function BookInner() {
           guests: 1,
           package: activeService?.name ?? "General Booking",
           service_id: selectedServiceId,
+          branch_id: selectedBranchId,
+          branch: activeBranch?.name ?? "",
           reservation_fee: activeService?.price ?? 0,
           payment_method: "cash",
           payment_status: "pending",
@@ -329,144 +358,12 @@ function BookInner() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* ── Form ── */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Step 1 — Service */}
-              <motion.div {...fade}>
-                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
-                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
-                      1
-                    </span>{" "}
-                    Select Service
-                  </h3>
-
-                  {lockedFromUrl && activeService ? (
-                    <div className="flex items-center justify-between px-4 py-3 bg-emerald-400/10 border border-emerald-400/30 rounded-xl">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
-                        {servicesLoading ? (
-                          <span className="text-slate-400 text-sm animate-pulse">
-                            Loading…
-                          </span>
-                        ) : (
-                          <span className="text-white font-medium">
-                            {activeService.name}
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-emerald-400/70 text-xs">
-                          Selected
-                        </span>
-                        <button
-                          onClick={() => {
-                            setSelectedServiceId(null)
-                            setLockedFromUrl(false)
-                          }}
-                          className="text-slate-500 hover:text-slate-300 text-xs underline underline-offset-2 transition-colors"
-                        >
-                          Change
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <Select
-                      value={selectedServiceId ? String(selectedServiceId) : ""}
-                      onValueChange={(val) => {
-                        setSelectedServiceId(Number(val))
-                        setLockedFromUrl(false)
-                      }}
-                    >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                        <SelectValue
-                          placeholder={
-                            servicesLoading
-                              ? "Loading services…"
-                              : "Choose a service"
-                          }
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {allServices.map((s) => (
-                          <SelectItem key={s.id} value={String(s.id)}>
-                            {s.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                </Card>
-              </motion.div>
-
-              {/* Step 2 — Date */}
-              <motion.div {...fade} transition={{ delay: 0.1 }}>
-                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
-                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
-                      2
-                    </span>{" "}
-                    Choose Date
-                  </h3>
-                  <div className="grid grid-cols-7 gap-2">
-                    {days.slice(0, 21).map((d, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedDate(d)}
-                        className={`p-2 rounded-lg text-center text-sm transition-all ${
-                          selectedDate?.toDateString() === d.toDateString()
-                            ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
-                            : "bg-white/5 text-slate-400 hover:bg-white/10"
-                        }`}
-                      >
-                        <div className="text-[10px] opacity-60">
-                          {d.toLocaleDateString("en-US", { weekday: "short" })}
-                        </div>
-                        <div className="font-medium">{d.getDate()}</div>
-                      </button>
-                    ))}
-                  </div>
-                </Card>
-              </motion.div>
-
-              {/* Step 3 — Time */}
-              <motion.div {...fade} transition={{ delay: 0.2 }}>
-                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
-                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
-                      3
-                    </span>{" "}
-                    Select Time
-                  </h3>
-
-                  {!selectedDate ? (
-                    <p className="text-slate-500 text-sm">
-                      Choose a date to see available times.
-                    </p>
-                  ) : (
-                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                      {timeSlots.map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => setSelectedTime(t)}
-                          className={`py-2 px-3 rounded-lg text-sm transition-all ${
-                            selectedTime === t
-                              ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
-                              : "bg-white/5 text-slate-400 hover:bg-white/10"
-                          }`}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </Card>
-              </motion.div>
-
-              {/* Step 4 — Your Information */}
+              {/* Step 1 — Your Information */}
               <motion.div {...fade} transition={{ delay: 0.3 }}>
                 <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
                   <h3 className="text-white font-medium mb-4 flex items-center gap-2">
                     <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
-                      4
+                      1
                     </span>{" "}
                     Your Information
                   </h3>
@@ -525,6 +422,189 @@ function BookInner() {
                   </div>
                 </Card>
               </motion.div>
+
+              {/* Step 2 — Service */}
+              <motion.div {...fade}>
+                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
+                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                      2
+                    </span>{" "}
+                    Select Service
+                  </h3>
+
+                  {lockedFromUrl && activeService ? (
+                    <div className="flex items-center justify-between px-4 py-3 bg-emerald-400/10 border border-emerald-400/30 rounded-xl">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
+                        {servicesLoading ? (
+                          <span className="text-slate-400 text-sm animate-pulse">
+                            Loading…
+                          </span>
+                        ) : (
+                          <span className="text-white font-medium">
+                            {activeService.name}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-emerald-400/70 text-xs">
+                          Selected
+                        </span>
+                        <button
+                          onClick={() => {
+                            setSelectedServiceId(null)
+                            setLockedFromUrl(false)
+                          }}
+                          className="text-slate-500 hover:text-slate-300 text-xs underline underline-offset-2 transition-colors"
+                        >
+                          Change
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <Select
+                      value={selectedServiceId ? String(selectedServiceId) : ""}
+                      onValueChange={(val) => {
+                        setSelectedServiceId(Number(val))
+                        setLockedFromUrl(false)
+                      }}
+                    >
+                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                        <SelectValue
+                          placeholder={
+                            servicesLoading
+                              ? "Loading services…"
+                              : "Choose a service"
+                          }
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {groupedServices.map(([category, services], i) => (
+                          <SelectGroup key={category}>
+                            {i > 0 && <SelectSeparator />}
+                            <SelectLabel className="text-emerald-600 text-xs uppercase tracking-wide">
+                              {category}
+                            </SelectLabel>
+                            {services.map((s) => (
+                              <SelectItem key={s.id} value={String(s.id)}>
+                                {s.name}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                </Card>
+              </motion.div>
+
+              {/* Step 3 — Branch */}
+              <motion.div {...fade} transition={{ delay: 0.05 }}>
+                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
+                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                      3
+                    </span>{" "}
+                    Select Branch
+                  </h3>
+
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {BRANCHES.map((b) => (
+                      <button
+                        key={b.id}
+                        onClick={() => setSelectedBranchId(b.id)}
+                        className={`text-left p-4 rounded-xl border transition-all ${
+                          selectedBranchId === b.id
+                            ? "bg-emerald-400/10 border-emerald-400/40 shadow-[0_0_15px_rgba(34,211,238,0.15)]"
+                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                          <span className="text-white font-medium text-sm">
+                            {b.name}
+                          </span>
+                          {selectedBranchId === b.id && (
+                            <CheckCircle
+                              size={14}
+                              className="text-emerald-400 shrink-0 mt-0.5"
+                            />
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-500 text-xs mb-1">
+                          <MapPin size={11} className="shrink-0" />
+                          <span>{b.area}</span>
+                        </div>
+                        <p className="text-slate-500 text-xs">{b.hours}</p>
+                      </button>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
+
+              {/* Step 4 — Date */}
+              <motion.div {...fade} transition={{ delay: 0.1 }}>
+                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
+                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                      4
+                    </span>{" "}
+                    Choose Date
+                  </h3>
+                  <div className="grid grid-cols-7 gap-2">
+                    {days.slice(0, 21).map((d, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedDate(d)}
+                        className={`p-2 rounded-lg text-center text-sm transition-all ${
+                          selectedDate?.toDateString() === d.toDateString()
+                            ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                            : "bg-white/5 text-slate-400 hover:bg-white/10"
+                        }`}
+                      >
+                        <div className="text-[10px] opacity-60">
+                          {d.toLocaleDateString("en-US", { weekday: "short" })}
+                        </div>
+                        <div className="font-medium">{d.getDate()}</div>
+                      </button>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
+
+              {/* Step 5 — Time */}
+              <motion.div {...fade} transition={{ delay: 0.2 }}>
+                <Card className="p-6 bg-white/5 border-white/10 backdrop-blur-sm">
+                  <h3 className="text-white font-medium mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-emerald-400 text-slate-950 text-xs flex items-center justify-center font-bold">
+                      5
+                    </span>{" "}
+                    Select Time
+                  </h3>
+
+                  {!selectedDate ? (
+                    <p className="text-slate-500 text-sm">
+                      Choose a date to see available times.
+                    </p>
+                  ) : (
+                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                      {timeSlots.map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setSelectedTime(t)}
+                          className={`py-2 px-3 rounded-lg text-sm transition-all ${
+                            selectedTime === t
+                              ? "bg-emerald-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                              : "bg-white/5 text-slate-400 hover:bg-white/10"
+                          }`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </Card>
+              </motion.div>
             </div>
 
             {/* ── Summary ── */}
@@ -546,6 +626,12 @@ function BookInner() {
                           ) : (
                             (activeService?.name ?? "—")
                           )}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Branch</span>
+                        <span className="text-white text-right max-w-[60%] leading-snug">
+                          {activeBranch?.name ?? "—"}
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -580,10 +666,14 @@ function BookInner() {
 
                     <div className="mt-6 pt-4 border-t border-white/10">
                       <div className="flex items-center gap-2 text-slate-500 text-xs mb-1">
-                        <Calendar size={12} /> Dr. Dental Care Center
+                        <Calendar size={12} />{" "}
+                        {activeBranch
+                          ? `Dr. Dental Care Center — ${activeBranch.name}`
+                          : "Dr. Dental Care Center"}
                       </div>
                       <div className="flex items-center gap-2 text-slate-500 text-xs">
-                        <Clock size={12} /> Mon–Sat: 9AM–7PM
+                        <Clock size={12} />{" "}
+                        {activeBranch?.hours ?? "Mon–Sat: 9AM–7PM"}
                       </div>
                     </div>
 
@@ -604,6 +694,7 @@ function BookInner() {
                       onClick={handleSubmit}
                       disabled={
                         !selectedServiceId ||
+                        !selectedBranchId ||
                         !selectedDate ||
                         !selectedTime ||
                         !name ||

@@ -1,24 +1,36 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Card } from "@/components/ui/card"
-import { Phone, Mail, MapPin, Clock, Navigation, ArrowLeft } from "lucide-react"
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Navigation,
+  ArrowLeft,
+  Facebook,
+  Instagram,
+} from "lucide-react"
 import { BRANCHES, getBranchById } from "@/lib/branches-data"
 
 export function generateStaticParams() {
   return BRANCHES.map((b) => ({ id: b.id }))
 }
 
-export default function BranchDetailPage({
+export default async function BranchDetailPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  const branch = getBranchById(params.id)
+  const { id } = await params
+  const branch = getBranchById(id)
   if (!branch) notFound()
 
   const info = [
     { icon: Phone, label: "Phone", value: branch.phone },
-    { icon: Mail, label: "Email", value: branch.email },
+    ...(branch.email
+      ? [{ icon: Mail, label: "Email", value: branch.email }]
+      : []),
     { icon: MapPin, label: "Address", value: branch.address },
     { icon: Clock, label: "Hours", value: branch.hours },
   ]
@@ -44,7 +56,7 @@ export default function BranchDetailPage({
           <p className="text-emerald-400 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 font-mono">
             {branch.area}
           </p>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold bg-gradient-to-r from-white via-emerald-200 to-emerald-300 bg-clip-text text-transparent">
+          <h1 className="font-serif py-2 text-4xl sm:text-5xl md:text-6xl font-semibold bg-gradient-to-r from-white via-emerald-200 to-emerald-300 bg-clip-text text-transparent">
             {branch.name} Branch
           </h1>
           <p className="text-slate-400 mt-4 max-w-xl text-sm sm:text-base">
@@ -105,6 +117,39 @@ export default function BranchDetailPage({
                     </div>
                   </div>
                 ))}
+                {(branch.facebook || branch.instagram) && (
+                  <div className="mt-6 pt-5 border-t border-emerald-500/15">
+                    <p className="text-[11px] uppercase tracking-wider text-slate-500 font-mono mb-3">
+                      Social Media
+                    </p>
+
+                    <div className="flex flex-wrap gap-3">
+                      {branch.facebook && (
+                        <a
+                          href={branch.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-emerald-500/20 text-sm text-slate-200 hover:text-emerald-400 transition"
+                        >
+                          <Facebook size={16} />
+                          Facebook
+                        </a>
+                      )}
+
+                      {branch.instagram && (
+                        <a
+                          href={branch.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-emerald-500/20 text-sm text-slate-200 hover:text-emerald-400 transition"
+                        >
+                          <Instagram size={16} />
+                          Instagram
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
               </dl>
             </Card>
 

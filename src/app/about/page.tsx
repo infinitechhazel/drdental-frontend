@@ -1,584 +1,381 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+"use client"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
 import {
   ArrowRight,
-  Microscope,
-  Cpu,
-  ScanLine,
-  HeartPulse,
   Target,
   Eye,
-  GraduationCap,
-  Stethoscope,
-  Award,
-  Star,
-  MapPin,
-  Calendar,
-  Loader2,
-} from "lucide-react";
-import { motion } from "framer-motion";
+  HeartHandshake,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from "lucide-react"
+import missionImage from "@/assets/exterior-5.jpg"
+import vissionImage from "@/assets/image.jpg"
 
-/* ─────────────────────────────────────────
-   TYPES
-───────────────────────────────────────── */
-type Credential = {
-  icon: string;
-  label: string;
-  value: string;
-  sub: string;
-};
-
-type DoctorProfile = {
-  name: string;
-  title: string;
-  role: string;
-  bio: string;
-  quote: string;
-  location: string;
-  since_year: string;
-  image_url: string | null;
-  credentials: Credential[];
-};
-
-type Stat = {
-  value: string;
-  label: string;
-};
-
-type TimelineItem = {
-  id: number;
-  year: string;
-  title: string;
-  description: string;
-  sort_order: number;
-};
-
-type TechItem = {
-  id: number;
-  icon_name: string;
-  name: string;
-  description: string;
-  sort_order: number;
-};
-
-type AboutData = {
-  hero_heading: string;
-  hero_subheading: string;
-  mission: string;
-  vision: string;
-  cta_heading: string;
-  cta_subheading: string;
-  stats: Stat[];
-  doctor: DoctorProfile | null;
-  timeline: TimelineItem[];
-  tech: TechItem[];
-};
-
-/* ─────────────────────────────────────────
-   ICON MAP
-───────────────────────────────────────── */
-const ICON_MAP: Record<string, React.ElementType> = {
-  Microscope,
-  Cpu,
-  ScanLine,
-  HeartPulse,
-  GraduationCap,
-  Stethoscope,
-  Award,
-  Star,
-};
-
-function DynamicIcon({
-  name,
-  ...props
-}: {
-  name: string;
-  size?: number;
-  className?: string;
-}) {
-  const Icon = ICON_MAP[name] ?? Stethoscope;
-  return <Icon {...props} />;
-}
-
-const CREDENTIAL_ICON_MAP: Record<string, React.ElementType> = {
-  GraduationCap,
-  Stethoscope,
-  Star,
-  Award,
-};
-
-function CredentialIcon({
-  name,
-  ...props
-}: {
-  name: string;
-  size?: number;
-  className?: string;
-}) {
-  const Icon = CREDENTIAL_ICON_MAP[name] ?? Award;
-  return <Icon {...props} />;
-}
-
-/* ─────────────────────────────────────────
-   ANIMATION VARIANTS
-───────────────────────────────────────── */
 const fade = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.5 },
-};
-
-const slideLeft = {
-  initial: { opacity: 0, x: -30 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true },
   transition: { duration: 0.6 },
-};
+}
 
-const slideRight = {
-  initial: { opacity: 0, x: 30 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 },
-};
+const values = [
+  {
+    icon: ShieldCheck,
+    title: "Integrity",
+    desc: "Honest recommendations and treatment plans built around what you actually need.",
+  },
+  {
+    icon: Sparkles,
+    title: "Excellence",
+    desc: "Every procedure held to a precision standard, using modern techniques and equipment maintained to the highest level.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Compassion",
+    desc: "Dental visits can be stressful. We create a calm, judgment-free space where every patient feels genuinely cared for.",
+  },
+  {
+    icon: Users,
+    title: "Community",
+    desc: "Proud to serve Davao, General Santos, Tagum, Panabo, and Digos — getting to know the families who trust us with their care.",
+  },
+]
 
-/* ─────────────────────────────────────────
-   PAGE
-───────────────────────────────────────── */
 export default function About() {
-  const [data, setData] = useState<AboutData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/about", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((d: AboutData) => setData(d))
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="bg-[#020617] min-h-screen flex items-center justify-center">
-        <Loader2 className="text-emerald-400 animate-spin" size={32} />
-      </div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <div className="bg-[#020617] min-h-screen flex items-center justify-center">
-        <p className="text-slate-500 text-sm">Failed to load page data.</p>
-      </div>
-    );
-  }
-
-  const { doctor, stats, timeline, tech } = data;
-
   return (
-    <div className="bg-[#020617] min-h-screen">
+    <div className="font-sans" style={{ background: "#020617" }}>
       {/* ── Hero ── */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-400/5 rounded-full blur-[120px]" />
+      <section
+        className="relative pt-32 pb-20 overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, #030F0A 0%, #07281B 60%, #0A4E2F 100%)",
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-emerald-600/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-400/5 rounded-full blur-[100px]" />
+          <svg
+            className="absolute inset-0 w-full h-full opacity-[0.04]"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <pattern
+                id="grid"
+                width="40"
+                height="40"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 40 0 L 0 0 0 40"
+                  fill="none"
+                  stroke="#34D399"
+                  strokeWidth="0.5"
+                />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-          <span className="text-[160px] md:text-[220px] font-black text-white/[0.02] leading-none tracking-tighter">
-            Dr. Dental
-          </span>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <motion.div {...fade} className="max-w-4xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-emerald-400" />
-              <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
-                About Dr. Dental Care Center
-              </p>
-            </div>
+
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <motion.div {...fade}>
+            <span
+              className="inline-block text-xs uppercase tracking-[0.35em] mb-5 px-4 py-1.5 rounded-full border"
+              style={{
+                color: "#6EE7B7",
+                borderColor: "rgba(110,231,183,0.25)",
+                background: "rgba(16,185,129,0.08)",
+              }}
+            >
+              About Us
+            </span>
+
             <h1
-              className="font-serif text-5xl md:text-7xl text-white leading-[1.05] mb-6"
-              dangerouslySetInnerHTML={{ __html: data.hero_heading ?? "" }}
-            />
-            <p className="text-slate-400 text-lg leading-relaxed max-w-2xl">
-              {data.hero_subheading}
+              className="font-serif text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight"
+              style={{ color: "#ECFDF5" }}
+            >
+              Every Smile Deserves a Chance
+            </h1>
+
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div
+                className="h-px w-16"
+                style={{
+                  background: "linear-gradient(to right, transparent, #10B981)",
+                }}
+              />
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <div
+                className="h-px w-16"
+                style={{
+                  background: "linear-gradient(to left, transparent, #10B981)",
+                }}
+              />
+            </div>
+
+            <p
+              className="text-base md:text-lg max-w-2xl mx-auto"
+              style={{ color: "#94A3B8" }}
+            >
+              For years, Dr. Dental Care Center has been part of countless
+              smiles across Mindanao — listening to every story, understanding
+              every concern, and making every patient feel seen, valued, and
+              cared for.
             </p>
           </motion.div>
-
-          {/* Stats */}
-          {stats.length > 0 && (
-            <motion.div
-              {...fade}
-              transition={{ delay: 0.2 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-px mt-16 bg-white/10 border border-white/10 rounded-2xl overflow-hidden"
-            >
-              {stats.map((s, i) => (
-                <div key={i} className="bg-[#020617] px-6 py-6 text-center">
-                  <div className="text-3xl font-bold text-emerald-400 mb-1">
-                    {s.value}
-                  </div>
-                  <div className="text-slate-500 text-xs uppercase tracking-widest">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          )}
         </div>
       </section>
 
-      {/* ── Founder ── */}
-      {doctor && (
-        <section className="relative py-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent pointer-events-none" />
-          <div className="absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-emerald-400/3 to-transparent pointer-events-none" />
-
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <motion.div {...fade} className="flex items-center gap-3 mb-14">
-              <div className="h-px w-8 bg-emerald-400" />
-              <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
-                Meet the Founder
+      {/* ── Mission ── */}
+      <section className="py-24" style={{ background: "#020617" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-14 items-center">
+            <motion.div {...fade} className="order-2 md:order-1">
+              <span
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-4 px-3 py-1 rounded-full"
+                style={{ background: "rgba(16,185,129,0.1)", color: "#34D399" }}
+              >
+                <Target size={12} /> Our Mission
+              </span>
+              <h2
+                className="font-serif text-3xl md:text-4xl mb-5 leading-snug"
+                style={{ color: "#ECFDF5" }}
+              >
+                To care for people, not just teeth.
+              </h2>
+              <p
+                className="text-base leading-relaxed"
+                style={{ color: "#94A3B8" }}
+              >
+                Every patient who sits in our chair brings their own story —
+                some nervous, some overdue for a visit, some simply looking for
+                someone who&apos;ll take the time to explain things clearly. Our
+                mission is to meet each person where they are, listen before we
+                treat, and make sure they leave feeling heard, not just handled.
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
-              {/* Photo */}
-              <motion.div {...slideLeft} className="lg:col-span-5 relative">
-                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-emerald-400/40 rounded-tl-xl pointer-events-none z-10" />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-emerald-400/20 rounded-br-xl pointer-events-none z-10" />
-
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 h-full min-h-[520px]">
-                  <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900">
-                    {doctor.image_url && (
-                      <Image
-                        src={doctor.image_url}
-                        alt={doctor.name}
-                        fill
-                        className="object-cover object-top"
-                        priority
-                      />
-                    )}
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-transparent" />
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-400" />
-
-                  {/* Badges */}
-                  <div className="absolute top-5 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-emerald-400/30 rounded-xl px-3 py-2">
-                    <Calendar size={12} className="text-emerald-400" />
-                    <span className="text-emerald-400 text-xs font-mono">
-                      Since {doctor.since_year} ·{" "}
-                      {new Date().getFullYear() -
-                        parseInt(doctor.since_year ?? "0")}
-                      + yrs
-                    </span>
-                  </div>
-                  <div className="absolute top-14 right-5 flex items-center gap-2 bg-[#020617]/80 backdrop-blur-sm border border-white/10 rounded-xl px-3 py-2">
-                    <MapPin size={12} className="text-slate-400" />
-                    <span className="text-slate-400 text-xs">
-                      {doctor.location}
-                    </span>
-                  </div>
-
-                  {/* Name plate */}
-                  <div className="absolute bottom-0 left-0 right-0 p-7">
-                    <p className="text-white font-serif text-2xl leading-tight mb-1">
-                      {doctor.name}
-                    </p>
-                    <p className="text-emerald-400 text-xs uppercase tracking-[0.2em] mt-2">
-                      {doctor.title}
-                    </p>
-                    <p className="text-slate-500 text-xs mt-1">{doctor.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Bio + Credentials */}
-              <motion.div
-                {...slideRight}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                className="lg:col-span-7 lg:pl-12 flex flex-col gap-6 justify-center pt-8 lg:pt-0"
-              >
-                {/* Quote */}
-                {doctor.quote && (
-                  <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden group hover:border-emerald-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-52 h-52 bg-emerald-400/5 rounded-full blur-3xl group-hover:bg-emerald-400/10 transition-colors" />
-                    <span className="absolute top-2 left-6 text-7xl font-serif text-emerald-400/20 leading-none select-none">
-                      &ldquo;
-                    </span>
-                    <div className="relative pt-6">
-                      <p className="text-slate-200 text-base leading-relaxed italic mb-5">
-                        {doctor.quote}
-                      </p>
-                      <div className="flex items-center gap-3">
-                        <div className="h-px w-8 bg-emerald-400/50" />
-                        <p className="text-slate-500 text-sm">
-                          — {doctor.name.split(" ").slice(0, 2).join(" ")} ·
-                          Founder, Dr. Dental Care Center
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Bio */}
-                {doctor.bio && (
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    {doctor.bio}
-                  </p>
-                )}
-
-                {/* Credentials */}
-                {doctor.credentials?.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {doctor.credentials.map((c, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }}
-                      >
-                        <div className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/10 rounded-xl hover:border-emerald-400/30 hover:bg-white/[0.06] transition-all group cursor-default">
-                          <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center shrink-0 group-hover:bg-emerald-400/20 transition-colors">
-                            <CredentialIcon
-                              name={c.icon}
-                              className="text-emerald-400"
-                              size={17}
-                            />
-                          </div>
-                          <div>
-                            <p className="text-slate-500 text-[10px] uppercase tracking-widest mb-0.5">
-                              {c.label}
-                            </p>
-                            <p className="text-white text-sm font-medium leading-snug">
-                              {c.value}
-                            </p>
-                            <p className="text-slate-500 text-xs mt-0.5">
-                              {c.sub}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Trust bar */}
-                {stats.length >= 3 && (
-                  <div className="flex items-center gap-6 pt-2 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={13}
-                            className="text-emerald-400 fill-emerald-400"
-                          />
-                        ))}
-                      </div>
-                      <span className="text-slate-400 text-xs">
-                        {stats[3]?.value ?? "4.9"} average rating
-                      </span>
-                    </div>
-                    <div className="h-4 w-px bg-white/10" />
-                    <div className="text-slate-400 text-xs">
-                      <span className="text-white font-medium">
-                        {stats[2]?.value ?? "15,000+"}
-                      </span>{" "}
-                      patients treated
-                    </div>
-                    <div className="h-4 w-px bg-white/10" />
-                    <div className="text-slate-400 text-xs">
-                      <span className="text-white font-medium">
-                        {stats[1]?.value ?? "98%"}
-                      </span>{" "}
-                      satisfaction rate
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Mission / Vision ── */}
-      {(data.mission || data.vision) && (
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              {data.mission && (
-                <motion.div {...fade}>
-                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-emerald-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-400/5 rounded-full blur-2xl group-hover:bg-emerald-400/10 transition-colors" />
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-5">
-                        <Target className="text-emerald-400" size={18} />
-                      </div>
-                      <h3 className="font-serif text-2xl text-white mb-3">
-                        Our Mission
-                      </h3>
-                      <p className="text-slate-400 leading-relaxed text-sm">
-                        {data.mission}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-              {data.vision && (
-                <motion.div {...fade} transition={{ delay: 0.1 }}>
-                  <div className="relative p-8 bg-white/5 border border-white/10 rounded-2xl h-full overflow-hidden group hover:border-emerald-400/30 transition-colors">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-400/5 rounded-full blur-2xl group-hover:bg-emerald-400/10 transition-colors" />
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-5">
-                        <Eye className="text-emerald-400" size={18} />
-                      </div>
-                      <h3 className="font-serif text-2xl text-white mb-3">
-                        Our Vision
-                      </h3>
-                      <p className="text-slate-400 leading-relaxed text-sm">
-                        {data.vision}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Technology ── */}
-      {tech.length > 0 && (
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div {...fade} className="mb-10">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="h-px w-8 bg-emerald-400" />
-                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
-                  Technology
-                </p>
-              </div>
-              <h2 className="font-serif text-3xl text-white">
-                Precision Equipment
-              </h2>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {tech.map((t, i) => (
-                <motion.div
-                  key={t.id}
-                  {...fade}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl h-full hover:bg-white/[0.07] hover:border-white/20 transition-all group">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center mb-4 group-hover:bg-emerald-400/20 transition-colors">
-                      <DynamicIcon
-                        name={t.icon_name}
-                        className="text-emerald-400"
-                        size={18}
-                      />
-                    </div>
-                    <h3 className="text-white font-medium text-sm mb-1.5">
-                      {t.name}
-                    </h3>
-                    <p className="text-slate-500 text-xs leading-relaxed">
-                      {t.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Timeline ── */}
-      {timeline.length > 0 && (
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div {...fade} className="mb-10">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="h-px w-8 bg-emerald-400" />
-                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em]">
-                  Our Journey
-                </p>
-              </div>
-              <h2 className="font-serif text-3xl text-white">
-                Timeline of Excellence
-              </h2>
-            </motion.div>
-
-            <div className="relative">
-              <div className="absolute left-[72px] top-0 bottom-0 w-px bg-white/10" />
-              <div className="space-y-0">
-                {timeline.map((t, i) => (
-                  <motion.div
-                    key={t.id}
-                    {...fade}
-                    transition={{ delay: i * 0.08 }}
-                    className="relative flex items-start gap-6 group"
-                  >
-                    <div className="w-[72px] shrink-0 pt-5 text-right">
-                      <span className="text-emerald-400 font-mono text-xs font-semibold">
-                        {t.year}
-                      </span>
-                    </div>
-                    <div className="relative shrink-0 mt-5">
-                      <div className="w-3 h-3 rounded-full border-2 border-emerald-400/50 bg-[#020617] group-hover:border-emerald-400 group-hover:bg-emerald-400/20 transition-all" />
-                    </div>
-                    <div className="flex-1 py-4 border-b border-white/5 group-hover:border-white/10 transition-colors">
-                      <h3 className="text-white font-medium text-sm mb-0.5">
-                        {t.title}
-                      </h3>
-                      <p className="text-slate-500 text-xs leading-relaxed">
-                        {t.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── CTA ── */}
-      {(data.cta_heading || data.cta_subheading) && (
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-6">
             <motion.div
               {...fade}
-              className="relative rounded-2xl border border-white/10 bg-white/5 p-12 text-center overflow-hidden"
+              className="order-1 md:order-2 rounded-2xl overflow-hidden"
+              style={{
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 4px 24px rgba(16,185,129,0.08)",
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-transparent to-emerald-600/5" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-emerald-400/10 rounded-full blur-[80px]" />
-              <div className="relative">
-                <p className="text-emerald-400 text-xs uppercase tracking-[0.3em] mb-3">
-                  Get Started
-                </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
-                  {data.cta_heading}
-                </h2>
-                <p className="text-slate-400 text-sm mb-8 max-w-md mx-auto">
-                  {data.cta_subheading}
-                </p>
-                <Link href="/book">
-                  <Button
-                    size="lg"
-                    className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 px-8 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all font-medium"
-                  >
-                    Book Consultation <ArrowRight className="ml-2" size={16} />
-                  </Button>
-                </Link>
-              </div>
+              <Image
+                src={missionImage}
+                alt="Our mission — patient-centered dental care"
+                width={700}
+                height={520}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* ── Vision ── */}
+      <section className="py-24" style={{ background: "#07110D" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-14 items-center">
+            <motion.div
+              {...fade}
+              className="rounded-2xl overflow-hidden"
+              style={{
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 4px 24px rgba(16,185,129,0.08)",
+              }}
+            >
+              <Image
+                src={vissionImage}
+                alt="Our vision — the future of dental care in Mindanao"
+                width={700}
+                height={520}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div {...fade}>
+              <span
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-4 px-3 py-1 rounded-full"
+                style={{ background: "rgba(16,185,129,0.1)", color: "#34D399" }}
+              >
+                <Eye size={12} /> Our Vision
+              </span>
+              <h2
+                className="font-serif text-3xl md:text-4xl mb-5 leading-snug"
+                style={{ color: "#ECFDF5" }}
+              >
+                To be the reason someone smiles a little easier tomorrow.
+              </h2>
+              <p
+                className="text-base leading-relaxed"
+                style={{ color: "#94A3B8" }}
+              >
+                We envision every Dr. Dental Care Center branch as a place where
+                patients receive more than treatment — they experience genuine
+                care, lasting trust, and a relationship built around their
+                well-being.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Values ── */}
+      <section className="py-24" style={{ background: "#020617" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div {...fade} className="text-center max-w-2xl mx-auto mb-16">
+            <span
+              className="inline-block text-xs uppercase tracking-[0.35em] mb-5 px-4 py-1.5 rounded-full border"
+              style={{
+                color: "#34D399",
+                borderColor: "rgba(16,185,129,0.25)",
+                background: "rgba(16,185,129,0.08)",
+              }}
+            >
+              Our Values
+            </span>
+            <h2
+              className="font-serif text-3xl md:text-4xl leading-tight"
+              style={{ color: "#ECFDF5" }}
+            >
+              What Guides Every Visit
+            </h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((v, i) => (
+              <motion.div
+                key={v.title}
+                {...fade}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+                <div
+                  className="h-full rounded-2xl p-6 transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 32px rgba(5,150,105,0.16), 0 0 0 1px rgba(110,231,183,0.4)"
+                    e.currentTarget.style.borderColor = "rgba(110,231,183,0.4)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "none"
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"
+                  }}
+                >
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: "linear-gradient(135deg, #047857, #059669)",
+                    }}
+                  >
+                    <v.icon size={20} color="#fff" />
+                  </div>
+                  <h3
+                    className="font-serif text-lg mb-2"
+                    style={{ color: "#ECFDF5" }}
+                  >
+                    {v.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "#94A3B8" }}
+                  >
+                    {v.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section
+        className="py-24 relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, #030F0A 0%, #07281B 60%, #0A4E2F 100%)",
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(5,150,105,0.12) 0%, transparent 70%)",
+            }}
+          />
+          <div className="absolute top-8 left-1/4 w-2 h-2 rounded-full bg-emerald-400/40" />
+          <div className="absolute bottom-12 right-1/3 w-1.5 h-1.5 rounded-full bg-emerald-300/30" />
+          <div className="absolute top-1/2 right-1/4 w-1 h-1 rounded-full bg-emerald-400/50" />
+        </div>
+
+        <motion.div
+          {...fade}
+          className="relative max-w-3xl mx-auto px-6 text-center"
+        >
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div
+              className="h-px w-12"
+              style={{
+                background: "linear-gradient(to right, transparent, #10B981)",
+              }}
+            />
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <div
+              className="h-px w-12"
+              style={{
+                background: "linear-gradient(to left, transparent, #10B981)",
+              }}
+            />
+          </div>
+
+          <h2
+            className="font-serif text-3xl md:text-4xl mb-5 leading-tight"
+            style={{ color: "#ECFDF5" }}
+          >
+            Let&apos;s Take Care of You
+          </h2>
+          <p className="mb-10 text-base" style={{ color: "#94A3B8" }}>
+            Book a consultation at the branch nearest you, and let&apos;s talk
+            about what your smile needs — no rush, no pressure.
+          </p>
+
+          <Link href="/book">
+            <button
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              style={{
+                background: "linear-gradient(135deg, #047857, #10B981)",
+                color: "#fff",
+                boxShadow: "0 4px 24px rgba(16,185,129,0.35)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 6px 32px rgba(16,185,129,0.55)"
+                e.currentTarget.style.transform = "translateY(-1px)"
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 4px 24px rgba(16,185,129,0.35)"
+                e.currentTarget.style.transform = "translateY(0)"
+              }}
+            >
+              Book Free Consultation
+              <ArrowRight size={16} />
+            </button>
+          </Link>
+        </motion.div>
+      </section>
     </div>
-  );
+  )
 }

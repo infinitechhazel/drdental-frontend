@@ -3,99 +3,114 @@ export type Branch = {
     name: string
     area: string
     phone: string
-    email: string
+    email?: string
     address: string
     hours: string
     mapQuery: string
     directionsUrl: string
     blurb: string
+    facebook: string
+    instagram?: string
 }
 
-// Dr Dental Care Center — 7 branches across Davao Region
+// Dr Dental Care Center Branches 
 export const BRANCHES: Branch[] = [
     {
         id: "ponciano",
         name: "Ponciano",
         area: "Davao City",
         phone: "+63 967 964 6888",
-        email: "ponciano@drdentalcareclinic.com",
-        address: "Unit I-3 K.H Building, Ponciano cor. Bonifacio St, Davao City",
-        hours: "Mon–Fri · 8AM–5PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Ponciano,+Davao+City",
-        directionsUrl: "https://maps.app.goo.gl/BDzb3mLhe9TaGq3U7",
-        blurb: "Our flagship clinic in the heart of downtown Davao.",
-    },
-    {
-        id: "matina",
-        name: "Matina",
-        area: "Davao City",
-        phone: "+63 967 964 6889",
-        email: "matina@drdentalcareclinic.com",
-        address: "2F MatinaTown Square, Matina, Davao City",
-        hours: "Mon–Sat · 9AM–6PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Matina,+Davao+City",
-        directionsUrl: "https://maps.google.com/?q=Matina+Davao+City",
-        blurb: "Convenient mall-based branch with extended Saturday hours.",
+        email: "dentaldr95@gmail.com",
+        address:
+            "Unit I-3 K.H Building cor. Ponciano and Bonifacio Street, Davao City, Philippines, 8000",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - Ponciano, Davao City",
+        directionsUrl:
+            "https://maps.google.com/?q=DR+Dental+Care+Center+Ponciano+Davao+City",
+        blurb: "Our Davao City branch located near Ponciano and Bonifacio Street.",
+        facebook: "https://www.facebook.com/DrDentalCareCenter/",
+        instagram: "https://www.instagram.com/dr.dentalcarecenter/",
     },
     {
         id: "bajada",
         name: "Bajada",
         area: "Davao City",
-        phone: "+63 967 964 6890",
-        email: "bajada@drdentalcareclinic.com",
-        address: "J.P. Laurel Ave, Bajada, Davao City",
-        hours: "Mon–Fri · 8AM–5PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Bajada,+Davao+City",
-        directionsUrl: "https://maps.google.com/?q=Bajada+Davao+City",
-        blurb: "Easy-access clinic along the main avenue.",
+        phone: "+63 981 381 0999",
+        email: "drdentalbajada@gmail.com",
+        address:
+            "SK Complex, J.P. Laurel Ave, Bajada, Davao City, Philippines, 8000",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - Bajada, SK Complex Davao City",
+        directionsUrl:
+            "https://maps.google.com/?q=DR+Dental+Care+Center+Bajada+SK+Complex+Davao",
+        blurb: "Accessible dental clinic along J.P. Laurel Avenue in Bajada.",
+        facebook: "https://www.facebook.com/drdentalcarebajada",
     },
     {
-        id: "toril",
-        name: "Toril",
-        area: "Davao City",
-        phone: "+63 967 964 6891",
-        email: "toril@drdentalcareclinic.com",
-        address: "National Highway, Toril, Davao City",
-        hours: "Mon–Sat · 9AM–5PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Toril,+Davao+City",
-        directionsUrl: "https://maps.google.com/?q=Toril+Davao+City",
-        blurb: "Serving the southern district with weekend availability.",
-    },
-    {
-        id: "digos",
-        name: "Digos",
-        area: "Davao del Sur",
-        phone: "+63 967 964 6892",
-        email: "digos@drdentalcareclinic.com",
-        address: "Rizal Ave, Digos City, Davao del Sur",
-        hours: "Mon–Fri · 8AM–5PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Digos+City",
-        directionsUrl: "https://maps.google.com/?q=Digos+City",
-        blurb: "Our provincial branch serving Davao del Sur.",
+        id: "sm-gensan",
+        name: "SM Gensan",
+        area: "General Santos City",
+        phone: "+63 927 701 7999",
+        email: "drdentalgensan@gmail.com",
+        address:
+            "3rd Floor, SM City General Santos, San Miguel Street Corner Santiago Boulevard, General Santos City, Philippines, 9500",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - SM Gensan, SM City General Santos",
+        directionsUrl:
+            "https://maps.google.com/?q=DR+Dental+Care+Center+SM+Gensan+SM+City+General+Santos",
+        blurb: "Convenient mall-based dental care center inside SM City General Santos.",
+        facebook: "https://www.facebook.com/profile.php?id=61581187916792",
     },
     {
         id: "tagum",
         name: "Tagum",
-        area: "Davao del Norte",
-        phone: "+63 967 964 6893",
-        email: "tagum@drdentalcareclinic.com",
-        address: "Pioneer Ave, Tagum City, Davao del Norte",
-        hours: "Mon–Sat · 9AM–6PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Tagum+City",
-        directionsUrl: "https://maps.google.com/?q=Tagum+City",
-        blurb: "Full-service clinic in the Davao del Norte capital.",
+        area: "Tagum City",
+        phone: "+63 967 241 6888",
+        email: "drdentaltagumbranch@gmail.com",
+        address:
+            "Cris Inn Hotel Building, Unit Door 22-28, Magugpo East, Lower Apokon, Tagum City, Philippines, 8100",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - Tagum, Cris Inn Hotel Building",
+        directionsUrl:
+            "https://maps.google.com/?q=DR+Dental+Care+Center+Tagum+Cris+Inn+Hotel",
+        blurb: "Serving Tagum City and nearby communities with quality dental services.",
+        facebook: "https://www.facebook.com/profile.php?id=61556466363467",
     },
     {
         id: "panabo",
         name: "Panabo",
-        area: "Davao del Norte",
-        phone: "+63 967 964 6894",
-        email: "panabo@drdentalcareclinic.com",
-        address: "National Highway, Panabo City, Davao del Norte",
-        hours: "Mon–Fri · 8AM–5PM",
-        mapQuery: "Dr+Dental+Care+Center+-+Panabo+City",
-        directionsUrl: "https://maps.google.com/?q=Panabo+City",
-        blurb: "Our newest branch, serving Panabo and nearby towns.",
+        area: "Panabo City",
+        phone: "+63 928 865 2999",
+        email: "drdentalpanabobranch2025@gmail.com",
+        address:
+            "Ground Floor, Panabo Market Complex, Panabo City, Philippines, 8105",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - Panabo Market Complex",
+        directionsUrl:
+            "https://maps.google.com/?q=DR+Dental+Care+Center+Panabo+Market+Complex",
+        blurb: "Providing dental services to Panabo City and surrounding areas.",
+        facebook: "https://www.facebook.com/profile.php?id=61577327366697",
+    },
+    {
+        id: "digos",
+        name: "Digos",
+        area: "Digos City",
+        phone: "+63 918 682 8599",
+        email: "",
+        address:
+            "3rd Floor, Gmall Digos, Tres De Mayo, Upper Digos, Digos City, Philippines, 8002",
+        hours: "Mon-Fri · 8AM-5PM",
+        mapQuery:
+            "DR Dental Care Center - Digos, Gmall Digos",
+        directionsUrl:
+            "https://maps.google.com/?q=Gmall+Digos",
+        blurb: "Our Digos branch bringing accessible dental care to Davao del Sur.",
+        facebook: "https://www.facebook.com/profile.php?id=61590649856296",
     },
 ]
 

@@ -30,7 +30,11 @@ export default function BranchesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {BRANCHES.map((branch) => (
-              <Link key={branch.id} href={`/branches/${branch.id}`} className="group">
+              <Link
+                key={branch.id}
+                href={`/branches/${branch.id}`}
+                className="group"
+              >
                 <Card className="h-full p-5 sm:p-6 bg-white/5 border border-emerald-500/20 backdrop-blur-xl rounded-2xl transition-all hover:border-emerald-400/50 hover:bg-white/[0.07]">
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div>
@@ -51,11 +55,19 @@ export default function BranchesPage() {
 
                   <div className="space-y-2 border-t border-emerald-500/15 pt-4">
                     <div className="flex gap-2 text-xs sm:text-sm text-slate-300">
-                      <MapPin size={15} className="text-emerald-400 shrink-0 mt-0.5" />
-                      <span className="font-mono break-words">{branch.address}</span>
+                      <MapPin
+                        size={15}
+                        className="text-emerald-400 shrink-0 mt-0.5"
+                      />
+                      <span className="font-mono break-words">
+                        {branch.address}
+                      </span>
                     </div>
                     <div className="flex gap-2 text-xs sm:text-sm text-slate-300">
-                      <Clock size={15} className="text-emerald-400 shrink-0 mt-0.5" />
+                      <Clock
+                        size={15}
+                        className="text-emerald-400 shrink-0 mt-0.5"
+                      />
                       <span className="font-mono">{branch.hours}</span>
                     </div>
                   </div>

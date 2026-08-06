@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import {
   Star,
@@ -8,6 +10,7 @@ import {
   ChevronRight,
   Send,
   CheckCircle,
+  ArrowRight,
 } from "lucide-react"
 
 interface Testimonial {
@@ -142,8 +145,57 @@ export default function Testimonials() {
           {/* LEFT — Carousel */}
           <motion.div {...fade}>
             {loading && (
-              <div className="flex items-center justify-center py-20">
-                <div className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin" />
+              <div className="relative">
+                <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-10 border border-emerald-500/20 animate-pulse">
+                  {/* Stars skeleton */}
+                  <div className="flex gap-2 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="w-5 h-5 rounded bg-slate-700" />
+                    ))}
+                  </div>
+
+                  {/* Quote skeleton */}
+                  <div className="w-16 h-12 bg-emerald-400/10 rounded mb-3" />
+
+                  {/* Message skeleton */}
+                  <div className="space-y-3 mb-8">
+                    <div className="h-5 bg-slate-700 rounded w-full" />
+                    <div className="h-5 bg-slate-700 rounded w-11/12" />
+                    <div className="h-5 bg-slate-700 rounded w-3/4" />
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-px bg-slate-700 mb-6" />
+
+                  {/* User info */}
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-3">
+                      <div className="h-4 w-32 bg-slate-700 rounded" />
+                      <div className="h-3 w-24 bg-slate-800 rounded" />
+                    </div>
+
+                    {/* Rating badge */}
+                    <div className="h-8 w-16 rounded-full bg-emerald-400/10" />
+                  </div>
+                </div>
+
+                {/* Navigation skeleton */}
+                <div className="flex items-center justify-center gap-6 mt-6">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10" />
+
+                  <div className="flex gap-2">
+                    {[...Array(3)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`h-2 rounded-full bg-slate-700 ${
+                          i === 0 ? "w-8" : "w-2"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10" />
+                </div>
               </div>
             )}
 
@@ -405,6 +457,31 @@ export default function Testimonials() {
           </motion.div>
         </div>
       </div>
+
+      {/* ── Final CTA ── */}
+      <section className="pt-24 relative overflow-hidden">
+        <div className="absolute inset-0" />
+        <motion.div
+          {...fade}
+          className="relative max-w-3xl mx-auto px-6 text-center"
+        >
+          <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            Ready to Transform Your Smile?
+          </h2>
+          <p className="text-slate-400 text-lg mb-10">
+            Book your consultation today and take the first step toward clinical
+            excellence.
+          </p>
+          <Link href="/book">
+            <Button
+              size="lg"
+              className="bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-medium px-10 hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all"
+            >
+              Book Your Appointment <ArrowRight className="ml-2" size={18} />
+            </Button>
+          </Link>
+        </motion.div>
+      </section>
     </section>
   )
 }

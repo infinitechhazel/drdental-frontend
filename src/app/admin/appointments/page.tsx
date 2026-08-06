@@ -23,6 +23,7 @@ import {
   Trash2,
 } from "lucide-react"
 import { useAuthStore } from "@/store/authStore"
+import { BRANCHES } from "@/lib/branches-data"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
 
@@ -41,6 +42,15 @@ function extractList<T>(data: unknown): T[] {
   const nested = (d as { data?: { data?: T[] } })?.data?.data
   if (Array.isArray(nested)) return nested
   return []
+}
+
+function groupServicesByCategory(services: Service[]) {
+  return services.reduce<Record<string, Service[]>>((acc, s) => {
+    const cat = s.category?.trim() || "Other"
+    if (!acc[cat]) acc[cat] = []
+    acc[cat].push(s)
+    return acc
+  }, {})
 }
 
 const STATUS_STYLES: Record<
@@ -70,6 +80,7 @@ const STATUS_STYLES: Record<
 interface Service {
   id: string
   name: string
+  category: string
 }
 
 interface Booking {
@@ -328,6 +339,7 @@ function NewBookingModal({
     date: string
     time: string
     service_id: string
+    branch: string
     notes: string
   }
   const blank: F = {
@@ -337,30 +349,35 @@ function NewBookingModal({
     date: "",
     time: "",
     service_id: "",
+    branch: "",
     notes: "",
   }
   const [form, setForm] = useState<F>(blank)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const groupedServices = groupServicesByCategory(services)
 
   const TIME_SLOTS = [
+    "08:00",
     "09:00",
-    "09:30",
     "10:00",
-    "10:30",
     "11:00",
-    "11:30",
     "13:00",
-    "13:30",
     "14:00",
-    "14:30",
     "15:00",
-    "15:30",
     "16:00",
-    "16:30",
   ]
 
   if (!open) return null
+
+  const formatTime = (time24: string) => {
+    const [hour, minute] = time24.split(":").map(Number)
+
+    const period = hour >= 12 ? "PM" : "AM"
+    const hour12 = hour % 12 || 12
+
+    return `${hour12}:${minute.toString().padStart(2, "0")} ${period}`
+  }
 
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.date || !form.time) {
@@ -387,6 +404,7 @@ function NewBookingModal({
           phone: form.phone,
           booking_date,
           service_id: form.service_id || undefined,
+          branch: form.branch || undefined,
           notes: form.notes || undefined,
         }),
       })
@@ -443,33 +461,59 @@ function NewBookingModal({
           </div>
           <div className="grid grid-cols-2 gap-3">
             {field("Phone", "phone", "tel", "+63 912 345 6789")}
+
             <div>
               <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1.5">
-                Requested Service
+                Branch
               </label>
               <select
-                value={form.service_id}
+                value={form.branch}
                 onChange={(e) =>
-                  setForm((p) => ({ ...p, service_id: e.target.value }))
+                  setForm((p) => ({ ...p, branch: e.target.value }))
                 }
-                disabled={servicesLoading}
-                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm"
               >
-                <option value="">
-                  {servicesLoading
-                    ? "Loading services…"
-                    : services.length
-                      ? "Select a service"
-                      : "No services available"}
-                </option>
-                {services.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
+                <option value="">Select a branch</option>
+                {BRANCHES.map((b) => (
+                  <option key={b.id} value={b.name}>
+                    {b.name}
                   </option>
                 ))}
               </select>
             </div>
           </div>
+
+          <div>
+            <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1.5">
+              Requested Service
+            </label>
+            <select
+              value={form.service_id}
+              onChange={(e) =>
+                setForm((p) => ({ ...p, service_id: e.target.value }))
+              }
+              disabled={servicesLoading}
+              className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm disabled:opacity-60"
+            >
+              <option value="">
+                {servicesLoading
+                  ? "Loading services…"
+                  : services.length
+                    ? "Select a service"
+                    : "No services available"}
+              </option>
+              {Object.entries(groupedServices).map(([category, items]) => (
+                <optgroup key={category} label={category}>
+                  {items.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+          </div>
+
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1.5">
@@ -497,9 +541,10 @@ function NewBookingModal({
                 className="w-full px-3.5 py-2.5 bg-[#f4f8ff] border border-emerald-100 rounded-xl text-slate-700 focus:outline-none focus:border-emerald-400 text-sm"
               >
                 <option value="">Select time</option>
+
                 {TIME_SLOTS.map((t) => (
                   <option key={t} value={t}>
-                    {t}
+                    {formatTime(t)}
                   </option>
                 ))}
               </select>

@@ -49,11 +49,20 @@ type Pagination = {
 /* ─────────────────────────────────────────
    CONSTANTS
 ───────────────────────────────────────── */
-const CATEGORIES = ["All", "Dental", "Aesthetic"]
+const CATEGORIES = [
+  "All",
+  "Cosmetic Dentistry",
+  "Oral Surgery",
+  "Periodontal & Gum Care",
+  "Preventive Dentistry",
+  "Restorative Dentistry",
+  "Specialized Dentistry",
+  "Tooth Replacement Dentistry",
+] as const
 
 const EMPTY_FORM: FormState = {
   name: "",
-  category: "Dental",
+  category: "Cosmetic Dentistry",
   price: "",
   status: "Active",
   description: "",
@@ -72,14 +81,6 @@ function statusStyle(status: string) {
     default:
       return "bg-red-50 text-red-700 border border-red-200"
   }
-}
-
-function categoryIcon(category: string) {
-  return category === "Dental" ? (
-    <Stethoscope size={14} className="inline mr-1 opacity-60" />
-  ) : (
-    <Sparkles size={14} className="inline mr-1 opacity-60" />
-  )
 }
 
 /* ─────────────────────────────────────────
@@ -154,7 +155,17 @@ export default function ServicesPage() {
   }
 
   const handleCreate = async () => {
-    await fetch("/api/services", { method: "POST", body: buildFormData() })
+    const fd = buildFormData()
+
+    for (const [key, value] of fd.entries()) {
+      console.log(key, value)
+    }
+
+    await fetch("/api/services", {
+      method: "POST",
+      body: fd,
+    })
+
     closeModal()
     fetchServices()
   }
@@ -351,7 +362,10 @@ export default function ServicesPage() {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-slate-600">
-                          {categoryIcon(s.category)}
+                          <Stethoscope
+                            size={14}
+                            className="inline mr-1 opacity-60"
+                          />
                           {s.category}
                         </td>
                         <td className="px-4 py-4 text-slate-800 font-semibold">
@@ -417,7 +431,10 @@ export default function ServicesPage() {
                             {s.name}
                           </p>
                           <p className="text-xs text-slate-500 mt-0.5">
-                            {categoryIcon(s.category)}
+                            <Stethoscope
+                              size={14}
+                              className="inline mr-1 opacity-60"
+                            />
                             {s.category}
                           </p>
                         </div>
@@ -747,8 +764,18 @@ function ServiceForm({
             onChange={(e) => setForm({ ...form, category: e.target.value })}
             className={inputCls}
           >
-            <option>Dental</option>
-            <option>Aesthetic</option>
+            <option value="">Select Category</option>
+            <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
+            <option value="Oral Surgery">Oral Surgery</option>
+            <option value="Periodontal & Gum Care">
+              Periodontal & Gum Care
+            </option>
+            <option value="Preventive Dentistry">Preventive Dentistry</option>
+            <option value="Restorative Dentistry">Restorative Dentistry</option>
+            <option value="Specialized Dentistry">Specialized Dentistry</option>
+            <option value="Tooth Replacement Dentistry">
+              Tooth Replacement Dentistry
+            </option>
           </select>,
         )}
 
@@ -826,7 +853,7 @@ function ViewService({ service }: { service: Service }) {
       {row(
         "Category",
         <>
-          {categoryIcon(service.category)}
+          <Stethoscope size={14} className="inline mr-1 opacity-60" />
           {service.category}
         </>,
       )}

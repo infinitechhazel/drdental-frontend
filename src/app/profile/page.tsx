@@ -5,7 +5,15 @@ import { useAuthStore } from "@/store/authStore"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, User, Mail, Phone, Stethoscope } from "lucide-react"
+import {
+  Calendar,
+  Clock,
+  User,
+  Mail,
+  Phone,
+  Stethoscope,
+  Pin,
+} from "lucide-react"
 import Header from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 
@@ -21,6 +29,7 @@ type Booking = {
   service_id?: string
   service?: { id: string; name: string } | null
   booking_date: string
+  branch: string | null
   status: "pending" | "confirmed" | "cancelled"
   notes?: string | null
   name: string
@@ -221,6 +230,10 @@ export default function ProfilePage() {
                           <span className="flex items-center gap-1">
                             <Clock size={11} className="text-emerald-400" />
                             {parseTime(b)}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Pin size={11} className="text-emerald-400" />
+                            {b.branch}
                           </span>
                         </div>
                         {b.notes && (
