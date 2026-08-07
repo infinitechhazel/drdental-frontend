@@ -102,9 +102,6 @@ export default function BranchesMap({
                         key={branch.id}
                         position={position}
                         icon={createBranchIcon(branch.id === activeBranchId)}
-                        eventHandlers={{
-                            click: () => goToBranch(branch),
-                        }}
                     >
                         <Popup>
                             <div style={{ minWidth: 180 }}>
