@@ -83,7 +83,7 @@ export default function BranchesMap({
     }
 
     return (
-        <div className="w-full overflow-hidden rounded-2xl border border-neutral-200 shadow-sm">
+        <div className="w-full overflow-hidden z-0 rounded-2xl border border-neutral-200 shadow-sm">
             <MapContainer
                 center={[7.1, 125.4]}
                 zoom={8}
