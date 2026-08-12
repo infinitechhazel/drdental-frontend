@@ -63,7 +63,7 @@ export default function ServiceDetail() {
             ? s.image.startsWith("http")
               ? s.image
               : `${process.env.NEXT_PUBLIC_API_URL}${s.image}`
-            : "/placeholder-service.jpg",
+            : "/placeholder-service.png",
           status: s.status,
           category: s.category || "Other",
           price: s.price,
@@ -110,7 +110,7 @@ export default function ServiceDetail() {
               ? s.image.startsWith("http")
                 ? s.image
                 : `${process.env.NEXT_PUBLIC_API_URL}${s.image}`
-              : "/placeholder-service.jpg",
+              : "/placeholder-service.png",
             status: s.status,
             category: s.category || "Other",
             price: s.price,
@@ -130,22 +130,124 @@ export default function ServiceDetail() {
 
   if (loading) {
     return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{
-          background:
-            "radial-gradient(100% 70% at 10% 0%, #E9FBE8 0%, transparent 55%), radial-gradient(80% 60% at 90% 100%, #CFF3D6 0%, transparent 55%), #F1FAEE",
-        }}
-      >
-        <div className="flex flex-col items-center gap-3">
-          <div
-            className="h-10 w-10 animate-spin rounded-full border-4 border-t-transparent"
-            style={{ borderColor: "#4FC97B", borderTopColor: "transparent" }}
-          />
-          <span className="text-sm font-medium tracking-wide text-[#145C36]">
-            Loading...
-          </span>
-        </div>
+      <div className="font-sans">
+        {/* ── Hero Skeleton ── */}
+        <section
+          className="relative pt-32 pb-16 overflow-hidden"
+          style={{
+            background:
+              "linear-gradient(160deg, #0B3D26 0%, #0E4A2D 45%, #0B3D26 100%)",
+          }}
+        >
+          <div className="pointer-events-none absolute inset-0">
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] rounded-full blur-[130px]"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(31,149,82,0.4), rgba(167,232,107,0.12) 70%)",
+              }}
+            />
+            <div
+              className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full blur-[110px]"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(79,201,123,0.28), transparent 70%)",
+              }}
+            />
+          </div>
+
+          <div className="relative max-w-5xl mx-auto px-6">
+            <div
+              className="h-4 w-32 rounded mb-8 animate-pulse"
+              style={{ background: "rgba(255,255,255,0.15)" }}
+            />
+            <div
+              className="h-6 w-28 rounded-full mb-4 animate-pulse"
+              style={{ background: "rgba(255,255,255,0.12)" }}
+            />
+            <div
+              className="h-12 w-3/4 rounded mb-2 animate-pulse"
+              style={{ background: "rgba(255,255,255,0.15)" }}
+            />
+            <div
+              className="h-12 w-1/2 rounded animate-pulse"
+              style={{ background: "rgba(255,255,255,0.15)" }}
+            />
+          </div>
+        </section>
+
+        {/* ── Content Skeleton ── */}
+        <section
+          className="relative py-16 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(100% 70% at 10% 0%, #E9FBE8 0%, transparent 55%), radial-gradient(80% 60% at 90% 100%, #CFF3D6 0%, transparent 55%), #F1FAEE",
+          }}
+        >
+          <div className="relative max-w-5xl mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-10 items-start">
+              {/* Image skeleton */}
+              <div
+                className="rounded-2xl aspect-[4/3] animate-pulse"
+                style={{ background: "rgba(79,201,123,0.15)" }}
+              />
+
+              {/* Info skeleton */}
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div
+                    className="h-7 w-24 rounded-full animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.15)" }}
+                  />
+                  <div
+                    className="h-7 w-28 rounded-full animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.15)" }}
+                  />
+                </div>
+
+                <div className="space-y-2.5 mb-8">
+                  <div
+                    className="h-3.5 w-full rounded animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.12)" }}
+                  />
+                  <div
+                    className="h-3.5 w-full rounded animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.12)" }}
+                  />
+                  <div
+                    className="h-3.5 w-2/3 rounded animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.12)" }}
+                  />
+                </div>
+
+                <div className="mb-6">
+                  <div
+                    className="h-3 w-16 rounded mb-2 animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.12)" }}
+                  />
+                  <div
+                    className="h-9 w-32 rounded animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.2)" }}
+                  />
+                  <div
+                    className="h-3 w-48 rounded mt-3 animate-pulse"
+                    style={{ background: "rgba(79,201,123,0.1)" }}
+                  />
+                </div>
+
+                <div
+                  className="h-3 w-40 rounded mb-6 animate-pulse"
+                  style={{ background: "rgba(79,201,123,0.1)" }}
+                />
+
+                <div
+                  className="h-12 w-40 rounded-xl animate-pulse"
+                  style={{ background: "rgba(79,201,123,0.25)" }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     )
   }
@@ -303,7 +405,7 @@ export default function ServiceDetail() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     ;(e.target as HTMLImageElement).src =
-                      "/placeholder-service.jpg"
+                      "/placeholder-service.png"
                   }}
                 />
               </div>
@@ -340,7 +442,7 @@ export default function ServiceDetail() {
               </p>
 
               {service.price > 0 && (
-                <div className="mb-8">
+                <div className="mb-6">
                   <span
                     className="text-xs block mb-1"
                     style={{ color: "#4C6B4C" }}
@@ -354,10 +456,20 @@ export default function ServiceDetail() {
                         "linear-gradient(100deg, #145C36, #1F9552, #4FC97B)",
                     }}
                   >
-                    ₱{Number(service.price).toLocaleString()}+
+                    ₱{Number(service.price).toLocaleString()}
                   </span>
+                  <p
+                    className="text-xs mt-2 max-w-sm"
+                    style={{ color: "#4C6B4C" }}
+                  >
+                    Final cost varies by case complexity and materials used.
+                  </p>
                 </div>
               )}
+
+              <p className="text-xs mb-6 max-w-sm" style={{ color: "#4C6B4C" }}>
+                Service availability may vary by branch.
+              </p>
 
               <button
                 onClick={() =>
@@ -475,7 +587,7 @@ export default function ServiceDetail() {
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         onError={(e) => {
                           ;(e.target as HTMLImageElement).src =
-                            "/placeholder-service.jpg"
+                            "/placeholder-service.png"
                         }}
                       />
                     </div>

@@ -14,6 +14,7 @@ import {
   Stethoscope,
   Sparkles,
   AlertTriangle,
+  ChevronDown,
 } from "lucide-react"
 
 /* ─────────────────────────────────────────
@@ -51,13 +52,16 @@ type Pagination = {
 ───────────────────────────────────────── */
 const CATEGORIES = [
   "All",
+  "Preventive & General Dentistry",
   "Cosmetic Dentistry",
-  "Oral Surgery",
-  "Periodontal & Gum Care",
-  "Preventive Dentistry",
   "Restorative Dentistry",
-  "Specialized Dentistry",
-  "Tooth Replacement Dentistry",
+  "Orthodontic Treatment",
+  "Oral Surgery",
+  "Prosthodontic Services",
+  "Endodontic Treatment",
+  "Periodontal Care",
+  "Pediatric Dentistry",
+  "TMJ & Specialized Dentistry",
 ] as const
 
 const EMPTY_FORM: FormState = {
@@ -253,43 +257,53 @@ export default function ServicesPage() {
 
         {/* ── Filters ── */}
         <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm mb-5">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
-            <input
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value)
-                setPage(1)
-              }}
-              placeholder="Search services…"
-              className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50
-                         pl-9 pr-4 text-sm text-slate-800 placeholder:text-slate-400
-                         focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
-                         transition"
-            />
-          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            {/* Search */}
+            <div className="relative flex-1 min-w-0">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
 
-          <div className="flex gap-2 mt-3 flex-wrap">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c}
-                onClick={() => {
-                  setSelectedCategory(c)
+              <input
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value)
                   setPage(1)
                 }}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors
-                  ${
-                    selectedCategory === c
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
+                placeholder="Search services…"
+                className="w-full h-10 rounded-lg border border-slate-200 bg-slate-50
+                   pl-9 pr-4 text-sm text-slate-800 placeholder:text-slate-400
+                   focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
+                   transition"
+              />
+            </div>
+
+            {/* Category */}
+            <div className="relative w-full sm:w-56 shrink-0">
+              <select
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value)
+                  setPage(1)
+                }}
+                className="w-full h-10 appearance-none rounded-lg border border-slate-200 bg-slate-50
+                   px-4 pr-10 text-sm text-slate-800
+                   focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
+                   transition cursor-pointer"
               >
-                {c}
-              </button>
-            ))}
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+
+              <ChevronDown
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2
+                   w-4 h-4 text-slate-400"
+              />
+            </div>
           </div>
         </div>
-
+        
         {/* ── Table / Cards ── */}
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
           {loading ? (
@@ -765,16 +779,21 @@ function ServiceForm({
             className={inputCls}
           >
             <option value="">Select Category</option>
-            <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
-            <option value="Oral Surgery">Oral Surgery</option>
-            <option value="Periodontal & Gum Care">
-              Periodontal & Gum Care
+            <option value="Preventive & General Dentistry">
+              Preventive & General Dentistry
             </option>
-            <option value="Preventive Dentistry">Preventive Dentistry</option>
+            <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
             <option value="Restorative Dentistry">Restorative Dentistry</option>
-            <option value="Specialized Dentistry">Specialized Dentistry</option>
-            <option value="Tooth Replacement Dentistry">
-              Tooth Replacement Dentistry
+            <option value="Orthodontic Treatment">Orthodontic Treatment</option>
+            <option value="Oral Surgery">Oral Surgery</option>
+            <option value="Prosthodontic Services">
+              Prosthodontic Services
+            </option>
+            <option value="Endodontic Treatment">Endodontic Treatment</option>
+            <option value="Periodontal Care">Periodontal Care</option>
+            <option value="Pediatric Dentistry">Pediatric Dentistry</option>
+            <option value="TMJ & Specialized Dentistry">
+              TMJ & Specialized Dentistry
             </option>
           </select>,
         )}

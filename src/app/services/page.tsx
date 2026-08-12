@@ -74,7 +74,7 @@ export default function Services() {
             ? s.image.startsWith("http")
               ? s.image
               : `${process.env.NEXT_PUBLIC_API_URL}${s.image}`
-            : "/placeholder-service.jpg",
+            : "/placeholder-service.png",
           status: s.status,
           category: s.category || "Other",
           price: s.price,
@@ -145,7 +145,7 @@ export default function Services() {
                 "radial-gradient(circle, rgba(31,149,82,0.4), rgba(167,232,107,0.12) 70%)",
             }}
           />
-          
+
           <div
             className="absolute bottom-0 right-0 w-[480px] h-[480px] rounded-full blur-[120px]"
             style={{
@@ -188,7 +188,6 @@ export default function Services() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/20" />
         </div>
         
-
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <motion.div {...fade}>
             <span
@@ -205,7 +204,7 @@ export default function Services() {
             </span>
 
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
-              <span style={{ color: "#F8FFFB" }}>The Aesthetic </span>
+              <span style={{ color: "#F8FFFB" }}>Comprehensive Dental </span>
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -213,7 +212,7 @@ export default function Services() {
                     "linear-gradient(100deg, #A7E86B 0%, #4FC97B 50%, #1F9552 100%)",
                 }}
               >
-                Index
+                Care
               </span>
             </h1>
 
@@ -243,8 +242,17 @@ export default function Services() {
               className="text-lg max-w-2xl mx-auto leading-8"
               style={{ color: "#CFE8DD" }}
             >
-              Comprehensive dental and aesthetic services, each
-              precision-engineered for measurable results.
+              Dr. Dental Care Center provides a comprehensive range of dental
+              services, each delivered with care for lasting results.
+            </p>
+
+            <p
+              className="text-sm max-w-xl mx-auto leading-6 mt-4"
+              style={{ color: "#A9CFBB" }}
+            >
+              Available treatments and specialists may vary per branch. A dental
+              consultation is recommended to determine the most appropriate
+              treatment for each patient&apos;s needs.
             </p>
           </motion.div>
         </div>
@@ -500,7 +508,7 @@ export default function Services() {
                                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                   onError={(e) => {
                                     ;(e.target as HTMLImageElement).src =
-                                      "/placeholder-service.jpg"
+                                      "/placeholder-service.png"
                                   }}
                                 />
                                 <div
@@ -536,7 +544,8 @@ export default function Services() {
                                   {s.desc}
                                 </p>
 
-                                <div className="flex items-center gap-3 mb-5">
+                                {/* Duration badge on its own row */}
+                                <div className="flex items-center gap-3 mb-2">
                                   <span
                                     className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full font-medium"
                                     style={{
@@ -547,7 +556,11 @@ export default function Services() {
                                     <Clock size={11} />
                                     {s.duration}
                                   </span>
-                                  {s.price > 0 && (
+                                </div>
+
+                                {/* Price block on its own row, note directly beneath */}
+                                {s.price > 0 && (
+                                  <div className="mb-5">
                                     <span
                                       className="text-xs font-semibold bg-clip-text text-transparent"
                                       style={{
@@ -555,10 +568,18 @@ export default function Services() {
                                           "linear-gradient(100deg, #145C36, #1F9552)",
                                       }}
                                     >
-                                      ₱{Number(s.price).toLocaleString()}+
+                                      Starting from ₱
+                                      {Number(s.price).toLocaleString()}
                                     </span>
-                                  )}
-                                </div>
+                                    <p
+                                      className="text-[10px] mt-0.5"
+                                      style={{ color: "#4C6B4C" }}
+                                    >
+                                      Final pricing confirmed during
+                                      consultation
+                                    </p>
+                                  </div>
+                                )}
 
                                 <div
                                   className="flex items-center justify-between pt-4"
