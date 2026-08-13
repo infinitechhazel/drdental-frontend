@@ -54,20 +54,20 @@ type Pagination = {
 ───────────────────────────────────────── */
 const CATEGORIES = [
   "All",
-  "Preventive & General Dentistry",
+  "General Dentistry",
   "Cosmetic Dentistry",
   "Restorative Dentistry",
-  "Orthodontic Treatment",
+  "Orthodontics",
+  "Wisdom Tooth Removal",
+  "Dental Implants",
+  "Root Canal Treatment",
   "Oral Surgery",
-  "Prosthodontic Services",
-  "Endodontic Treatment",
-  "Periodontal Care",
   "Pediatric Dentistry",
-  "TMJ & Specialized Dentistry",
+  "TMJ Treatment",
 ] as const
 
 const EMPTY_FORM: FormState = {
-  category: "Preventive & General Dentistry",
+  category: "General Dentistry",
   treatment: "",
   before_image: null,
   after_image: null,

@@ -57,7 +57,7 @@ type Stat = { value: string; label: string }
 export default function Home() {
   const stats: Stat[] = [
     { value: "6+", label: "Years Experience" },
-    { value: "5K+", label: "Patients Treated" },
+    { value: "150K+", label: "Patients Treated" },
     { value: "98%", label: "Satisfaction Rate" },
     { value: "10+", label: "Specialists" },
   ]

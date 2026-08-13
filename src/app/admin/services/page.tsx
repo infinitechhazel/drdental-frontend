@@ -52,21 +52,22 @@ type Pagination = {
 ───────────────────────────────────────── */
 const CATEGORIES = [
   "All",
-  "Preventive & General Dentistry",
+  "General Dentistry",
   "Cosmetic Dentistry",
   "Restorative Dentistry",
-  "Orthodontic Treatment",
+  "Orthodontics",
+  "Wisdom Tooth Removal",
+  "Dental Implants",
+  "Restorative Dentistry",
+  "Root Canal Treatment",
   "Oral Surgery",
-  "Prosthodontic Services",
-  "Endodontic Treatment",
-  "Periodontal Care",
   "Pediatric Dentistry",
-  "TMJ & Specialized Dentistry",
+  "TMJ Treatment",
 ] as const
 
 const EMPTY_FORM: FormState = {
   name: "",
-  category: "Cosmetic Dentistry",
+  category: "General Dentistry",
   price: "",
   status: "Active",
   description: "",
@@ -303,7 +304,7 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
-        
+
         {/* ── Table / Cards ── */}
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
           {loading ? (
@@ -779,22 +780,17 @@ function ServiceForm({
             className={inputCls}
           >
             <option value="">Select Category</option>
-            <option value="Preventive & General Dentistry">
-              Preventive & General Dentistry
-            </option>
+            <option value="All">All</option>
+            <option value="General Dentistry">General Dentistry</option>
             <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
             <option value="Restorative Dentistry">Restorative Dentistry</option>
-            <option value="Orthodontic Treatment">Orthodontic Treatment</option>
+            <option value="Orthodontics">Orthodontics</option>
+            <option value="Wisdom Tooth Removal">Wisdom Tooth Removal</option>
+            <option value="Dental Implants">Dental Implants</option>
+            <option value="Root Canal Treatment">Root Canal Treatment</option>
             <option value="Oral Surgery">Oral Surgery</option>
-            <option value="Prosthodontic Services">
-              Prosthodontic Services
-            </option>
-            <option value="Endodontic Treatment">Endodontic Treatment</option>
-            <option value="Periodontal Care">Periodontal Care</option>
             <option value="Pediatric Dentistry">Pediatric Dentistry</option>
-            <option value="TMJ & Specialized Dentistry">
-              TMJ & Specialized Dentistry
-            </option>
+            <option value="TMJ Treatment">TMJ Treatment</option>
           </select>,
         )}
 
