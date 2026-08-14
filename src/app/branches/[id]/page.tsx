@@ -12,11 +12,9 @@ import {
   ArrowLeft,
   Facebook,
   Instagram,
-  X,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react"
 import { BRANCHES, getBranchById } from "@/lib/branches-data"
+import { BranchGallery } from "@/components/branch-gallery"
 
 export function generateStaticParams() {
   return BRANCHES.map((b) => ({ id: b.id }))
@@ -31,8 +29,6 @@ export default async function BranchDetailPage({
   const branch = getBranchById(id)
   if (!branch) notFound()
 
-  const branchImages = branch.images ?? []
-
   const info = [
     { icon: Phone, label: "Phone", value: branch.phone },
     ...(branch.email
@@ -46,60 +42,6 @@ export default async function BranchDetailPage({
 
   return (
     <div className="min-h-screen bg-[#0B3D26]">
-      {/* Pure-CSS lightbox: each photo has a #photo-N target div, hidden by default,
-          shown via :target when a thumbnail (or nav arrow) links to it.
-          Stacking: backdrop (z-0) < image (z-10) < controls (z-20), so clicking the
-          padding area closes it, clicking the photo or a button doesn't. */}
-      {branchImages.length > 0 && (
-        <style>{`
-        .lightbox {
-          display: none;
-          position: fixed;
-          inset: 0;
-          z-index: 50;
-          align-items: center;
-          justify-content: center;
-          background: rgba(0, 0, 0, 0.92);
-          backdrop-filter: blur(6px);
-          padding: 4.5rem 2.75rem 5rem;
-        }
-
-        .lightbox:target {
-          display: flex;
-        }
-
-        .lightbox-backdrop {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
-
-        .lightbox-image-wrap {
-          position: relative;
-          z-index: 10;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-        }
-
-        .lightbox-image-wrap img {
-          pointer-events: none;
-        }
-
-        @media (max-width: 640px) {
-          .lightbox {
-            padding: 4rem 2.75rem 4.5rem;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .lightbox {
-            padding: 4rem 6.5rem;
-          }
-        }
-      `}</style>
-      )}
-
       {/* HERO */}
       <section className="relative pt-24 sm:pt-32 pb-10 sm:pb-14 overflow-hidden">
         {/* mesh gradient base */}
@@ -352,135 +294,23 @@ export default async function BranchDetailPage({
             </Card>
           </div>
 
-          {/* GALLERY - thumbnails link to #photo-N, matching lightbox div shown via :target */}
-          {branchImages.length > 0 && (
-            <div className="mt-6 sm:mt-8">
-              <Card className="p-4 sm:p-5 lg:p-6 bg-white border-0 rounded-2xl shadow-[0_10px_40px_-12px_rgba(0,0,0,0.4)] relative overflow-hidden">
-                <div
-                  className="absolute top-0 left-0 right-0 h-1"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(90deg, #1F9552, #4FC97B, #A7E86B)",
-                  }}
-                />
-                <p className="text-xs uppercase tracking-[0.2em] text-[#145C36] font-mono font-semibold mb-4 sm:mb-5">
-                  Branch Photos
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3 lg:gap-4">
-                  {branchImages.map((src, i) => (
-                    <a
-                      key={i}
-                      href={`#photo-${i}`}
-                      className="relative block aspect-square rounded-xl overflow-hidden border border-[#DCEFD6] group"
-                    >
-                      <Image
-                        src={src}
-                        alt={`${branch.name} branch photo ${i + 1}`}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                    </a>
-                  ))}
-                </div>
-              </Card>
+          {/* GALLERY */}
+          <div className="mt-10 sm:mt-14">
+            <div className="flex items-center gap-2 mb-5 sm:mb-6">
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #1F9552, #4FC97B)",
+                }}
+              />
+              <p className="text-xs uppercase tracking-[0.2em] text-[#A7E86B] font-mono font-semibold">
+                Gallery
+              </p>
             </div>
-          )}
+            <BranchGallery branchId={branch.id} />
+          </div>
         </div>
       </section>
-
-      {/* LIGHTBOX MODALS - one per photo, shown only when URL hash matches its id. */}
-      {branchImages.map((src, i) => (
-        <div key={i} id={`photo-${i}`} className="lightbox">
-          {/* Backdrop - fills the whole overlay, sits behind the image, closes on click */}
-          <a href="#" aria-label="Close" className="lightbox-backdrop" />
-
-          <a
-            href="#"
-            aria-label="Close"
-            className="absolute top-3 right-3 sm:top-6 sm:right-6 z-20 w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full bg-black/60 hover:bg-black/80 sm:bg-white/10 sm:hover:bg-white/20 flex items-center justify-center text-white transition"
-          >
-            <X size={20} />
-          </a>
-
-          {i > 0 && (
-            <a
-              href={`#photo-${i - 1}`}
-              aria-label="Previous photo"
-              className="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full bg-black/60 hover:bg-black/80 sm:bg-white/10 sm:hover:bg-white/20 flex items-center justify-center text-white transition"
-            >
-              <ChevronLeft size={22} />
-            </a>
-          )}
-
-          {i < branchImages.length - 1 && (
-            <a
-              href={`#photo-${i + 1}`}
-              aria-label="Next photo"
-              className="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full bg-black/60 hover:bg-black/80 sm:bg-white/10 sm:hover:bg-white/20 flex items-center justify-center text-white transition"
-            >
-              <ChevronRight size={22} />
-            </a>
-          )}
-
-          {/* Image wrap sits above the backdrop but is non-interactive (pointer-events: none)
-              so a tap on the photo itself passes through to the backdrop underneath and closes too -
-              only the buttons (z-20, real elements) intercept clicks. */}
-          <div className="lightbox-image-wrap">
-            <Image
-              src={src}
-              alt={`${branch.name} branch photo ${i + 1}`}
-              fill
-              className="object-contain"
-              sizes="100vw"
-            />
-          </div>
-
-          <p className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 text-white/80 text-xs sm:text-sm font-mono bg-black/40 sm:bg-transparent px-2.5 py-1 sm:px-0 sm:py-0 rounded-full pointer-events-none">
-            {i + 1} / {branchImages.length}
-          </p>
-        </div>
-      ))}
-
-      {/* Keyboard controls for the lightbox: ArrowLeft/ArrowRight navigate, Escape/Enter close.
-          Reads/writes location.hash - the same #photo-N mechanism the :target CSS above uses,
-          so no React state or client component is needed. */}
-      {branchImages.length > 0 && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                var total = ${branchImages.length};
-                function currentIndex() {
-                  var m = location.hash.match(/^#photo-(\\d+)$/);
-                  return m ? parseInt(m[1], 10) : null;
-                }
-                function goTo(i) {
-                  history.replaceState(null, '', location.pathname + location.search + '#photo-' + i);
-                }
-                function close() {
-                  history.replaceState(null, '', location.pathname + location.search);
-                }
-                document.addEventListener('keydown', function (e) {
-                  var idx = currentIndex();
-                  if (idx === null) return;
-                  if (e.key === 'Escape' || e.key === 'Enter') {
-                    e.preventDefault();
-                    close();
-                  } else if (e.key === 'ArrowLeft' && idx > 0) {
-                    e.preventDefault();
-                    goTo(idx - 1);
-                  } else if (e.key === 'ArrowRight' && idx < total - 1) {
-                    e.preventDefault();
-                    goTo(idx + 1);
-                  }
-                });
-              })();
-            `,
-          }}
-        />
-      )}
     </div>
   )
 }

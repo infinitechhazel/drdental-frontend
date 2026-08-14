@@ -1,6 +1,3 @@
-import fs from "node:fs"
-import path from "node:path"
-
 export type Branch = {
     id: string
     name: string
@@ -14,45 +11,9 @@ export type Branch = {
     blurb: string
     facebook: string
     instagram?: string
-    images?: string[]
 }
 
-const IMAGE_REGEX = /\.(png|jpe?g|webp)$/i
-
-/**
- * Dynamically loads all images from:
- *
- * public/images/branch/{branchId}/
- *
- * Example:
- * public/images/branch/tagum/image1.jpg
- * becomes:
- * /images/branch/tagum/image1.jpg
- */
-function getBranchImages(branchId: string): string[] {
-    const directory = path.join(
-        process.cwd(),
-        "public",
-        "images",
-        "branch",
-        branchId
-    )
-
-    if (!fs.existsSync(directory)) {
-        return []
-    }
-
-    return fs
-        .readdirSync(directory)
-        .filter((file) => IMAGE_REGEX.test(file))
-        .sort()
-        .map(
-            (file) =>
-                `/images/branch/${branchId}/${file}`
-        )
-}
-
-// Dr Dental Care Center Branches
+// Dr Dental Care Center Branches 
 export const BRANCHES: Branch[] = [
     {
         id: "ponciano",
@@ -67,15 +28,10 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - Ponciano, Davao City",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+Ponciano+Davao+City",
-        blurb:
-            "Our Davao City branch located near Ponciano and Bonifacio Street.",
-        facebook:
-            "https://www.facebook.com/DrDentalCareCenter/",
-        instagram:
-            "https://www.instagram.com/dr.dentalcarecenter/",
-        images: getBranchImages("ponciano"),
+        blurb: "Our Davao City branch located near Ponciano and Bonifacio Street.",
+        facebook: "https://www.facebook.com/DrDentalCareCenter/",
+        instagram: "https://www.instagram.com/dr.dentalcarecenter/",
     },
-
     {
         id: "bajada",
         name: "Bajada",
@@ -89,13 +45,9 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - Bajada, SK Complex Davao City",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+Bajada+SK+Complex+Davao",
-        blurb:
-            "Accessible dental clinic along J.P. Laurel Avenue in Bajada.",
-        facebook:
-            "https://www.facebook.com/drdentalcarebajada",
-        images: getBranchImages("bajada"),
+        blurb: "Accessible dental clinic along J.P. Laurel Avenue in Bajada.",
+        facebook: "https://www.facebook.com/drdentalcarebajada",
     },
-
     {
         id: "sm-gensan",
         name: "SM Gensan",
@@ -109,13 +61,9 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - SM Gensan, SM City General Santos",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+SM+Gensan+SM+City+General+Santos",
-        blurb:
-            "Convenient mall-based dental care center inside SM City General Santos.",
-        facebook:
-            "https://www.facebook.com/profile.php?id=61581187916792",
-        images: getBranchImages("sm-gensan"),
+        blurb: "Convenient mall-based dental care center inside SM City General Santos.",
+        facebook: "https://www.facebook.com/profile.php?id=61581187916792",
     },
-
     {
         id: "tagum",
         name: "Tagum",
@@ -129,13 +77,9 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - Tagum, Cris Inn Hotel Building",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+Tagum+Cris+Inn+Hotel",
-        blurb:
-            "Serving Tagum City and nearby communities with quality dental services.",
-        facebook:
-            "https://www.facebook.com/profile.php?id=61556466363467",
-        images: getBranchImages("tagum"),
+        blurb: "Serving Tagum City and nearby communities with quality dental services.",
+        facebook: "https://www.facebook.com/profile.php?id=61556466363467",
     },
-
     {
         id: "panabo",
         name: "Panabo",
@@ -149,18 +93,15 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - Panabo Market Complex",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+Panabo+Market+Complex",
-        blurb:
-            "Providing dental services to Panabo City and surrounding areas.",
-        facebook:
-            "https://www.facebook.com/profile.php?id=61577327366697",
-        images: getBranchImages("panabo"),
+        blurb: "Providing dental services to Panabo City and surrounding areas.",
+        facebook: "https://www.facebook.com/profile.php?id=61577327366697",
     },
-
     {
         id: "digos",
         name: "Digos",
         area: "Digos City",
         phone: "+63 918 682 8599",
+        email: "",
         address:
             "3rd Floor, Gmall Digos, Tres De Mayo, Upper Digos, Digos City, Philippines, 8002",
         hours: "Mon-Fri · 8AM-5PM",
@@ -168,35 +109,29 @@ export const BRANCHES: Branch[] = [
             "DR Dental Care Center - Digos, Gmall Digos",
         directionsUrl:
             "https://maps.google.com/?q=Gmall+Digos",
-        blurb:
-            "Our Digos branch bringing accessible dental care to Davao del Sur.",
-        facebook:
-            "https://www.facebook.com/profile.php?id=61590649856296",
-        images: getBranchImages("digos"),
+        blurb: "Our Digos branch bringing accessible dental care to Davao del Sur.",
+        facebook: "https://www.facebook.com/profile.php?id=61590649856296",
     },
-
     {
         id: "toril",
         name: "Toril",
         area: "Davao City",
         phone: "-",
+        email: "",
         address:
             "Toril Branch, Davao City, Davao del Sur 8000",
         hours: "Mon-Fri · 8AM-5PM",
-        mapQuery: "Toril, Davao City",
+        mapQuery:
+            "Toril, Davao City",
         directionsUrl:
             "https://maps.google.com/?q=DR+Dental+Care+Center+Toril",
         blurb:
             "Your trusted dental care provider in Toril, Davao City, offering quality and accessible dental services for you and your family.",
         facebook: "",
-        images: getBranchImages("toril"),
     },
+
 ]
 
-export function getBranchById(
-    id: string
-): Branch | undefined {
-    return BRANCHES.find(
-        (branch) => branch.id === id
-    )
+export function getBranchById(id: string): Branch | undefined {
+    return BRANCHES.find((b) => b.id === id)
 }
