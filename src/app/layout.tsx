@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import ClientLayout from "./ClientLayout";
 import ServiceWorkerProvider from "@/components/ServiceWorkerProvider";
+import { Analytics } from "@vercel/analytics/next"
 import "leaflet/dist/leaflet.css"
 import "./globals.css";
 
